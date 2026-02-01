@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Hexapod 18-DOF | Robotics Systems Engineering</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+:root {
+  --bg: #030507;
+  --surface: #0a0c10;
+  --card-bg: rgba(15, 19, 24, 0.85);
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #10b981;
+  --border: rgba(255, 255, 255, 0.1);
+  --max-width: 1100px;
+}
+
+*{box-sizing:border-box; -webkit-font-smoothing: antialiased;}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 100px 100px;
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+.nav-home {
+  position: fixed; top: 2rem; left: 2rem; z-index: 1000;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+  color: var(--accent); text-decoration: none;
+  padding: 0.6rem 1.2rem; border: 1px solid var(--accent);
+  background: rgba(10, 12, 16, 0.9); backdrop-filter: blur(10px);
+}
+
+main { max-width: var(--max-width); margin: 0 auto; padding: 10rem 1.5rem 6rem; }
+
+/* --- HUD TYPOGRAPHY --- */
+h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; margin: 0 0 1.5rem; font-weight: 800; letter-spacing: -0.05em; text-align: center;}
+h2 { font-size: 1.6rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem;}
+h2::before { content: "[0"+attr(data-step)+"]"; font-family: 'JetBrains Mono'; font-size: 0.8rem; opacity: 0.5; }
+
+.mono { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); }
+
+/* --- SECTION NAVIGATOR --- */
+.section-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 4rem 0;
+}
+.nav-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  color: var(--text);
+  text-decoration: none;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.nav-btn:hover {
+  border-color: var(--accent);
+  background: rgba(16, 185, 129, 0.05);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+}
+
+/* --- COMPONENTS --- */
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  padding: 4rem;
+  margin-bottom: 4rem;
+  position: relative;
+  scroll-margin-top: 100px;
+}
+.card::after { content: ""; position: absolute; top: -1px; right: -1px; width: 25px; height: 25px; border-top: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+
+.metric-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 3rem; }
+.metric-item { border: 1px solid var(--border); padding: 1.5rem; background: rgba(255,255,255,0.02); }
+.metric-label { font-size: 0.7rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.1em; display: block; margin-bottom: 0.5rem;}
+.metric-value { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+
+.split { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: flex-start; }
+img { width: 100%; border: 1px solid var(--border); border-radius: 2px; background: #000; }
+figcaption { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-top: 1rem; text-transform: uppercase; }
+
+.math-box { background: rgba(0,0,0,0.3); padding: 2rem; border-radius: 4px; margin: 2rem 0; font-family: 'JetBrains Mono', monospace;}
+
+@media(max-width:1000px){ .split { grid-template-columns: 1fr; } .section-nav { grid-template-columns: 1fr 1fr; } }
+</style>
+<link rel="stylesheet" href="theme.css">
+<script defer src="theme.js"></script>
+</head>
+
+<body>
+
+<a href="../" class="nav-home">← Home</a>
+
+<main>
+  <header style="text-align:center;">
+    <div class="mono mono-tagline" style="margin-bottom: 1.5rem; letter-spacing: 0.5em;">[ SYSTEM_DEVELOPMENT / HEXAPOD_V1 ]</div>
+    <h1>18-DOF Biomimetic Locomotion Testbed</h1>
+    <p style="color: var(--muted); font-size: 1.2rem; max-width: 800px; margin: 0 auto 3rem;">
+      Exploring high-degree-of-freedom coordination through geometric inverse kinematics, cubic trajectory planning, and hybrid fabrication techniques.
+    </p>
+
+    <div class="metric-row">
+      <div class="metric-item"><span class="metric-label">Joints</span><span class="metric-value">18 DOF</span></div>
+      <div class="metric-item"><span class="metric-label">Mass</span><span class="metric-value">350g</span></div>
+      <div class="metric-item"><span class="metric-label">Power</span><span class="metric-value">Bench Isolated</span></div>
+      <div class="metric-item"><span class="metric-label">Pathing</span><span class="metric-value">Bézier</span></div>
+    </div>
+  </header>
+
+  <nav class="section-nav">
+    <a href="#kinematics" class="nav-btn">KINEMATICS</a>
+    <a href="#design" class="nav-btn">MECHANICAL_DESIGN</a>
+    <a href="#fabrication" class="nav-btn">FABRICATION</a>
+    <a href="#electronics" class="nav-btn">ELECTRONICS_POWER</a>
+  </nav>
+
+  <section id="kinematics" class="card" data-step="1">
+    <div class="split">
+      <div>
+        <h2>Kinematics & Trajectory</h2>
+        <p>The core challenge of the 18-DOF system is resolving the $(x, y, z)$ position of each leg tip into Coxa, Femur, and Tibia joint angles.</p>
+        
+        <h3 class="mono">Triangular Geometry Approach</h3>
+        <p style="font-size: 0.95rem; color: var(--muted);">Instead of black-box libraries, I derived a trigonometric IK solver. This approach ensures a fundamental understanding of coordinate frame transformations and allows for specific mechanical offsets to be hard-coded into the gait cycle.</p>
+
+        <h3 class="mono">Bézier Path Planning</h3>
+        <p style="font-size: 0.95rem; color: var(--muted);">Standard linear movement causes massive instantaneous acceleration (jerk), leading to servo torque spikes and system brownouts. I implemented cubic Bézier curves to smooth the foot trajectories.</p>
+        
+        <div class="math-box">
+          $$B(t) = (1-t)^3P_0 + 3(1-t)^2tP_1 + 3(1-t)t^2P_2 + t^3P_3$$
+        </div>
+      </div>
+      <figure>
+  <video 
+    src="assets/videos/ik_circle.mp4"
+    autoplay
+    loop
+    muted
+    playsinline
+    style="width:100%; border:1px solid var(--border); background:#000;">
+  </video>
+  <figcaption>IK_CIRCULAR_TRAJECTORY</figcaption>
+</figure>
+
+    </div>
+  </section>
+
+  <section id="design" class="card" data-step="2">
+    <div class="split">
+      <figure>
+ 
+  <figcaption>IK_CIRCULAR_TRAJECTORY_DEMO</figcaption>
+</figure>
+
+      <div>
+        <h2>Mechanical Design</h2>
+        <p>Designing for 18 micro-servos (MG90S) required a rigorous focus on weight-to-torque ratios and joint reliability.</p>
+        
+        <h3 class="mono">Pre-Bent Neutral Stance</h3>
+        <p style="font-size: 0.95rem; color: var(--muted);">I engineered the leg geometry with a pre-set neutral bend. This minimizes the holding torque required for the "standing" state, preventing servo stall and thermal runaway during static phases.</p>
+
+        <h3 class="mono">The Horn Housing Crisis</h3>
+        <p style="font-size: 0.95rem; color: var(--muted);">Initial models faced a critical failure: the servo horns would slip or detach under high load. I redesigned the joints with a specialized internal indent and a "locking lip" to secure the horn within the 3D-printed assembly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="fabrication" class="card" data-step="3">
+    <div class="split">
+      <div>
+        <h2>Fabrication & Craftsmanship</h2>
+        <p>Printed on a Bambu Lab X1E in high-rigidity PLA, the fabrication focused on monolithic structural integrity.</p>
+        
+        <h3 class="mono">Friction Stir Welding (The Dremel Method)</h3>
+        <p style="font-size: 0.95rem; color: var(--muted);">Standard adhesives proved insufficient for the horn-to-frame bond. I developed a post-processing technique using a rotary tool and raw PLA filament to friction-weld the locking lip over the servo horn.</p>
+        
+        <p style="font-size: 0.95rem; color: var(--muted);">This created a fused mechanical connection that is far stronger than epoxy and lighter than using additional M3 fasteners, keeping the total assembly weight to a targeted 350g.</p>
+      </div>
+      <figure>
+        <img src="assets/images/original.png" alt="Fabrication detail (placeholder)">
+        <figcaption>FRICTION_STIR_WELD_MACRO</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="electronics" class="card" data-step="4">
+    <div class="split">
+      <figure>
+        <img src="assets/images/annotated.png" alt="Electronics overview (placeholder)">
+        <figcaption>54_WIRE_ROUTING_MANAGEMENT</figcaption>
+      </figure>
+      <div>
+        <h2>Electronics & Power Isolation</h2>
+        <p>Coordinating 18 servos creates "dirty" power rails with massive current transients.</p>
+        
+        <h3 class="mono">Tethered R&D Phase</h3>
+        <p style="font-size: 0.95rem; color: var(--muted);">To isolate gait-tuning from power distribution issues, V1 is tethered to a high-amperage bench supply. This provides the stable $I_{peak}$ required for testing trajectory smoothing without the brownout risks posed by standard buck converters.</p>
+
+        <h3 class="mono">System Integration</h3>
+        <p style="font-size: 0.95rem; color: var(--muted);">Two PCA9685 boards manage the PWM signals, while a state machine in the Arduino controller limits the gait pattern to no more than 5 active motors per phase, protecting the system from current-induced resets.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer style="margin-top: 6rem; text-align: center; border-top: 1px solid var(--border); padding-top: 4rem;">
+    
+  </footer>
+
+</main>
+
+</body>
+</html>

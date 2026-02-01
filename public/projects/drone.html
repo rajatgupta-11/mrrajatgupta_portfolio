@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UAV Autonomy & Robust Control Testbed</title>
+<meta name="description" content="Robust PID stabilization, vibration mitigation, and deterministic failsafe behavior on a 250 mm quadrotor.">
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#030507;
+  --surface:#0a0c10;
+  --card:rgba(15,19,24,.85);
+  --text:#e6edf3;
+  --muted:#8b949e;
+  --accent:#10b981;
+  --border:rgba(255,255,255,.1);
+  --maxw:1100px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  color:var(--text);
+  background:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px),
+    var(--bg);
+  background-size:100px 100px;
+}
+.nav-home{
+  position:fixed;top:2rem;left:2rem;
+  font-family:'JetBrains Mono';font-size:.75rem;
+  color:var(--accent);text-decoration:none;
+  padding:.6rem 1.2rem;border:1px solid var(--border);
+  background:var(--surface);z-index:10;
+}
+main{max-width:var(--maxw);margin:0 auto;padding:5.5rem 1.5rem 6rem}
+.mono{font-family:'JetBrains Mono';color:var(--accent);font-size:.8rem}
+h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;margin:.5rem 0}
+.subtitle{color:var(--muted);max-width:720px;margin-bottom:1.2rem}
+.hero{margin:.6rem 0 2.8rem;border:1px solid var(--border);background:rgba(255,255,255,.02)}
+model-viewer{width:100%;height:420px}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:3rem;
+  margin-bottom:3rem;
+  position:relative;
+}
+.card::after{
+  content:"";position:absolute;top:-1px;right:-1px;
+  width:18px;height:18px;border-top:2px solid var(--accent);border-right:2px solid var(--accent)
+}
+h2{
+  font-family:'JetBrains Mono';
+  color:var(--accent);
+  font-size:1.4rem;
+  text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.exec-image{
+  max-width:85%;
+  margin-left:auto;
+  border-radius:2px;
+}
+.arch-wrapper{
+  background:#ffffff;
+  padding:1.5rem;
+  border-radius:2px;
+  max-width:920px;
+  margin:0 auto;
+}
+.arch-wrapper img{
+  width:100%;
+  display:block;
+}
+.skill-strip{
+  display:flex;
+  gap:1.8rem;
+  flex-wrap:wrap;
+  margin:1.2rem 0 2.2rem;
+}
+.skill-box{
+  border:1px solid var(--accent);
+  color:var(--accent);
+  font-family:'JetBrains Mono';
+  padding:.9rem 1.3rem;
+  font-size:1rem;
+  background:rgba(0,0,0,.15);
+}
+
+/* COLLAPSIBLE COMPONENTS */
+.comp-toggle{
+  display:flex; justify-content:space-between; align-items:center;
+  cursor:pointer;
+  border:1px solid var(--border);
+  padding:1.5rem;
+  font-family:'JetBrains Mono';
+  color:var(--accent);
+  background: var(--surface);
+  margin-bottom: 1.5rem;
+}
+.comp-toggle span{font-size:1.5rem; font-weight: 400;}
+.comp-content{display:none; padding-bottom: 2rem;}
+.comp-toggle.open + .comp-content{display:block}
+
+table{width:100%;border-collapse:collapse}
+th{
+  text-align:left;
+  color:var(--accent);
+  padding:.75rem;
+  border-bottom:2px solid var(--border);
+  font-family:'JetBrains Mono'
+}
+td{padding:.75rem;border-bottom:1px solid var(--border)}
+
+/* REPORT LINK CARD */
+.report-link {
+  display: block; text-decoration: none; color: inherit; transition: transform 0.2s ease;
+}
+.report-link:hover { transform: translateY(-4px); }
+
+@media(max-width:900px){
+  .split{grid-template-columns:1fr}
+  model-viewer{height:320px}
+}
+</style>
+<link rel="stylesheet" href="theme.css">
+<script defer src="theme.js"></script>
+</head>
+<body>
+<a href="../" class="nav-home">← Home</a>
+<main>
+<header>
+  <div class="mono mono-tagline">[ PROJECT_UAV_V1 / CONTROL_CORE ]</div>
+  <h1>UAV Autonomy & Robust Control Testbed</h1>
+  <p class="subtitle">
+    Understanding classical control behavior under asymmetric mass loading,
+    [cite_start]mechanical vibration, and communication loss[cite: 5].
+  </p>
+  <div class="skill-strip">
+    <div class="skill-box">Betaflight PID Tuning</div>
+    <div class="skill-box">IMU Filtering (Notch / RPM)</div>
+    <div class="skill-box">Isaac Sim (RL Prototyping)</div>
+    <div class="skill-box">Failsafe State Machine</div>
+    <div class="skill-box">GPS Companion Experiments</div>
+  </div>
+</header>
+<section class="hero">
+  <model-viewer src="drone.glb" auto-rotate camera-controls disable-zoom></model-viewer>
+</section>
+
+<section class="card">
+  <div class="split">
+    <div>
+      <h2>Executive Summary</h2>
+      <p>
+        [cite_start]This 250 mm testbed investigates robust PID stabilization and deterministic failsafe behavior[cite: 4].
+        All flight-critical control logic executes directly on the Brahma F4 MK-III flight controller
+        [cite_start]to guarantee hard real-time execution[cite: 6, 84], while non-real-time autonomy experiments run on a
+        [cite_start]Raspberry Pi companion computer[cite: 7, 85].
+      </p>
+    </div>
+    <img src="assets/images/drone_real.png" alt="Full UAV Hardware System" class="exec-image">
+  </div>
+</section>
+
+<section class="card">
+  <div class="comp-toggle">
+    <span>System Components</span>
+    <span class="symbol">+</span>
+  </div>
+  <div class="comp-content">
+    <table>
+      <tr><th>Subsystem</th><th>Component Details</th></tr>
+      [cite_start]<tr><td>Airframe</td><td>250 mm carbon-fiber quadcopter frame [cite: 10]</td></tr>
+      [cite_start]<tr><td>Motors</td><td>Readytosky 2306 class brushless motors &times;4 [cite: 48]</td></tr>
+      <tr><td>Propellers</td><td>5-inch tri-blade FPV propellers</td></tr>
+      [cite_start]<tr><td>ESC</td><td>Vishnu 50A ESC (DShot600) [cite: 28, 64]</td></tr>
+      [cite_start]<tr><td>Flight Controller</td><td>Brahma F4 MK-III (IMU sampling, PID control, filtering, failsafe logic) [cite: 11, 84]</td></tr>
+      [cite_start]<tr><td>Companion Computer</td><td>Raspberry Pi 4B (non-real-time autonomy experiments, logging, sim-to-real tests) [cite: 22, 85]</td></tr>
+      [cite_start]<tr><td>Navigation</td><td>u-blox NEO-6M GPS module (position estimates for high-level experiments) [cite: 39]</td></tr>
+      <tr><td>Power</td><td>4S LiPo battery</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="card">
+  <h2>System Architecture</h2>
+  <div class="arch-wrapper">
+    <img src="assets/images/table1.png" alt="Hierarchical Architecture of the UAV Control System">
+  </div>
+</section>
+
+<section class="card">
+  <div class="split">
+    <div>
+      <h2>Control Strategy</h2>
+      <p>
+        [cite_start]Independent PID loops stabilize roll, pitch, and yaw[cite: 42]. Tuning prioritized
+        disturbance rejection and vibration tolerance through conservative
+        [cite_start]derivative gains and dynamic notch filtering[cite: 46, 52].
+      </p>
+      [cite_start]<p class="mono">u(t) = Kp e(t) + Ki ∫e(t)dt + Kd de/dt [cite: 43]</p>
+    </div>
+    <div>
+      <h2>Deterministic Failsafe</h2>
+      <p>
+        On signal loss, the controller enforces a deterministic state machine:
+        attitude leveling followed by linear throttle decay to avoid free-fall
+        [cite_start]and ensure controlled touchdown[cite: 53, 59].
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Sim-to-Real Analysis</h2>
+  <p>
+    Policies trained in simulation exhibited smooth descent trajectories but failed
+    to transfer reliably due to latency (exceeding 50 ms), inertial mismatch, and vibration-induced
+    sensor noise. Future work requires domain randomization across mass, noise,
+    [cite_start]and timing[cite: 74, 77].
+  </p>
+</section>
+
+<section class="card">
+  <h2>Results: Hover & Stability</h2>
+  <table>
+    <tr><th>Metric</th><th>Clean</th><th>Coin-Loaded</th></tr>
+    <tr><td>Hover Drift (XY)</td><td>~10–15 cm</td><td>~15–25 cm</td></tr>
+    <tr><td>Roll Std Dev</td><td>~0.5–0.9°</td><td>~0.9–1.6°</td></tr>
+    <tr><td>Pitch Std Dev</td><td>~0.5–0.8°</td><td>~0.8–1.5°</td></tr>
+    <tr><td>Yaw Drift</td><td>low</td><td>low:moderate</td></tr>
+    <tr><td>Stable Hover Duration</td><td>~20–60 s</td><td>~15–45 s</td></tr>
+  </table>
+</section>
+
+<section class="card">
+  <h2>Results: IMU Noise & Vibration</h2>
+  <table>
+    <tr><th>Metric</th><th>Clean</th><th>Pre-filter</th><th>Filtered</th></tr>
+    [cite_start]<tr><td>Gyro Noise Floor</td><td>~0.04–0.08 dps</td><td>~0.10–0.20 dps</td><td>~0.08–0.16 dps [cite: 14]</td></tr>
+    [cite_start]<tr><td>Dominant Band</td><td>~120–200 Hz</td><td>~100–300 Hz [cite: 67][cite_start]</td><td>attenuated in-band [cite: 68]</td></tr>
+    <tr><td>PSD Reduction</td><td>—</td><td>—</td><td>~5–12 dB</td></tr>
+    [cite_start]<tr><td>D-term</td><td>stable</td><td>borderline</td><td>stable [cite: 46]</td></tr>
+  </table>
+</section>
+
+<section class="card">
+  <h2>Results: Failsafe / Descent</h2>
+  <table>
+    <tr><th>Metric</th><th>Value (Range)</th></tr>
+    [cite_start]<tr><td>RSSI Threshold</td><td>~15–25% [cite: 55]</td></tr>
+    [cite_start]<tr><td>Detection Latency</td><td>~100–150 ms [cite: 15]</td></tr>
+    [cite_start]<tr><td>Attitude Neutralization</td><td>~250–450 ms [cite: 16]</td></tr>
+    [cite_start]<tr><td>Descent Deceleration</td><td>~0.4–0.6 m/s² [cite: 60]</td></tr>
+    [cite_start]<tr><td>Touchdown Velocity</td><td>~1.2–1.8 m/s [cite: 17]</td></tr>
+    [cite_start]<tr><td>Outcome</td><td>controlled descent, no freefall [cite: 59]</td></tr>
+  </table>
+</section>
+
+<a href="assets/vault/uav.pdf" target="_blank" class="report-link">
+  <section class="card" style="padding: 2rem; border: 1px dashed var(--accent);">
+    <div class="split" style="gap: 1rem;">
+      <div>
+        <h2 style="margin: 0; font-size: 1.2rem;">UAV Technical Report</h2>
+        <p class="mono" style="margin: 0.5rem 0 0;">[ VIEW_FULL_DOCUMENTATION_PDF ]</p>
+      </div>
+      <div style="text-align: right; color: var(--accent); font-size: 1.5rem;">→</div>
+    </div>
+  </section>
+</a>
+
+<footer style="margin-top:6rem;text-align:center;opacity:.5">
+  <div class="mono">END_PROJECT_LOG_V1</div>
+</footer>
+</main>
+
+<script>
+document.querySelectorAll('.comp-toggle').forEach(t=>{
+  t.addEventListener('click',()=>{
+    t.classList.toggle('open');
+    const s=t.querySelector('.symbol');
+    s.textContent=s.textContent==='+'?'−':'+';
+  })
+});
+</script>
+</body>
+</html>

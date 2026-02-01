@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>MTA Desk Clock | Assistive IoT</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+<style>
+:root {
+  --bg:#030507;
+  --surface:#0a0c10;
+  --card-bg:rgba(15,19,24,.8);
+  --text:#e6edf3;
+  --muted:#8b949e;
+  --accent:#10b981;
+  --border:rgba(255,255,255,.08);
+  --max-width:1100px;
+}
+
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased}
+
+body{
+  margin:0;
+  background-color:var(--bg);
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:100px 100px;
+  color:var(--text);
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  line-height:1.6;
+}
+
+.nav-home{
+  position:fixed;
+  top:2rem;
+  left:2rem;
+  z-index:100;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  color:var(--accent);
+  text-decoration:none;
+  padding:.5rem 1rem;
+  border:1px solid var(--border);
+  background:var(--surface);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+.nav-home:hover{background:var(--accent);color:#000}
+
+main{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:10rem 1.5rem 6rem;
+}
+
+h1{
+  font-size:clamp(2.5rem,5vw,4.5rem);
+  line-height:1;
+  margin:0 0 1.5rem;
+  font-weight:800;
+  letter-spacing:-.04em;
+}
+h2{
+  font-size:1.8rem;
+  font-weight:800;
+  margin:0 0 1.5rem;
+}
+
+.mono{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.85rem;
+  color:var(--accent);
+}
+
+.subtitle{
+  font-size:1.2rem;
+  color:var(--muted);
+  max-width:800px;
+  margin:0 auto 2.5rem;
+}
+
+.skills-container{
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  flex-wrap:wrap;
+  margin-bottom:5rem;
+}
+.skill-box{
+  border:1px solid var(--accent);
+  padding:.4rem 1rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.8rem;
+  color:var(--accent);
+  text-transform:uppercase;
+}
+
+.card{
+  background:var(--card-bg);
+  backdrop-filter:blur(10px);
+  border:1px solid var(--border);
+  padding:3.5rem;
+  margin-bottom:3rem;
+  position:relative;
+}
+.card::after{
+  content:"";
+  position:absolute;
+  top:-1px;
+  right:-1px;
+  width:15px;
+  height:15px;
+  border-top:2px solid var(--accent);
+  border-right:2px solid var(--accent);
+}
+
+.split{
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:4rem;
+  align-items:center;
+}
+.split.reverse{grid-template-columns:1.2fr 1fr}
+
+.metric-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1.5rem;
+  margin-top:2rem;
+}
+.metric-item{
+  border-left:2px solid var(--accent);
+  padding:1rem 1.5rem;
+  background:rgba(16,185,129,.03);
+}
+.metric-value{
+  font-size:2.2rem;
+  font-weight:800;
+  line-height:1;
+}
+.metric-label{
+  font-size:.75rem;
+  text-transform:uppercase;
+  color:var(--muted);
+  letter-spacing:.1em;
+}
+
+.split.media-heavy {
+  grid-template-columns: 1.5fr 1fr;
+}
+
+img,video{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:6px;
+  display:block;
+}
+
+.video-enhanced{
+  transform:scale(1.05);
+}
+
+figcaption{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  color:var(--muted);
+  margin-top:1rem;
+}
+
+.stl-link{
+  display:inline-block;
+  margin-top:1.2rem;
+  font-size:.75rem;
+  text-decoration:none;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--accent);
+}
+
+.stl-link:hover{
+  text-decoration:underline;
+}
+
+@media(max-width:1000px){
+  .split,.split.reverse{grid-template-columns:1fr}
+  main{padding-top:6rem}
+  .video-enhanced{transform:none}
+}
+</style>
+<link rel="stylesheet" href="theme.css">
+<script defer src="theme.js"></script>
+</head>
+
+<body>
+
+<a href="../" class="nav-home">← Home</a>
+
+<main>
+
+<header style="text-align:center;">
+  <div class="mono mono-tagline" style="margin-bottom:1.5rem;letter-spacing:.4em;">[ PRODUCT_DESIGN / IOT ]</div>
+  <h1>MTA Desk Clock</h1>
+  <p class="subtitle">
+    Assistive IoT hardware designed to externalize time and reduce cognitive load for neurodivergent workflows.
+  </p>
+
+  <div class="skills-container">
+    <div class="skill-box">ESP32 Firmware</div>
+    <div class="skill-box">GTFS-R Telemetry</div>
+    <div class="skill-box">Fault-Tolerant Systems</div>
+    <div class="skill-box">DFM</div>
+  </div>
+</header>
+
+<section class="card">
+  <div class="split">
+    <div>
+      <h2>Designed for Time Blindness</h2>
+      <p>
+        Time blindness is common in ADHD and other neurodivergent workflows. App-based reminders introduce just enough friction to break focus and delay action.
+      </p>
+      <p style="color:var(--muted);">
+        This project relocates time-critical transit data from a phone into a persistent physical object. The display runs continuously, presents information at a glance, and removes the need for last-minute decisions.
+      </p>
+    </div>
+    <figure>
+      <video
+        src="assets/videos/herodisplay.mp4"
+        muted
+        loop
+        autoplay
+        playsinline>
+      </video>
+      <figcaption>DESK-RESIDENT TRANSIT DISPLAY</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Core Architecture</h2>
+  <div class="metric-row">
+    <div class="metric-item">
+      <div class="metric-label">Data Source</div>
+      <div class="metric-value">GTFS-R</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">Update Interval</div>
+      <div class="metric-value">30 s</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">Time Sync</div>
+      <div class="metric-value">NTP</div>
+    </div>
+  </div>
+</section>
+
+<section class="split reverse media-heavy card">
+  <figure>
+    <video
+      class="video-enhanced"
+      src="assets/videos/trainl.mp4"
+      muted
+      loop
+      autoplay
+      playsinline>
+    </video>
+    <figcaption>ENCLOSURE ASSEMBLY</figcaption>
+  </figure>
+  <div>
+    <h2>Mechanical Design</h2>
+    <p>
+      The enclosure uses an interlocking elliptical lip with a 0.2 mm interference fit, leveraging PLA elasticity for a secure, screw-free assembly.
+    </p>
+    <p style="color:var(--muted);">
+      Three design iterations were conducted to reconcile printer tolerances with internal component clearances. The final form behaves more like a desk object than a gadget.
+    </p>
+<div style="margin-top:1.2rem;">
+  <a href="assets/vault/frontplate.stl" class="mono stl-link">Download Front Plate STL</a><br>
+  <a href="assets/vault/backplate.stl" class="mono stl-link">Download Back Plate STL</a>
+</div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="split">
+    <div>
+      <h2>Authentic Visual Fidelity</h2>
+      <p>
+        To maintain environmental consistency, I replicated the exact UI/UX language of the NYC subway countdown signs.
+      </p>
+      <p style="color: var(--muted);">
+        This involved mapping live JSON streams to a custom dot-matrix typography layout.
+      </p>
+    </div>
+    <figure>
+      <img src="assets/images/ui.png" alt="Dot Matrix Interface">
+      <figcaption>Real Countdown Signs</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Systems Architecture: Logic and State Management</h2>
+
+  <figure style="margin:2rem 0 3rem;">
+    <img
+      src="assets/images/Logic.png"
+      alt="Logic diagram"
+      style="background:#000;">
+    <figcaption>STATE MACHINE & SIGNAL FLOW</figcaption>
+  </figure>
+
+  <figure style="margin:2rem 0 3rem;">
+    <img
+      src="assets/images/scrolldia.png"
+      alt="Scroll marquee flow diagram"
+      style="background:#000;">
+    <figcaption>SCROLL MARQUEE FLOW DIAGRAM</figcaption>
+  </figure>
+
+  <p>
+Firmware is written in C++ and structured as a strictly non-blocking state machine, with network operations decoupled from UI rendering and independent update loops for train telemetry and the scrolling reminder banner.  </p>
+
+  <p style="color:var(--muted);">
+A visual urgency layer maps arrival time to interface state, while a time-driven marquee subsystem scrolls reminder and calendar data without interrupting primary countdown rendering. At T-7 minutes, the display enters a periodic red pulsing mode, empirically chosen as the optimal apartment departure threshold.  </p>
+</section>
+
+<footer style="margin-top:8rem;border-top:1px solid var(--border);padding-top:4rem;text-align:center;">
+  
+</footer>
+
+</main>
+</body>
+</html>

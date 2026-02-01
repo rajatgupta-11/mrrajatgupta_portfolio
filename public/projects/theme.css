@@ -1,0 +1,115 @@
+/* Shared theme for standalone project pages
+   Matches portfolio's neon green accent and supports light mode. */
+
+:root{
+  --accent: #10b981; /* emerald-500 */
+  --accent-rgb: 16 185 129;
+  --accent-glow: rgb(var(--accent-rgb) / 0.18);
+
+  /* Default = LIGHT (matches portfolio token structure) */
+  --bg: #f7faf9;
+  --surface: #ffffff;
+  --card-bg: rgba(255, 255, 255, 0.88);
+  --text: #0b1220;
+  --muted: #475569;
+  --border: rgba(2, 6, 23, 0.12);
+}
+
+/* Manual dark mode (matches portfolio toggle: html.dark) */
+.dark{
+  --bg: #030507;
+  --surface: #0a0c10;
+  --card-bg: rgba(15, 19, 24, 0.82);
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --border: rgba(255, 255, 255, 0.10);
+}
+
+/* Background motion (subtle) */
+body{
+  /* Many project pages already define a multi-layer background.
+     This gently drifts any grid layers via background-position. */
+  background-position: 0 0, 0 0, 0 0;
+  animation: project-grid-drift 28s linear infinite;
+}
+
+/* Nebula overlay (no extra grid; just glow) */
+body{ position: relative; }
+body::before{
+  content:"";
+  position: fixed;
+  inset: -20%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(700px circle at 20% 20%, rgb(var(--accent-rgb) / 0.16), transparent 60%),
+    radial-gradient(900px circle at 80% 55%, rgb(var(--accent-rgb) / 0.12), transparent 62%),
+    radial-gradient(700px circle at 35% 85%, rgb(var(--accent-rgb) / 0.10), transparent 60%);
+  opacity: 0.30;
+  transform: translate3d(0,0,0);
+  animation: project-nebula-float 18s ease-in-out infinite alternate;
+}
+
+/* Ensure content sits above the overlay */
+body > *{ position: relative; z-index: 1; }
+
+@media (prefers-color-scheme: light) {
+  body::before{ opacity: 0.16; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body{ animation: none; }
+  body::before{ animation: none; }
+}
+
+@keyframes project-grid-drift{
+  0% { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 240px 240px, 240px 240px, 0 0; }
+}
+
+@keyframes project-nebula-float{
+  0% { transform: translate3d(-1.5%, -1%, 0) scale(1); filter: blur(0px); }
+  100% { transform: translate3d(1.5%, 1%, 0) scale(1.03); filter: blur(0.25px); }
+}
+
+/* Common overrides for old cyan glow values */
+.item:hover{ box-shadow: 0 0 10px rgb(var(--accent-rgb) / .45) !important; }
+.card:hover{ box-shadow: 0 0 12px rgb(var(--accent-rgb) / .50) !important; }
+
+/* Some pages use inline hover backgrounds; normalize to accent */
+.nav-btn:hover{
+  background: rgb(var(--accent-rgb) / 0.06) !important;
+  box-shadow: 0 0 20px rgb(var(--accent-rgb) / 0.10) !important;
+  border-color: var(--accent) !important;
+}
+
+/* Project page top-left "Home" button */
+.nav-home{
+  color: var(--accent) !important;
+  border-color: rgb(var(--accent-rgb) / 0.55) !important;
+  background: rgb(var(--accent-rgb) / 0.06) !important;
+  box-shadow: 0 0 0 transparent !important;
+}
+.nav-home:hover{
+  background: rgb(var(--accent-rgb) / 0.14) !important;
+  border-color: rgb(var(--accent-rgb) / 0.75) !important;
+  box-shadow: 0 0 18px rgb(var(--accent-rgb) / 0.22) !important;
+}
+
+/* Ensure links/buttons pick up the new accent */
+a{ color: var(--accent); }
+
+/* Larger header "tagline" (the [ ... / ... ] line) */
+.mono-tagline{
+  font-size: clamp(0.95rem, 1.15vw, 1.15rem);
+  line-height: 1.2;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px){
+  .mono-tagline{
+    font-size: 0.9rem;
+    letter-spacing: 0.22em;
+  }
+}

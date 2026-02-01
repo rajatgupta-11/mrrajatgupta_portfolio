@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>SpinLaunch | Kinetic Energy Launch System Simulation</title>
+<meta name="description" content="Dynamics, control, and trajectory analysis of a SpinLaunch-inspired centrifugal accelerator focused on structural load reduction and propellant savings.">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+:root{
+  --bg: #030507;
+  --surface: #0a0c10;
+  --card-bg: rgba(15, 19, 24, 0.7);
+  --text: #e6edf3;
+  --muted: #7d8590;
+  --accent: #10b981; /* Theme green */
+  --accent-glow: rgba(16, 185, 129, 0.15);
+  --border: rgba(255, 255, 255, 0.08);
+  --max-width: 1100px;
+}
+
+*{box-sizing:border-box; -webkit-font-smoothing: antialiased;}
+
+body{
+  margin: 0;
+  background-color: var(--bg);
+  /* Aerospace Grid Overlay */
+  background-image: 
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 100px 100px;
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+/* --- HOME BUTTON --- */
+.nav-home {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  z-index: 1000;
+  color: var(--accent);
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  background: rgba(10, 12, 16, 0.8);
+  backdrop-filter: blur(8px);
+  border-radius: 4px;
+}
+.nav-home:hover {
+  background: var(--accent);
+  color: #000;
+}
+
+main{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 6rem 1.5rem;
+}
+
+/* --- TELEMETRY TYPOGRAPHY --- */
+h1, h2, h3 { letter-spacing: -0.04em; font-weight: 800; }
+h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; margin-bottom: 1.5rem; }
+h2 { font-size: 1.8rem; display: flex; align-items: center; gap: 0.75rem; }
+h2::before { content: ""; width: 12px; height: 12px; background: var(--accent); display: inline-block; border-radius: 2px; }
+
+.mono { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--accent); }
+
+/* --- AEROSPACE CARDS --- */
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 4px; /* Sharper, industrial corners */
+  padding: 3rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+/* Corner Accents for a "HUD" feel */
+.card::after {
+  content: ""; position: absolute; top: -1px; right: -1px;
+  width: 20px; height: 20px;
+  border-top: 2px solid var(--accent); border-right: 2px solid var(--accent);
+}
+
+/* --- SPLIT LAYOUTS --- */
+.split { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; }
+.split.reverse { grid-template-columns: 1.2fr 1fr; }
+
+/* --- DATA VISUALS --- */
+.metric-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.metric-item {
+  border-left: 2px solid var(--accent);
+  padding: 1rem 1.5rem;
+  background: rgba(16, 185, 129, 0.03);
+}
+
+.metric-value { font-size: 2rem; font-weight: 800; display: block; line-height: 1; }
+.metric-label { font-size: 0.75rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.1em; }
+
+/* --- TABLES --- */
+.table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; font-size: 0.9rem; }
+.table th { text-align: left; padding: 1rem; color: var(--muted); border-bottom: 1px solid var(--border); font-size: 0.7rem; text-transform: uppercase; }
+.table td { padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.03); }
+
+/* --- COLLAPSIBLE (ACCORDION) --- */
+.collapsible-container { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+details {
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+details[open] { background: rgba(16, 185, 129, 0.05); border-color: var(--accent); }
+summary {
+  padding: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+summary::after { content: "+"; color: var(--accent); }
+details[open] summary::after { content: "−"; }
+
+.details-content { padding: 0 1.5rem 2rem; }
+
+/* --- MATH BOXES --- */
+.math {
+  background: #000;
+  border: 1px dashed var(--accent);
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin: 1.5rem 0;
+  color: var(--accent);
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+/* --- MEDIA --- */
+img, video {
+  width: 100%;
+  filter: grayscale(0.2) contrast(1.1);
+  border: 1px solid var(--border);
+  transition: all 0.4s;
+}
+img:hover { filter: grayscale(0); border-color: var(--accent); }
+
+@media(max-width:1000px){
+  .split, .split.reverse { grid-template-columns: 1fr; }
+  main { padding-top: 3rem; }
+  .nav-home { position: static; display: inline-block; margin-bottom: 2rem; }
+}
+</style>
+<link rel="stylesheet" href="theme.css">
+<script defer src="theme.js"></script>
+</head>
+
+<body>
+
+<a href="../" class="nav-home">← Home</a>
+
+<main>
+
+  <section class="hero center" style="margin-bottom: 6rem; text-align: center;">
+    <div class="mono mono-tagline" style="margin-bottom: 1rem; letter-spacing: 0.3em;">[ SIMULATION_CORE / TRAJECTORY_01 ]</div>
+    <h1>SpinLaunch Kinetic Accelerator Analysis</h1>
+    <p class="subtitle" style="font-size: 1.2rem; color: var(--muted);">High-Fidelity Dynamics & Load Optimization in Centrifugal Launch Systems</p>
+    
+    <div style="margin-top: 3rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+      <span class="mono" style="border: 1px solid var(--accent); padding: 0.4rem 1rem; border-radius: 2px;">MuJoCo Engine</span>
+      <span class="mono" style="border: 1px solid var(--accent); padding: 0.4rem 1rem; border-radius: 2px;">Rigid-Body Dynamics</span>
+      <span class="mono" style="border: 1px solid var(--accent); padding: 0.4rem 1rem; border-radius: 2px;">Control Systems</span>
+    </div>
+  </section>
+
+  <section class="split card">
+    <div>
+      <h2>The Dynamics Problem</h2>
+      <p>Centrifugal launch shifts the energy burden from the vehicle to ground-based infrastructure. However, at hypersonic angular velocities, structural loads on bearings and hinges become the primary failure mode.</p>
+      <p style="color: var(--muted);">This simulation treats the accelerator not just as a launch tool, but as a complex <strong>multi-body control problem</strong> where survival is measured in millisecond timing.</p>
+    </div>
+    <figure>
+      <img src="assets/images/accelerator.png" alt="SpinLaunch accelerator">
+      <figcaption class="mono" style="text-align: right; margin-top: 0.5rem; font-size: 0.7rem;">ACCELERATOR_INTERNAL_VIEW</figcaption>
+    </figure>
+  </section>
+
+  <section class="card">
+    <h2>Analysis Results</h2>
+    <div class="metric-row">
+      <div class="metric-item">
+        <span class="metric-label">Hinge Load Reduction</span>
+        <span class="metric-value">>90%</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-label">Oscillation Damping</span>
+        <span class="metric-value">~1.0s</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-label">Propellant Savings</span>
+        <span class="metric-value">48.9%</span>
+      </div>
+    </div>
+  </section>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem;">
+    <div class="card" style="padding: 2rem;">
+      <h3 class="mono" style="margin-top:0">BASELINE: SINGLE RELEASE</h3>
+      <img src="assets/images/original.png" alt="Baseline release">
+      <table class="table">
+        <tr><th>Phase</th><th style="text-align:right">Load</th></tr>
+        <tr><td>Release Peak</td><td style="text-align:right">89 kN</td></tr>
+        <tr><td>Oscillation</td><td style="text-align:right">>15 kN</td></tr>
+      </table>
+      <video autoplay muted loop playsinline style="margin-top: 1.5rem;">
+        <source src="assets/videos/sim1_v2.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="card" style="padding: 2rem; border-color: var(--accent);">
+      <h3 class="mono" style="margin-top:0; color: var(--accent);">OPTIMIZED: DUAL RELEASE</h3>
+      <img src="assets/images/sequential.png" alt="Sequential release">
+      <table class="table">
+        <tr><th>Phase</th><th style="text-align:right">Load</th></tr>
+        <tr><td>Release Peak</td><td style="text-align:right">133 kN</td></tr>
+        <tr><td>Settling Time</td><td style="text-align:right">&lt; 1s</td></tr>
+      </table>
+      <video autoplay muted loop playsinline style="margin-top: 1.5rem;">
+        <source src="assets/videos/sim2_v2.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <div class="collapsible-container">
+    
+    <details>
+      <summary>Control Theory & Autonomy Stack</summary>
+      <div class="details-content">
+        <p>Release timing is treated as a dynamic control problem. The autonomy stack uses high-frequency feedback to guarantee phase-accurate release despite transient decelerations.</p>
+        <div class="math">\[\tau = K_p (\omega_{target} - \omega_{current})\]</div>
+        <p class="mono" style="font-size: 0.8rem;">[ Kₚ = 10,000 / ω_measure = MuJoCo_State ]</p>
+        <div class="math">\[x = \begin{bmatrix} \theta \\ \omega \end{bmatrix}, \Delta t_{opt} \approx \frac{\Delta\theta_{rem}}{\omega_{curr}}\]</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Kinetic Assist & Orbital Mechanics</summary>
+      <div class="details-content">
+        <p>Shifting 2.2 km/s of Δv to a ground-based centrifuge reduces vehicle mass exponentially via the Tsiolkovsky equation.</p>
+        <div class="math">\[\Delta v = I_{sp} g_0 \ln\left(\frac{m_0}{m_f}\right)\]</div>
+        <div class="split" style="gap: 1rem; margin-top: 2rem;">
+            <img src="assets/images/vvt.png" class="image-box" alt="Velocity Graph">
+            <img src="assets/images/fuel_graph.png" class="image-box" alt="Fuel Graph">
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Hypersonic Aerodynamics & Throw Angle</summary>
+      <div class="details-content">
+        <p>Trajectory selection is governed by the atmospheric density gradient and Max-Q (dynamic pressure) constraints.</p>
+        <div class="math">\[q = \frac{1}{2} \rho v^2 \quad \text{where} \quad \rho(h) = \rho_0 e^{-h/H}\]</div>
+        <img src="assets/images/throw.png" style="max-width: 600px; margin: 2rem auto; display: block;" alt="Optimal angle">
+        <p class="center" style="font-weight: 700; color: var(--accent); text-align: center;">OPTIMAL THROW ANGLE: 36°</p>
+      </div>
+    </details>
+
+  </div>
+
+  <footer class="center" style="margin-top: 6rem; border-top: 1px solid var(--border); padding-top: 3rem; text-align: center;">
+    <p class="mono" style="font-size: 0.7rem; color: var(--muted); margin-bottom: 2rem;">DOCUMENTATION_ACCESS_AUTHORIZED</p>
+    <div style="display: flex; justify-content: center; gap: 2rem;">
+      <a href="assets/vault/spinlaunch_report1.pdf" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 700; border-bottom: 1px solid var(--accent);">TECHNICAL REPORT I</a>
+      <a href="assets/vault/spinlaunch_report2.pdf" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 700; border-bottom: 1px solid var(--accent);">TECHNICAL REPORT II</a>
+    </div>
+  </footer>
+
+</main>
+</body>
+</html>
