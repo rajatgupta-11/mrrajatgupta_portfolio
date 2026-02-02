@@ -58,7 +58,7 @@ const projects: Project[] = [
   },
   {
     category: "CONTROL_SYSTEMS",
-    title: "Closed Loop Thermal Control",
+    title: "Closed loop Solar Panel efficiency control",
     status: "COMPLETED",
     description: "Closed-loop evaporative cooling for PV panels. Achieved 5-7°C reduction matching Simulink predictions.",
     type: "projects" as const,
