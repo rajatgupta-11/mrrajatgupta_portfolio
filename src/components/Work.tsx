@@ -38,7 +38,7 @@ const projects: Project[] = [
     type: "projects" as const,
     href: "projects/drone.html",
     previews: [
-      "assets/images/drone_real.png",
+      "projects/assets/images/drone_real.png",
       "projects/assets/images/fc.png",
       "projects/assets/images/esc.png",
     ],
@@ -77,7 +77,7 @@ const projects: Project[] = [
     type: "projects" as const,
     href: "projects/subway.html",
     previews: [
-      "projects/assets/videos/herodisplay.png",
+      "projects/assets/images/herodisplay.png",
       "projects/assets/images/layout.png",
     ],
   },
