@@ -18,9 +18,9 @@ const withBase = (p: string) => `${import.meta.env.BASE_URL}${p.replace(/^\//, "
 
 const projects: Project[] = [
   {
-    category: "LOCOMOTION_RESEARCH",
+    category: "MULTI-DOF ROBOTICS",
     title: "18 DOF Hexapod Robotic Platform",
-    status: "DEPLOYED (working on v2 currently)",
+    status: "DEPLOYED",
     description: "Designed and built a 6-legged 18-DOF microserver controlled platform under $150. ESP32-based WiFi control and Arduino based multi-joint actuation.",
     type: "projects" as const,
     href: "projects/hexapod.html",
@@ -44,7 +44,7 @@ const projects: Project[] = [
     ],
   },
   {
-    category: "TRAJECTORY_SIM",
+    category: "MUJOCO_SIM",
     title: "SpinLaunch Kinetic Sim & Analysis",
     status: "COMPLETED",
     description: "High fidelity Mujoco & Python simulation framework analysis for kinetic launch systems. Reduced post-release oscillatory hinge loads by 90% and optimized factors like angle of throw and burner phase using ONLY HALF the propellant of a conventional launch",
@@ -57,7 +57,7 @@ const projects: Project[] = [
     ],
   },
   {
-    category: "CONTROL_SYSTEMS",
+    category: "THERMAL_CONTROLSYSTEMS",
     title: "Closed loop Solar Panel efficiency control",
     status: "COMPLETED",
     description: "Closed-loop evaporative cooling for PV panels. Achieved 5-7°C reduction matching Simulink predictions.",
@@ -70,7 +70,7 @@ const projects: Project[] = [
     ],
   },
   {
-    category: "IOT_FABRICATION",
+    category: "IOT_PRODUCT_FABRICATION",
     title: "NYC Subway Arrival Countdown",
     status: "DEPLOYED",
     description: "Real-time transit telemetry display with fault-tolerant updates and custom-fabricated enclosure.",
@@ -82,7 +82,7 @@ const projects: Project[] = [
     ],
   },
   {
-    category: "INDUSTRIAL_OPS",
+    category: "INDUSTRIAL_OPERATIONS",
     title: "Emerson | Engineering Work",
     status: "COMPLETED",
     description: "Professional engineering focused on real-world constraints, MOST analysis, and system behavior.",
