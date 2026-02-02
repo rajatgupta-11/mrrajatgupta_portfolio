@@ -24,7 +24,7 @@ const ScrambleText = () => {
 
   // Trigger animation periodically
   useEffect(() => {
-    const intervalMs = 3000;
+    const intervalMs = 1500;
     const id = window.setInterval(() => {
       if (!shouldReduceMotion) {
         setIsAnimating(true);
