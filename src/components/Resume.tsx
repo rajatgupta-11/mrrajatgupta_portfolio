@@ -9,9 +9,18 @@ const RESUME_VIEW_URL = `${import.meta.env.BASE_URL}resume.html`;
 
 const experience = [
   {
-    title: "Mechanical Systems Engineer",
+    title: "",
+    company: "LawgicHub AI",
+    period: "Sept 2024 to present",
+    description: "an AI-driven legal technology startup focused on intelligent document and case management. Leading system-level architecture planning and workflow design for AI-assisted document ingestion, analysis, drafting, and revision.",
+  },
+];
+
+const experience = [
+  {
+    title: "Mechanical Engineer Intern",
     company: "Emerson",
-    period: "Professional Experience",
+    period: "January 2024 to June 2024",
     description: "Engineering focused on real-world constraints, MOST analysis, and system behavior optimization.",
   },
 ];
