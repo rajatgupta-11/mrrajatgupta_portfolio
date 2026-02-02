@@ -40,6 +40,9 @@
 
     --radius: 0.5rem;
 
+    /* Fixed header offset (for layout + anchor scroll) */
+    --nav-height: 5.5rem; /* ~88px */
+
     /* Tech colors - High contrast for light mode */
     --neon-cyan: 152 80% 36%;
     --neon-cyan-glow: 152 85% 44%;
@@ -122,6 +125,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: var(--nav-height);
   }
 
   body {

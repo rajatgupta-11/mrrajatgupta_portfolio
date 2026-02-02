@@ -32,7 +32,7 @@ const getHslVarWithAlpha = (name: string, alpha: number) => {
   return raw ? `hsl(${raw} / ${alpha})` : null;
 };
 
-export const GalaxyBackground = () => {
+export const GalaxyBackground = ({ quality = "auto" }: { quality?: "auto" | "low" | "normal" } = {}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -62,17 +62,25 @@ export const GalaxyBackground = () => {
 
     let nextMeteorAt = performance.now() + 2500 + Math.random() * 4500;
     let raf = 0;
+    let running = true;
+    let lastDrawAt = 0;
 
     const resize = () => {
       const rect = parent.getBoundingClientRect();
       width = Math.max(1, Math.floor(rect.width));
       height = Math.max(1, Math.floor(rect.height));
+      // Background canvas: keep DPR at 1 for performance.
       canvas.width = width;
       canvas.height = height;
 
       // Re-seed stars based on area for consistent density.
       stars.length = 0;
-      const target = Math.max(80, Math.min(180, Math.floor((width * height) / 12000)));
+      const isSmall = width < 640 || height < 520;
+      const q = quality === "auto" ? (isSmall ? "low" : "normal") : quality;
+      const minStars = q === "low" ? 45 : 70;
+      const maxStars = q === "low" ? 120 : 160;
+      const denom = q === "low" ? 16000 : 12000;
+      const target = Math.max(minStars, Math.min(maxStars, Math.floor((width * height) / denom)));
       for (let i = 0; i < target; i++) {
         stars.push({
           x: Math.random() * width,
@@ -88,6 +96,21 @@ export const GalaxyBackground = () => {
     const ro = new ResizeObserver(resize);
     ro.observe(parent);
     resize();
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        const anyVisible = entries.some((e) => e.isIntersecting);
+        if (anyVisible && !running) {
+          running = true;
+          raf = requestAnimationFrame(animate);
+        } else if (!anyVisible && running) {
+          running = false;
+          cancelAnimationFrame(raf);
+        }
+      },
+      { root: null, threshold: 0.01 }
+    );
+    io.observe(canvas);
 
     const spawnMeteor = (now: number) => {
       // Start near top-right area and streak down-left.
@@ -132,6 +155,18 @@ export const GalaxyBackground = () => {
     };
 
     const animate = (now: number) => {
+      if (!running) return;
+
+      // Throttle FPS a bit on small screens to reduce jank.
+      const isSmall = width < 640 || height < 520;
+      const q = quality === "auto" ? (isSmall ? "low" : "normal") : quality;
+      const minFrameMs = q === "low" ? 1000 / 36 : 1000 / 50;
+      if (lastDrawAt && now - lastDrawAt < minFrameMs) {
+        raf = requestAnimationFrame(animate);
+        return;
+      }
+      lastDrawAt = now;
+
       ctx.clearRect(0, 0, width, height);
       drawBackgroundGlow();
 
@@ -220,9 +255,10 @@ export const GalaxyBackground = () => {
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
+      io.disconnect();
       themeObserver.disconnect();
     };
-  }, []);
+  }, [quality]);
 
   return <canvas ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none" />;
 };

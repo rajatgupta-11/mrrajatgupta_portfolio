@@ -1,4 +1,4 @@
-import { motion, useAnimationControls } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { useState, useEffect } from "react";
 import { GalaxyBackground } from "./ui/GalaxyBackground";
@@ -19,46 +19,134 @@ const GlitchText = ({ text }: { text: string }) => {
 
 const ScrambleText = () => {
   const [index, setIndex] = useState(0);
-  const [displayText, setDisplayText] = useState(roles[0]);
-  const chars = "!<>-_\\/[]{}—=+*^?#________";
+  const [isAnimating, setIsAnimating] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
+  // Trigger animation periodically
   useEffect(() => {
-    let interval: NodeJS.Timeout;
-    let counter = 0;
-    const currentRole = roles[index];
-
-    const scramble = () => {
-      if (counter >= currentRole.length + 10) { // Settle
-        setDisplayText(currentRole);
-        clearInterval(interval);
-        setTimeout(() => {
-          setIndex((prev) => (prev + 1) % roles.length);
-        }, 2000); // Wait before next word
-        return;
+    const intervalMs = 3000;
+    const id = window.setInterval(() => {
+      if (!shouldReduceMotion) {
+        setIsAnimating(true);
+      } else {
+        setIndex((prev) => (prev + 1) % roles.length);
       }
+    }, intervalMs);
+    return () => window.clearInterval(id);
+  }, [shouldReduceMotion]);
 
-      setDisplayText(
-        currentRole
-          .split("")
-          .map((char, i) => {
-            if (i < counter - 5) return char; // Reveal char
-            return chars[Math.floor(Math.random() * chars.length)];
-          })
-          .join("")
-      );
-      counter++;
+  // Handle animation completion
+  const handleAnimationComplete = () => {
+    setIsAnimating(false);
+    setIndex((prev) => (prev + 1) % roles.length);
+  };
+
+  const getRole = (offset: number) =>
+    roles[(index + offset + roles.length) % roles.length];
+
+  const windowRoles = [
+    getRole(-2),
+    getRole(-1),
+    getRole(0),
+    getRole(1),
+    getRole(2),
+    getRole(3),
+  ];
+
+  const ITEM_HEIGHT = "3.5rem"; // Increased spacing
+
+  const getStyle = (i: number) => {
+    // i=2 is Center
+    if (i === 2) {
+      return {
+        opacity: 1,
+        filter: "blur(0px)",
+        scale: 1,
+        color: "hsl(var(--primary))",
+        y: 0,
+        textShadow: "0 0 20px hsl(var(--primary)/0.4)"
+      };
+    }
+    // Neighbors (i=1, i=3)
+    if (i === 1 || i === 3) {
+      return {
+        opacity: 0.3,
+        filter: "blur(4px)",
+        scale: 0.9,
+        color: "hsl(var(--foreground))",
+        y: 0,
+        textShadow: "none"
+      };
+    }
+    // Far (i=0, i=4)
+    if (i === 0 || i === 4) {
+      return {
+        opacity: 0.05,
+        filter: "blur(8px)",
+        scale: 0.8,
+        color: "hsl(var(--foreground))",
+        y: 0,
+        textShadow: "none"
+      };
+    }
+    // Offscreen (i=5, etc)
+    return {
+      opacity: 0,
+      filter: "blur(10px)",
+      scale: 0.8,
+      color: "hsl(var(--foreground))",
+      y: 0,
+      textShadow: "none"
     };
+  };
 
-    interval = setInterval(scramble, 50);
-    return () => clearInterval(interval);
-  }, [index]);
+  return (
+    <span className="font-mono inline-flex justify-center w-[32ch] max-w-[90vw] select-none text-primary relative">
+      {/* Container height = visible window ~ 5 items * ITEM_HEIGHT */}
+      {/* We mask heavily at top/bottom so effectively 3 items are visible, but window is tall */}
+      <span
+        className={[
+          "relative inline-flex flex-col items-center overflow-hidden",
+          "h-[18rem]", // Spaced out window
+          "[mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]",
+          "[-webkit-mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]",
+        ].join(" ")}
+      >
+        <motion.div
+          initial={{ y: "0px" }}
+          // Move entire list up by one item height
+          animate={{ y: isAnimating ? `-${ITEM_HEIGHT}` : "0px" }}
+          transition={isAnimating ? { duration: 0.8, ease: [0.16, 1, 0.3, 1] } : { duration: 0 }} // duration 0 on reset!
+          onAnimationComplete={() => {
+            if (isAnimating) handleAnimationComplete();
+          }}
+          className="flex flex-col items-center will-change-transform"
+        >
+          {windowRoles.map((role, i) => {
+            const currentStyle = getStyle(i);
+            const nextStyle = getStyle(i - 1); // We are moving UP, so visual destination is index-1 styling
 
-  return <span className="font-mono text-primary">{displayText}</span>;
+            return (
+              <motion.span
+                key={`${role}-${i}`} // Keeping key stable per slot to allow style transition
+                style={{ height: ITEM_HEIGHT, lineHeight: ITEM_HEIGHT }}
+                animate={isAnimating ? nextStyle : currentStyle}
+                transition={isAnimating ? { duration: 0.8, ease: [0.16, 1, 0.3, 1] } : { duration: 0 }}
+                className="w-full whitespace-nowrap text-center flex items-center justify-center p-0 m-0"
+              >
+                {role}
+              </motion.span>
+            );
+          })}
+        </motion.div>
+      </span>
+    </span>
+  );
 };
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+    <section className="relative min-h-screen pt-[var(--nav-height)] flex items-center justify-center overflow-hidden bg-background">
       {/* Dynamic Background Elements */}
       <GalaxyBackground />
       <div className="absolute inset-0 grid-pattern opacity-40 dark:opacity-20" />
@@ -74,14 +162,14 @@ export const Hero = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-10 overflow-hidden rounded-full border border-primary/25 bg-primary/10 px-6 py-2.5 backdrop-blur-md shadow-[0_0_24px_hsl(var(--primary)/0.18)]"
+          className="mb-10 inline-flex max-w-[calc(100vw-2rem)] overflow-hidden rounded-full border border-primary/25 bg-primary/10 px-4 sm:px-6 py-2 sm:py-2.5 backdrop-blur-md shadow-[0_0_24px_hsl(var(--primary)/0.18)]"
         >
-          <span className="text-sm md:text-base font-mono text-primary tracking-[0.25em] flex items-center gap-3">
-            <span className="relative flex h-2.5 w-2.5">
+          <span className="min-w-0 text-xs sm:text-sm md:text-base font-mono text-primary tracking-[0.12em] sm:tracking-[0.25em] flex items-center gap-2 sm:gap-3 whitespace-nowrap">
+            <span className="relative flex h-2.5 w-2.5 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary shadow-[0_0_14px_hsl(var(--primary)/0.45)]"></span>
             </span>
-            [ SYSTEMS_ENGINEER / NY_USA ]
+            <span className="min-w-0 truncate">[ SYSTEMS_ENGINEER / NY_USA ]</span>
           </span>
         </motion.div>
 
@@ -97,16 +185,6 @@ export const Hero = () => {
             <GlitchText text="Rajat" />
           </span>
         </motion.h1>
-
-        {/* Scramble Roles */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="text-xl md:text-3xl font-light text-muted-foreground mb-12 h-8"
-        >
-          Building <ScrambleText />
-        </motion.div>
 
         {/* Description */}
         <motion.p
@@ -152,6 +230,16 @@ export const Hero = () => {
               </a>
             ))}
           </div>
+        </motion.div>
+
+        {/* Scramble Roles */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.0 }}
+          className="mt-10 pt-2 text-2xl sm:text-3xl md:text-4xl font-light text-muted-foreground"
+        >
+          <ScrambleText />
         </motion.div>
       </div>
 

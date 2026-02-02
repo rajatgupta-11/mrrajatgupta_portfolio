@@ -72,15 +72,15 @@ export function ScrollVelocityStrip({
       out.push(
         <span
           key={key}
-          className="inline-flex items-center gap-4"
+          className="inline-flex items-center gap-3 sm:gap-4"
         >
           <span
             title={it.label}
-            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-primary/20 bg-background/5 text-primary"
+            className="inline-flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-primary/20 bg-background/5 text-primary"
           >
-            <Icon className="h-6 w-6" />
+            <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
           </span>
-          <span className="inline-flex h-1.5 w-1.5 rounded-full bg-primary/35" aria-hidden="true" />
+          <span className="inline-flex h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-primary/35" aria-hidden="true" />
         </span>
       );
     });
@@ -90,19 +90,19 @@ export function ScrollVelocityStrip({
   return (
     <div
       ref={containerRef}
-      className="relative overflow-hidden rounded-2xl border border-primary/15 bg-background/5 backdrop-blur-sm px-8 py-7 min-h-[104px]"
+      className="relative overflow-hidden rounded-2xl border border-primary/15 bg-background/5 backdrop-blur-sm px-4 py-4 sm:px-8 sm:py-7 min-h-[84px] sm:min-h-[104px]"
     >
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background/50 via-transparent to-background/50" />
       <motion.div
         style={{ x }}
-        className="relative flex w-max gap-8"
+        className="relative flex w-max gap-6 sm:gap-8"
         aria-hidden="true"
       >
-        <div ref={sequenceRef} className="flex w-max gap-8 items-center">
+        <div ref={sequenceRef} className="flex w-max gap-6 sm:gap-8 items-center">
           {rendered}
         </div>
         {/* duplicate for seamless wrap */}
-        <div className="flex w-max gap-8 items-center">
+        <div className="flex w-max gap-6 sm:gap-8 items-center">
           {rendered}
         </div>
       </motion.div>

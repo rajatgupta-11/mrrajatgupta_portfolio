@@ -44,7 +44,7 @@ export function SplashScreen({
         aria-busy="true"
       >
         {/* Background */}
-        <GalaxyBackground />
+        <GalaxyBackground quality="low" />
         <div className="absolute inset-0 grid-pattern opacity-35 dark:opacity-25" />
         <div className="absolute inset-0 scanlines opacity-60" />
 

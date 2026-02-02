@@ -1,6 +1,6 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 type FilterType = "all" | "projects" | "professional";
 
@@ -109,16 +109,10 @@ export const Work = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [filter, setFilter] = useState<FilterType>("all");
-  const [carouselTick, setCarouselTick] = useState(0);
 
   const filteredProjects = projects.filter(
     (project) => filter === "all" || project.type === filter
   );
-
-  useEffect(() => {
-    const id = window.setInterval(() => setCarouselTick((t) => t + 1), 2600);
-    return () => window.clearInterval(id);
-  }, []);
 
   return (
     <section id="work" className="py-24 md:py-32 relative" ref={ref}>
@@ -163,7 +157,7 @@ export const Work = () => {
           {filteredProjects.map((project, index) => {
             const preview =
               project.previews.length > 0
-                ? withBase(project.previews[(carouselTick + index) % project.previews.length])
+                ? withBase(project.previews[0])
                 : null;
 
             return (
@@ -186,25 +180,20 @@ export const Work = () => {
               </div>
 
               {/* Default content (matches screenshot) */}
-              <div className="relative flex flex-col items-center justify-center text-center px-6 py-14 transition-opacity duration-300 group-hover:opacity-0 group-focus-visible:opacity-0">
-                {/* Auto-sliding preview */}
+              <div className="relative flex flex-col items-center justify-center text-center px-6 py-10 transition-opacity duration-300 group-hover:opacity-0 group-focus-visible:opacity-0">
+                {/* Preview */}
                 {preview && (
-                  <div className="relative h-[110px] w-[190px] overflow-hidden rounded-2xl border border-border/50 bg-background/5">
-                    <AnimatePresence mode="wait" initial={false}>
-                      <motion.img
-                        key={preview}
-                        src={preview}
-                        alt=""
-                        className="absolute inset-0 h-full w-full object-cover"
-                        onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).src = withBase("placeholder.svg");
-                        }}
-                        initial={{ opacity: 0, x: 16 }}
-                        animate={{ opacity: 0.98, x: 0 }}
-                        exit={{ opacity: 0, x: -16 }}
-                        transition={{ duration: 0.35, ease: "easeOut" }}
-                      />
-                    </AnimatePresence>
+                  <div className="relative w-full aspect-[16/9] overflow-hidden rounded-2xl border border-border/50 bg-background/5">
+                    <img
+                      src={preview}
+                      alt=""
+                      className="absolute inset-0 h-full w-full object-cover opacity-[0.98]"
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = withBase("placeholder.svg");
+                      }}
+                    />
                     <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-70" />
                   </div>
                 )}
