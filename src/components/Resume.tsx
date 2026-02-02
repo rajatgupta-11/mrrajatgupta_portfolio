@@ -7,14 +7,6 @@ import { GalaxyBackground } from "./ui/GalaxyBackground";
 const RESUME_PDF_URL = `${import.meta.env.BASE_URL}resume.pdf`;
 const RESUME_VIEW_URL = `${import.meta.env.BASE_URL}resume.html`;
 
-const experience = [
-  {
-    title: "",
-    company: "LawgicHub AI",
-    period: "Sept 2024 to present",
-    description: "an AI-driven legal technology startup focused on intelligent document and case management. Leading system-level architecture planning and workflow design for AI-assisted document ingestion, analysis, drafting, and revision.",
-  },
-];
 
 const experience = [
   {
