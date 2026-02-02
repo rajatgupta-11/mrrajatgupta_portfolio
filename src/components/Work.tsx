@@ -77,7 +77,7 @@ const projects: Project[] = [
     type: "projects" as const,
     href: "projects/subway.html",
     previews: [
-      "projects/assets/videos/herodisplay.mp4",
+      "projects/assets/videos/herodisplay.png",
       "projects/assets/images/layout.png",
     ],
   },
