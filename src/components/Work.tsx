@@ -32,7 +32,7 @@ const projects: Project[] = [
   },
   {
     category: "AUTONOMOUS_FLIGHT",
-    title: "Autonomous Quadcopter Control with PID Control + RL",
+    title: "Autonomous Quadcopter with PID Control + RL",
     status: "DEPLOYED",
     description: "Betaflight tuning and PPO reinforcement learning in Isaac Sim with traditional PID architectures for smooth 'man to computer' input transitions.",
     type: "projects" as const,
