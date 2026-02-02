@@ -11,7 +11,7 @@ export const Footer = () => {
             transition={{ duration: 0.6 }}
             className="font-mono text-sm text-muted-foreground"
           >
-            <span className="text-primary">©</span> 2024 Rajat Gupta. Built with precision.
+            <span className="text-primary">©</span> 2026 Rajat Gupta. Engineered for precision.
           </motion.div>
 
           <motion.div
@@ -21,7 +21,7 @@ export const Footer = () => {
             className="flex items-center gap-2 font-mono text-xs text-muted-foreground"
           >
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span>Available for opportunities</span>
+            <span>Looking for oppportunities in robotics and system design</span>
           </motion.div>
         </div>
       </div>
