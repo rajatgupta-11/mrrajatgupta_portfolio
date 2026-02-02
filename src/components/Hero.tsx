@@ -1,7 +1,7 @@
 import { motion, useAnimationControls } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { useState, useEffect } from "react";
-import { StarBackground } from "./ui/StarBackground";
+import { GalaxyBackground } from "./ui/GalaxyBackground";
 
 const roles = [
   "Systems Engineer",
@@ -60,7 +60,7 @@ export const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       {/* Dynamic Background Elements */}
-      <StarBackground />
+      <GalaxyBackground />
       <div className="absolute inset-0 grid-pattern opacity-40 dark:opacity-20" />
       <div className="hidden dark:block absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
