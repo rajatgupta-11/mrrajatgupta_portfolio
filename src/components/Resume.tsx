@@ -10,6 +10,11 @@ const RESUME_VIEW_URL = `${import.meta.env.BASE_URL}resume.html`;
 
 const experience = [
   {
+    title: "Systems Engineer",
+    company: "Emerson",
+    period: "September 2025 to present",
+    description: "",
+
     title: "Mechanical Engineer Intern",
     company: "Emerson",
     period: "January 2024 to June 2024",
@@ -19,9 +24,13 @@ const experience = [
 
 const education = [
   {
-    degree: "Mechanical Engineering",
-    institution: "University",
-    focus: "Controls, Dynamics & Robotics",
+    degree: "MS Mechanical Engineering",
+    institution: "New York University Tandon School of Engineering, USA",
+    focus: "Controls, Dynamics, Robotics, Fabrication ",
+   
+    degree: "Btech Mechatronics Engineering with a Minor in Digital Marketing",
+    institution: "Manipal Institute of Technology, India",
+   
   },
 ];
 
