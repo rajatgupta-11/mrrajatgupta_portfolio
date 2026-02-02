@@ -15,7 +15,7 @@ export const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
-    console.log("Form submitted:", formState);
+    console.log("Request submitted:", formState);
   };
 
   return (
@@ -33,7 +33,7 @@ export const Contact = () => {
             Get In <span className="neon-text">Touch</span>
           </h2>
           <p className="text-muted-foreground mt-4 max-w-md mx-auto">
-            Interested in collaborating or discussing autonomous systems? Let's connect.
+            Interested in collaborating or talking robots? Let's connect.
           </p>
         </motion.div>
 
@@ -52,7 +52,7 @@ export const Contact = () => {
                 </div>
                 <div>
                   <p className="font-mono text-sm text-muted-foreground">Email</p>
-                  <p className="font-medium">rajat@example.com</p>
+                  <p className="font-medium">rg4883@nyu.edu</p>
                 </div>
               </div>
             </div>
@@ -73,7 +73,7 @@ export const Contact = () => {
             <div className="flex gap-4">
               {[
                 { icon: Github, href: "#", label: "GitHub" },
-                { icon: Linkedin, href: "#", label: "LinkedIn" },
+                { icon: Linkedin, href: "https://www.linkedin.com/in/rajat-gupta-60152125a/", label: "LinkedIn" },
               ].map((social) => (
                 <motion.a
                   key={social.label}
