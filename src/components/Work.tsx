@@ -25,7 +25,7 @@ const projects: Project[] = [
     type: "projects" as const,
     href: "projects/hexapod.html",
     previews: [
-      "projects/assets/images/annotated.png",
+      "projects/assets/images/hexa.png",
       "projects/assets/images/physical-setup-annotated.png",
       "projects/assets/images/original.png",
     ],
