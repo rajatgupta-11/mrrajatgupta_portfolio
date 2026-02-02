@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 import { GalaxyBackground } from "./ui/GalaxyBackground";
 
 const roles = [
-  "Systems Engineer",
-  "Robotics Architect",
-  "Simulation Expert",
-  "Drone Pilot",
-  "Builder"
+  "Design",
+  "Simulate",
+  "Build",
+  "Break",
+  "Repeat"
 ];
 
 const GlitchText = ({ text }: { text: string }) => {
