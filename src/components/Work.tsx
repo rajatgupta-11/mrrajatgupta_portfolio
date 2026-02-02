@@ -21,7 +21,7 @@ const projects: Project[] = [
     category: "LOCOMOTION_RESEARCH",
     title: "18 DOF Hexapod Robotic Platform",
     status: "COMPLETED",
-    description: "Designed and built a 6-legged 18-DOF platform under $150. ESP32-based WiFi control and synchronized multi-joint actuation.",
+    description: "Designed and built a 6-legged 18-DOF platform under $150. ESP32-based WiFi control and Arduino based multi-joint actuation.",
     type: "projects" as const,
     href: "projects/hexapod.html",
     previews: [
