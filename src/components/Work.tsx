@@ -82,7 +82,7 @@ const projects: Project[] = [
     ],
   },
   {
-  category: "IOT_PRODUCT_FABRICATION",
+  category: "DFM",
   title: "Solutions Looking for Problems",
   status: "ONGOING",
   description: "Self-initiated product design series targeting small everyday friction points through CAD-driven iteration, rapid prototyping, and enclosure design.",
@@ -122,10 +122,9 @@ const projects: Project[] = [
 {
   category: "AI_PRODUCT_DESIGN",
   title: "LawgicHub AI | Product Engineer",
-  period: "Sept 2025 – Present",
-  summary:
-    "Product-shaping role focused on clarity, restraint, and user trust—guiding how a domain-specific legal AI thinks, speaks, and presents itself through synthesis of expert feedback and cross-functional alignment.",
-     type: "professional" as const,
+  status: "REMOTE",
+  description: "Product-shaping role focused on clarity, restraint, and user trust—guiding how a domain-specific legal AI thinks, speaks, and presents itself through synthesis of expert feedback and cross-functional alignment.",
+    type: "professional" as const,
     href: "projects/lawgic.html",
     previews: [
       "projects/assets/images/lawgic.png",
