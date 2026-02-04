@@ -84,7 +84,7 @@ const projects: Project[] = [
   {
 
   category: "ADDITIVE_MANUFACTURE",
-  title: "Additive Manufacturing of 316L Stainless Steel (DMLS)",
+  title: "Additive Manufacturing and testing of 316L Stainless Steel (DMLS)",
   status: "COMPLETED",
   description: "Experimental study on build orientation effects in DMLS-printed 316L stainless steel. Evaluated tensile, impact, and hardness properties, identifying anisotropy, defect formation, and orientation-driven performance tradeoffs.",
   type: "projects" as const,
