@@ -43,6 +43,18 @@ const projects: Project[] = [
     ],
   },
   {
+    category: "IOT_PRODUCT_FABRICATION",
+    title: "NYC Subway Arrival Countdown",
+    status: "DEPLOYED",
+    description: "Real-time transit telemetry display with fault-tolerant updates and custom-fabricated enclosure.",
+    type: "projects" as const,
+    href: "projects/subway.html",
+    previews: [
+      "projects/assets/images/herodisplay.png",
+      "projects/assets/images/layout.png",
+    ],
+  },
+  {
     category: "MUJOCO_SIM",
     title: "SpinLaunch Kinetic Sim & Analysis",
     status: "COMPLETED",
@@ -56,6 +68,33 @@ const projects: Project[] = [
     ],
   },
   {
+  category: "AI_PRODUCT_DESIGN",
+  title: "LawgicHub AI | Product Engineer",
+  status: "REMOTE",
+  description: "Product-shaping role focused on clarity, restraint, and user trust. Guiding how a domain-specific legal AI thinks, speaks, and presents itself through synthesis of expert feedback and cross-functional alignment.",
+    type: "professional" as const,
+    href: "projects/lawgic.html",
+    previews: [
+      "projects/assets/images/lawgic.png",
+      "projects/assets/images/most.png",
+      "projects/assets/images/valve.png",
+    ],
+  },
+  {
+    category: "INDUSTRIAL_OPERATION",
+    title: "Emerson | Mechanical Engineering",
+    status: "COMPLETED",
+    description: "Professional engineering focused on real-world constraints, MOST analysis, and system behavior.",
+    type: "professional" as const,
+    href: "projects/emerson.html",
+    previews: [
+      "projects/assets/images/emerson.png",
+      "projects/assets/images/most.png",
+      "projects/assets/images/valve.png",
+    ],
+  },
+
+{
     category: "THERMAL_CONTROL",
     title: "Closed Loop Solar Panel Efficiency Control",
     status: "COMPLETED",
@@ -68,18 +107,7 @@ const projects: Project[] = [
       "projects/assets/images/experimental-temp-power.png",
     ],
   },
-  {
-    category: "IOT_PRODUCT_FABRICATION",
-    title: "NYC Subway Arrival Countdown",
-    status: "DEPLOYED",
-    description: "Real-time transit telemetry display with fault-tolerant updates and custom-fabricated enclosure.",
-    type: "projects" as const,
-    href: "projects/subway.html",
-    previews: [
-      "projects/assets/images/herodisplay.png",
-      "projects/assets/images/layout.png",
-    ],
-  },
+  
   {
   category: "DFM",
   title: "Solutions Looking for Problems",
@@ -94,7 +122,7 @@ const projects: Project[] = [
   {
 
   category: "ADDITIVE_MANUFACTURE",
-  title: "Additive Manufacturing and testing of 316L Stainless Steel (DMLS)",
+  title: "Additive Manufacturing & testing of 316L Stainless Steel (DMLS)",
   status: "COMPLETED",
   description: "Experimental study on build orientation effects in DMLS-printed 316L stainless steel. Evaluated tensile, impact, and hardness properties, identifying anisotropy, defect formation, and orientation-driven performance tradeoffs.",
   type: "projects" as const,
@@ -105,33 +133,7 @@ const projects: Project[] = [
       "projects/assets/images/tensile.png",
     ],
   },
-    {
-    category: "INDUSTRIAL_OPERATION",
-    title: "Emerson | Mechanical Engineering",
-    status: "COMPLETED",
-    description: "Professional engineering focused on real-world constraints, MOST analysis, and system behavior.",
-    type: "professional" as const,
-    href: "projects/emerson.html",
-    previews: [
-      "projects/assets/images/emerson.png",
-      "projects/assets/images/most.png",
-      "projects/assets/images/valve.png",
-    ],
-  },
-{
-  category: "AI_PRODUCT_DESIGN",
-  title: "LawgicHub AI | Product Engineer",
-  status: "REMOTE",
-  description: "Product-shaping role focused on clarity, restraint, and user trust. Guiding how a domain-specific legal AI thinks, speaks, and presents itself through synthesis of expert feedback and cross-functional alignment.",
-    type: "professional" as const,
-    href: "projects/lawgic.html",
-    previews: [
-      "projects/assets/images/lawgic.png",
-      "projects/assets/images/most.png",
-      "projects/assets/images/valve.png",
-    ],
-  },
-];
+    
 
 const statusColors: Record<string, string> = {
   COMPLETED: "text-green-400",
