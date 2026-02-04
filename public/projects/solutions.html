@@ -301,13 +301,19 @@ figcaption{
         The MTA Desk Clock directly inspired this series. Beyond revisiting a side of mechanical engineering I enjoy, it highlighted how much friction can be removed from everyday life through simple, well-considered physical systems.
       </p>
       <p style="color:var(--muted);">
-        The project simultaneously improved my instincts as a builder, reinforcing the value of fast iteration and hardware validation over extended design refinement.
+        Simultaneously, this project reinforced the value of fast iteration and hardware validation over extended design refinement.
       </p>
-      <a href="../mta-desk-clock/" class="mono stl-link">Go to project →</a>
+      <a href="../subway.html/" class="mono stl-link">Go to project</a>
     </div>
     <figure>
-      <img src="assets/images/mta-origin.png" alt="MTA Desk Clock">
-      <figcaption>INSPIRATION_ARTIFACT</figcaption>
+      <video
+        src="assets/videos/herodisplay.mp4"
+        muted
+        loop
+        autoplay
+        playsinline>
+      </video>
+      <figcaption>ORIGIN_ARTIFICANT</figcaption>
     </figure>
   </div>
 </section>
@@ -316,7 +322,7 @@ figcaption{
 
 <section class="artifact-container">
   <div class="artifact-header">Artifact #1</div>
-  <h2>Cantilevered Paper Roll Holder</h2>
+  <h2>Cantilevered Paper-Roll Holder</h2>
   
   <div class="split reverse media-heavy">
     <figure>
@@ -330,38 +336,7 @@ figcaption{
      
     </div>
   </div>
-a
-  <div class="split" style="margin-top:3rem;">
-    <div>
-      <h2>Design Decisions</h2>
-      <p>
-        Geometry, wall thickness, and print orientation were selected to balance stiffness, print time, and FDM tolerances, with layer direction aligned to the primary bending loads.
-      </p>
-      <p style="color:var(--muted);">
-        Clearances were tuned to allow repeatable assembly without post-processing or fasteners. The cantilevered configuration eliminates the need for through-shaft support, reducing installation complexity.
-      </p>
-    </div>
-    <figure>
-      <img src="assets/images/assembly-diagram.png" alt="Assembly configuration">
-      <figcaption>COMPONENT_ASSEMBLY_DETAIL</figcaption>
-    </figure>
-  </div>
 
-  <div class="split reverse" style="margin-top:3rem;">
-    <figure>
-      <img src="assets/images/layer-orientation.png" alt="Print orientation analysis">
-      <figcaption>FDM_LAYER_ALIGNMENT</figcaption>
-    </figure>
-    <div>
-      <h2>Manufacturing Strategy</h2>
-      <p>
-        Layer direction is intentionally aligned with the primary bending loads to maximize structural performance within FDM constraints.
-      </p>
-      <p style="color:var(--muted);">
-        Wall thickness and infill were calibrated to achieve sufficient rigidity without excessive print time, treating material distribution as a tradeoff between strength and manufacturing efficiency.
-      </p>
-    </div>
-  </div>
 
   <div class="design-tip">
     <strong>Tip:</strong> Print both parts twice and invert the bodies during mounting for symmetric load distribution and visual balance.
