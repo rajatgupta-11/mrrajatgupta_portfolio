@@ -82,6 +82,19 @@ const projects: Project[] = [
     href: "projects/solutions.html",
     previews: ["projects/assets/images/paper_roll.png"],
   },
+   {
+    category: "MUJOCO_SIM",
+    title: "SpinLaunch Kinetic Sim & Analysis",
+    status: "COMPLETED",
+    description: "High fidelity Mujoco & Python simulation framework analysis for kinetic launch systems. Reduced post-release oscillatory hinge loads by 90% and optimized factors like angle of throw and burner phase using ONLY HALF the propellant of a conventional launch",
+    type: "projects" as const,
+    href: "projects/kinetic.html",
+    previews: [
+      "projects/assets/images/accelerator.png",
+      "projects/assets/images/",
+      "projects/assets/images/fuel_graph.png",
+    ],
+  },
   {
     category: "ADDITIVE_MANUFACTURE",
     title: "Additive Manufacturing and testing of 316L Stainless Steel (DMLS)",
@@ -92,6 +105,7 @@ const projects: Project[] = [
     href: "projects/dmls.html",
     previews: ["projects/assets/images/tensile.png"],
   },
+  
   {
     category: "INDUSTRIAL_OPERATION",
     title: "Emerson | Mechanical Engineering",
