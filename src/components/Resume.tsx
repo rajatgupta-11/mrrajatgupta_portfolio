@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { Download, FileText, Briefcase, GraduationCap } from "lucide-react";
 import { GalaxyBackground } from "./ui/GalaxyBackground";
 
-const RESUME_PDF_URL = `${import.meta.env.BASE_URL}resume.pdf`;
+const RESUME_PDF_URL = `${import.meta.env.BASE_URL}base_resume.pdf`;
 const RESUME_VIEW_URL = `${import.meta.env.BASE_URL}resume.html`;
 
 
