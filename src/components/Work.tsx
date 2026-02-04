@@ -45,6 +45,19 @@ const projects: Project[] = [
       "projects/assets/images/esc.png",
     ],
   },
+    {
+    category: "IOT_PRODUCT_FABRICATION",
+    title: "NYC Subway Arrival Countdown",
+    status: "DEPLOYED",
+    description:
+      "Real-time transit telemetry display with fault-tolerant updates and custom-fabricated enclosure.",
+    type: "projects" as const,
+    href: "projects/subway.html",
+    previews: [
+      "projects/assets/images/herodisplay.png",
+      "projects/assets/images/layout.png",
+    ],
+  },
   {
     category: "THERMAL_CONTROL",
     title: "Closed Loop Solar Panel Efficiency Control",
@@ -59,19 +72,7 @@ const projects: Project[] = [
       "projects/assets/images/experimental-temp-power.png",
     ],
   },
-  {
-    category: "IOT_PRODUCT_FABRICATION",
-    title: "NYC Subway Arrival Countdown",
-    status: "DEPLOYED",
-    description:
-      "Real-time transit telemetry display with fault-tolerant updates and custom-fabricated enclosure.",
-    type: "projects" as const,
-    href: "projects/subway.html",
-    previews: [
-      "projects/assets/images/herodisplay.png",
-      "projects/assets/images/layout.png",
-    ],
-  },
+
   {
     category: "DFM",
     title: "Solutions Looking for Problems",
@@ -96,14 +97,18 @@ const projects: Project[] = [
     ],
   },
   {
-    category: "ADDITIVE_MANUFACTURE",
-    title: "Additive Manufacturing and testing of 316L Stainless Steel (DMLS)",
-    status: "COMPLETED",
+    category: "AI_PRODUCT_DESIGN",
+    title: "LawgicHub AI | Product Engineer",
+    status: "REMOTE",
     description:
-      "Experimental study on build orientation effects in DMLS-printed 316L stainless steel. Evaluated tensile, impact, and hardness properties, identifying anisotropy, defect formation, and orientation-driven performance tradeoffs.",
-    type: "projects" as const,
-    href: "projects/dmls.html",
-    previews: ["projects/assets/images/tensile.png"],
+      "Product-shaping role focused on clarity, restraint, and user trust. Guiding how a domain-specific legal AI thinks, speaks, and presents itself through synthesis of expert feedback and cross-functional alignment.",
+    type: "professional" as const,
+    href: "projects/lawgic.html",
+    previews: [
+      "projects/assets/images/lawgic.png",
+      "projects/assets/images/most.png",
+      "projects/assets/images/valve.png",
+    ],
   },
   
   {
@@ -121,19 +126,16 @@ const projects: Project[] = [
     ],
   },
   {
-    category: "AI_PRODUCT_DESIGN",
-    title: "LawgicHub AI | Product Engineer",
-    status: "REMOTE",
+    category: "ADDITIVE_MANUFACTURE",
+    title: "Additive Manufacturing and testing of 316L Stainless Steel (DMLS)",
+    status: "COMPLETED",
     description:
-      "Product-shaping role focused on clarity, restraint, and user trust. Guiding how a domain-specific legal AI thinks, speaks, and presents itself through synthesis of expert feedback and cross-functional alignment.",
-    type: "professional" as const,
-    href: "projects/lawgic.html",
-    previews: [
-      "projects/assets/images/lawgic.png",
-      "projects/assets/images/most.png",
-      "projects/assets/images/valve.png",
-    ],
+      "Experimental study on build orientation effects in DMLS-printed 316L stainless steel. Evaluated tensile, impact, and hardness properties, identifying anisotropy, defect formation, and orientation-driven performance tradeoffs.",
+    type: "projects" as const,
+    href: "projects/dmls.html",
+    previews: ["projects/assets/images/tensile.png"],
   },
+  
 ];
 
 
