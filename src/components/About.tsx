@@ -56,12 +56,12 @@
                 <p className="text-muted-foreground leading-relaxed">
   Outside of engineering, I occasionally write about decision-making, human behavior, and evolutionary constraints.{" "}
   <a
-    href="https://medium.com/@YOUR_USERNAME"
+    href="https://medium.com/@rajatg2062"
     target="_blank"
     rel="noopener noreferrer"
     className="underline underline-offset-4 hover:text-primary transition-colors"
   >
-    Writing →
+    Read more
   </a>
 </p>
 
