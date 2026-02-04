@@ -57,7 +57,7 @@ const projects: Project[] = [
     ],
   },
   {
-    category: "THERMAL_CONTROLSYSTEMS",
+    category: "THERMAL_CONTROL",
     title: "Closed loop Solar Panel efficiency control",
     status: "COMPLETED",
     description: "Closed-loop evaporative cooling for PV panels. Achieved 5-7°C reduction matching Simulink predictions.",
@@ -79,6 +79,17 @@ const projects: Project[] = [
     previews: [
       "projects/assets/images/herodisplay.png",
       "projects/assets/images/layout.png",
+    ],
+  },
+  {
+  category: "IOT_PRODUCT_FABRICATION",
+  title: "Everyday Friction — Ongoing Product Design Explorations",
+  status: "ONGOING",
+  description: "Self-initiated product design experiments targeting small everyday friction points through CAD-driven iteration, rapid prototyping, and enclosure design.",
+  type: "projects" as const,
+  href: "projects/solutions.html",
+    previews: [
+      "projects/assets/images/paper_roll.png",
     ],
   },
   {
