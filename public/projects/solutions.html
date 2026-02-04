@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Solutions Looking for Problems</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+<style>
+:root {
+  --bg:#030507;
+  --surface:#0a0c10;
+  --card-bg:rgba(15,19,24,.8);
+  --text:#e6edf3;
+  --muted:#8b949e;
+  --accent:#10b981;
+  --border:rgba(255,255,255,.08);
+  --max-width:1100px;
+}
+
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased}
+
+body{
+  margin:0;
+  background-color:var(--bg);
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:100px 100px;
+  color:var(--text);
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  line-height:1.6;
+}
+
+.nav-home{
+  position:fixed;
+  top:2rem;
+  left:2rem;
+  z-index:100;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  color:var(--accent);
+  text-decoration:none;
+  padding:.5rem 1rem;
+  border:1px solid var(--border);
+  background:var(--surface);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+.nav-home:hover{background:var(--accent);color:#000}
+
+main{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:10rem 1.5rem 6rem;
+}
+
+h1{
+  font-size:clamp(2.5rem,5vw,4.5rem);
+  line-height:1;
+  margin:0 0 1.5rem;
+  font-weight:800;
+  letter-spacing:-.04em;
+}
+h2{
+  font-size:1.8rem;
+  font-weight:800;
+  margin:0 0 1.5rem;
+}
+
+.mono{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.85rem;
+  color:var(--accent);
+}
+
+.subtitle{
+  font-size:1.2rem;
+  color:var(--muted);
+  max-width:800px;
+  margin:0 auto 2.5rem;
+}
+
+.skills-container{
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  flex-wrap:wrap;
+  margin-bottom:5rem;
+}
+.skill-box{
+  border:1px solid var(--accent);
+  padding:.4rem 1rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.8rem;
+  color:var(--accent);
+  text-transform:uppercase;
+}
+
+.card{
+  background:var(--card-bg);
+  backdrop-filter:blur(10px);
+  border:1px solid var(--border);
+  padding:3.5rem;
+  margin-bottom:3rem;
+  position:relative;
+}
+.card::after{
+  content:"";
+  position:absolute;
+  top:-1px;
+  right:-1px;
+  width:15px;
+  height:15px;
+  border-top:2px solid var(--accent);
+  border-right:2px solid var(--accent);
+}
+
+.split{
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:4rem;
+  align-items:center;
+}
+.split.reverse{grid-template-columns:1.2fr 1fr}
+
+.metric-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1.5rem;
+  margin-top:2rem;
+}
+.metric-item{
+  border-left:2px solid var(--accent);
+  padding:1rem 1.5rem;
+  background:rgba(16,185,129,.03);
+}
+.metric-value{
+  font-size:2.2rem;
+  font-weight:800;
+  line-height:1;
+}
+.metric-label{
+  font-size:.75rem;
+  text-transform:uppercase;
+  color:var(--muted);
+  letter-spacing:.1em;
+}
+
+.split.media-heavy {
+  grid-template-columns: 1.5fr 1fr;
+}
+
+img,video{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:6px;
+  display:block;
+}
+
+.video-enhanced{
+  transform:scale(1.05);
+}
+
+figcaption{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  color:var(--muted);
+  margin-top:1rem;
+}
+
+.stl-link{
+  display:inline-block;
+  margin-top:1.2rem;
+  font-size:.75rem;
+  text-decoration:none;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--accent);
+}
+
+.stl-link:hover{
+  text-decoration:underline;
+}
+
+.artifact-container{
+  background:var(--card-bg);
+  backdrop-filter:blur(10px);
+  border:1px solid var(--border);
+  padding:3.5rem;
+  margin-bottom:3rem;
+  position:relative;
+}
+
+.artifact-container::after{
+  content:"";
+  position:absolute;
+  top:-1px;
+  right:-1px;
+  width:15px;
+  height:15px;
+  border-top:2px solid var(--accent);
+  border-right:2px solid var(--accent);
+}
+
+.artifact-header{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  margin-bottom:1.5rem;
+}
+
+.design-tip{
+  background:rgba(16,185,129,.05);
+  border-left:3px solid var(--accent);
+  padding:1rem 1.5rem;
+  margin-top:2rem;
+  font-size:.9rem;
+}
+
+.design-tip strong{
+  color:var(--accent);
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+@media(max-width:1000px){
+  .split,.split.reverse{grid-template-columns:1fr}
+  main{padding-top:6rem}
+  .video-enhanced{transform:none}
+}
+</style>
+<link rel="stylesheet" href="theme.css">
+<script defer src="theme.js"></script>
+</head>
+
+<body>
+
+<a href="../" class="nav-home">← Home</a>
+
+<main>
+
+<header style="text-align:center;">
+  <div class="mono mono-tagline" style="margin-bottom:1.5rem;letter-spacing:.4em;">[ DFM / PRODUCT_DESIGN ]</div>
+  <h1>Solutions Looking for Problems</h1>
+  <p class="subtitle">
+    A self-initiated product design series focused on reducing everyday user friction through fast, constraint-driven iteration.
+  </p>
+
+  <div class="skills-container">
+    <div class="skill-box">Rapid Iteration</div>
+    <div class="skill-box">DFM</div>
+    <div class="skill-box">FDM Optimization</div>
+    <div class="skill-box">Constraint-Driven Design</div>
+  </div>
+</header>
+
+<section class="card">
+  <div class="split">
+    <div>
+      <h2>Design Philosophy</h2>
+      <p>
+        The work prioritizes practical impact over novelty, treating small, widely tolerated problems as valid engineering targets when they can be addressed within a couple of days and a $20–30 budget.
+      </p>
+      <p style="color:var(--muted);">
+        Each artifact is intentionally over-engineered relative to its apparent simplicity, emphasizing repetition and volume: making concrete mechanical decisions quickly, validating them in hardware, and moving on once the solution is good enough to disappear into daily use.
+      </p>
+    </div>
+  
+  
+    <figure>
+      <img src="assets/images/philosophy.png" alt="Design process visualization">
+      <figcaption>CONSTRAINT-DRIVEN_ITERATION</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Design Constraints</h2>
+  <div class="metric-row">
+    <div class="metric-item">
+      <div class="metric-label">Time Budget</div>
+      <div class="metric-value">2–3 days</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">Material Cost</div>
+      <div class="metric-value">$20–30</div>
+    </div>
+    <div class="metric-item">
+      <div class="metric-label">Assembly</div>
+      <div class="metric-value">Tool-less</div>
+    </div>
+  </div>
+</section>
+  
+<section class="card">
+  <h2>Origin: MTA Desk Clock</h2>
+  <div class="split">
+    <div>
+      <p>
+        The MTA Desk Clock directly inspired this series. Beyond revisiting a side of mechanical engineering I enjoy, it highlighted how much friction can be removed from everyday life through simple, well-considered physical systems.
+      </p>
+      <p style="color:var(--muted);">
+        The project simultaneously improved my instincts as a builder, reinforcing the value of fast iteration and hardware validation over extended design refinement.
+      </p>
+      <a href="../mta-desk-clock/" class="mono stl-link">Go to project →</a>
+    </div>
+    <figure>
+      <img src="assets/images/mta-origin.png" alt="MTA Desk Clock">
+      <figcaption>INSPIRATION_ARTIFACT</figcaption>
+    </figure>
+  </div>
+</section>
+
+
+
+<section class="artifact-container">
+  <div class="artifact-header">Artifact #1</div>
+  <h2>Cantilevered Paper Roll Holder</h2>
+  
+  <div class="split reverse media-heavy">
+    <figure>
+      <img src="assets/images/paper-holder-installed.png" alt="Paper roll holder in use">
+      <figcaption>WALL-MOUNTED_CONFIGURATION</figcaption>
+    </figure>
+    <div>
+      <p>
+        A wall-mounted, elevated roll holder designed to support the full mass of a standard paper roll while remaining lightweight, tool-less to assemble, and fast to manufacture. Clearances were tuned to allow repeatable assembly without post-processing or fasteners. The cantilevered configuration eliminates the need for through-shaft support, reducing installation complexity.
+      </p>
+     
+    </div>
+  </div>
+a
+  <div class="split" style="margin-top:3rem;">
+    <div>
+      <h2>Design Decisions</h2>
+      <p>
+        Geometry, wall thickness, and print orientation were selected to balance stiffness, print time, and FDM tolerances, with layer direction aligned to the primary bending loads.
+      </p>
+      <p style="color:var(--muted);">
+        Clearances were tuned to allow repeatable assembly without post-processing or fasteners. The cantilevered configuration eliminates the need for through-shaft support, reducing installation complexity.
+      </p>
+    </div>
+    <figure>
+      <img src="assets/images/assembly-diagram.png" alt="Assembly configuration">
+      <figcaption>COMPONENT_ASSEMBLY_DETAIL</figcaption>
+    </figure>
+  </div>
+
+  <div class="split reverse" style="margin-top:3rem;">
+    <figure>
+      <img src="assets/images/layer-orientation.png" alt="Print orientation analysis">
+      <figcaption>FDM_LAYER_ALIGNMENT</figcaption>
+    </figure>
+    <div>
+      <h2>Manufacturing Strategy</h2>
+      <p>
+        Layer direction is intentionally aligned with the primary bending loads to maximize structural performance within FDM constraints.
+      </p>
+      <p style="color:var(--muted);">
+        Wall thickness and infill were calibrated to achieve sufficient rigidity without excessive print time, treating material distribution as a tradeoff between strength and manufacturing efficiency.
+      </p>
+    </div>
+  </div>
+
+  <div class="design-tip">
+    <strong>Tip:</strong> Print both parts twice and invert the bodies during mounting for symmetric load distribution and visual balance.
+  </div>
+
+  <div style="margin-top:2rem;">
+    <a href="assets/vault/body.stl" class="mono stl-link">Download Body.stl</a><br>
+    <a href="assets/vault/shaft.stl" class="mono stl-link">Download Shaft.stl</a>
+  </div>
+</section>
+
+
+
+<footer style="margin-top:8rem;border-top:1px solid var(--border);padding-top:4rem;text-align:center;">
+  
+</footer>
+
+</main>
+</body>
+</html>
