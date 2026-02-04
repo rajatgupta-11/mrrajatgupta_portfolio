@@ -123,7 +123,7 @@ const projects: Project[] = [
   category: "AI_PRODUCT_DESIGN",
   title: "LawgicHub AI | Product Engineer",
   status: "REMOTE",
-  description: "Product-shaping role focused on clarity, restraint, and user trust—guiding how a domain-specific legal AI thinks, speaks, and presents itself through synthesis of expert feedback and cross-functional alignment.",
+  description: "Product-shaping role focused on clarity, restraint, and user trust. Guiding how a domain-specific legal AI thinks, speaks, and presents itself through synthesis of expert feedback and cross-functional alignment.",
     type: "professional" as const,
     href: "projects/lawgic.html",
     previews: [
