@@ -32,15 +32,14 @@ const projects: Project[] = [
   },
   {
     category: "AUTONOMOUS_FLIGHT",
-    title: "Autonomous Quadcopter with PID Control + RL",
+    title: "Autonomous Quadcopter w/ PID Control & RL",
     status: "DEPLOYED",
     description: "Betaflight tuning and PPO reinforcement learning in Isaac Sim with traditional PID architectures for smooth 'man to computer' input transitions.",
     type: "projects" as const,
     href: "projects/drone.html",
     previews: [
       "projects/assets/images/drone_real.png",
-      "projects/assets/images/fc.png",
-      "projects/assets/images/esc.png",
+
     ],
   },
   {
@@ -58,9 +57,9 @@ const projects: Project[] = [
   },
   {
     category: "THERMAL_CONTROL",
-    title: "Closed loop Solar Panel efficiency control",
+    title: "Closed Loop Solar Panel Efficiency Control",
     status: "COMPLETED",
-    description: "Closed-loop evaporative cooling for PV panels. Achieved 5-7°C reduction matching Simulink predictions.",
+    description: "Closed-loop evaporative cooling for PV panels. Achieved 5°C reduction matching Simulink predictions mitigating thermal efficiency losses.",
     type: "projects" as const,
     href: "projects/solar-cooling.html",
     previews: [
