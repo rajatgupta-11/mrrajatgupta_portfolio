@@ -108,7 +108,7 @@ const projects: Project[] = [
   },
     {
     category: "INDUSTRIAL_OPERATION",
-    title: "Emerson | Engineering Work",
+    title: "Emerson | Mechanical Engineering",
     status: "COMPLETED",
     description: "Professional engineering focused on real-world constraints, MOST analysis, and system behavior.",
     type: "professional" as const,
@@ -120,15 +120,15 @@ const projects: Project[] = [
     ],
   },
 {
-  title: "Product Engineer",
-  organization: "LawgicHub AI",
+  category: "AI_PRODUCT_DESIGN",
+  title: "LawgicHub AI | Product Engineer",
   period: "Sept 2025 – Present",
   summary:
     "Product-shaping role focused on clarity, restraint, and user trust—guiding how a domain-specific legal AI thinks, speaks, and presents itself through synthesis of expert feedback and cross-functional alignment.",
      type: "professional" as const,
     href: "projects/lawgic.html",
     previews: [
-      "projects/assets/images/emerson.png",
+      "projects/assets/images/lawgic.png",
       "projects/assets/images/most.png",
       "projects/assets/images/valve.png",
     ],
