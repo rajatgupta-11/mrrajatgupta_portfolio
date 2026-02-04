@@ -37,7 +37,7 @@
                 My work sits at the intersection of mechanics, control theory, and computation. I care about system-level behavior: how dynamics, sensing, actuation, and control interact under real constraints. I enjoy designing, simulating, building, breaking, and refining systems until their behavior matches intent.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                I'm highly motivated by failure-driven learning. Most interested in small, high-ownership environments that value autonomy, rapid prototyping, and fast progress, where engineering is hands-on and iterative.
+                I'm highly motivated by failure-driven learning. Most interested in small, high-ownership environments that value autonomy, rapid prototyping, and fast progress.
               </p>
             </motion.div>
   
