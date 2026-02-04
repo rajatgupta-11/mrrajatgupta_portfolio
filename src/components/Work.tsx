@@ -126,7 +126,7 @@ const projects: Project[] = [
     ],
   },
   {
-    category: "ADDITIVE_MANUFACTURE",
+    category: "ADDITIVE_MANUFACTURING",
     title: "Additive Manufacturing and Testing of 316L Stainless Steel (DMLS)",
     status: "COMPLETED",
     description:
