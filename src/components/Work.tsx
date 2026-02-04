@@ -17,116 +17,111 @@ previews: string[]; // relative to BASE_URL (no leading slash)
 const withBase = (p: string) => `${import.meta.env.BASE_URL}${p.replace(/^\//, "")}`;
 
 const projects: Project[] = [
-{
-category: "MULTI-DOF ROBOTICS",
-title: "18 DOF Hexapod Robotic Platform",
-status: "DEPLOYED",
-description: "Designed and built a 6-legged 18-DOF microserver controlled platform under $150. ESP32-based WiFi control and Arduino based multi-joint actuation.",
-type: "projects" as const,
-href: "projects/hexapod.html",
-previews: [
-"projects/assets/images/hexa.png",
-"projects/assets/images/physical-setup-annotated.png",
-"projects/assets/images/original.png",
-],
-},
-{
-category: "AUTONOMOUS_FLIGHT",
-    title: "Autonomous Quadcopter with PID Control + RL",
+  {
+    category: "MULTI-DOF ROBOTICS",
+    title: "18 DOF Hexapod Robotic Platform",
+    status: "DEPLOYED",
+    description:
+      "Designed and built a 6-legged 18-DOF microserver controlled platform under $150. ESP32-based WiFi control and Arduino based multi-joint actuation.",
+    type: "projects" as const,
+    href: "projects/hexapod.html",
+    previews: [
+      "projects/assets/images/hexa.png",
+      "projects/assets/images/physical-setup-annotated.png",
+      "projects/assets/images/original.png",
+    ],
+  },
+  {
+    category: "AUTONOMOUS_FLIGHT",
     title: "Autonomous Quadcopter w/ PID Control & RL",
-status: "DEPLOYED",
-description: "Betaflight tuning and PPO reinforcement learning in Isaac Sim with traditional PID architectures for smooth 'man to computer' input transitions.",
-type: "projects" as const,
-href: "projects/drone.html",
-previews: [
-"projects/assets/images/drone_real.png",
+    status: "DEPLOYED",
+    description:
+      "Betaflight tuning and PPO reinforcement learning in Isaac Sim with traditional PID architectures for smooth 'man to computer' input transitions.",
+    type: "projects" as const,
+    href: "projects/drone.html",
+    previews: [
+      "projects/assets/images/drone_real.png",
       "projects/assets/images/fc.png",
       "projects/assets/images/esc.png",
-
-],
-},
-{
-@@ -58,224 +57,224 @@
-},
-{
-category: "THERMAL_CONTROL",
-    title: "Closed loop Solar Panel efficiency control",
+    ],
+  },
+  {
+    category: "THERMAL_CONTROL",
     title: "Closed Loop Solar Panel Efficiency Control",
-status: "COMPLETED",
-    description: "Closed-loop evaporative cooling for PV panels. Achieved 5-7°C reduction matching Simulink predictions.",
-    description: "Closed-loop evaporative cooling for PV panels. Achieved 5°C reduction matching Simulink predictions mitigating thermal efficiency losses.",
-type: "projects" as const,
-href: "projects/solar-cooling.html",
-previews: [
-"assets/images/solar.png",
-"projects/assets/images/temp.png",
-"projects/assets/images/experimental-temp-power.png",
-],
-},
-{
-category: "IOT_PRODUCT_FABRICATION",
-title: "NYC Subway Arrival Countdown",
-status: "DEPLOYED",
-description: "Real-time transit telemetry display with fault-tolerant updates and custom-fabricated enclosure.",
-type: "projects" as const,
-href: "projects/subway.html",
-previews: [
-"projects/assets/images/herodisplay.png",
-"projects/assets/images/layout.png",
-],
-},
-{
-category: "DFM",
-title: "Solutions Looking for Problems",
-status: "ONGOING",
-description: "Self-initiated product design series targeting small everyday friction points through CAD-driven iteration, rapid prototyping, and enclosure design.",
-type: "projects" as const,
-href: "projects/solutions.html",
-previews: [
-"projects/assets/images/paper_roll.png",
-],
-},
-{
-
-category: "ADDITIVE_MANUFACTURE",
-title: "Additive Manufacturing and testing of 316L Stainless Steel (DMLS)",
-status: "COMPLETED",
-description: "Experimental study on build orientation effects in DMLS-printed 316L stainless steel. Evaluated tensile, impact, and hardness properties, identifying anisotropy, defect formation, and orientation-driven performance tradeoffs.",
-type: "projects" as const,
-href: "projects/dmls.html",
-
-
-previews: [
-"projects/assets/images/tensile.png",
-],
-},
-{
-category: "INDUSTRIAL_OPERATION",
-title: "Emerson | Mechanical Engineering",
-status: "COMPLETED",
-description: "Professional engineering focused on real-world constraints, MOST analysis, and system behavior.",
-type: "professional" as const,
-href: "projects/emerson.html",
-previews: [
-"projects/assets/images/emerson.png",
-"projects/assets/images/most.png",
-"projects/assets/images/valve.png",
-],
-},
-{
-category: "AI_PRODUCT_DESIGN",
-title: "LawgicHub AI | Product Engineer",
-status: "REMOTE",
-description: "Product-shaping role focused on clarity, restraint, and user trust. Guiding how a domain-specific legal AI thinks, speaks, and presents itself through synthesis of expert feedback and cross-functional alignment.",
-type: "professional" as const,
-href: "projects/lawgic.html",
-previews: [
-"projects/assets/images/lawgic.png",
-"projects/assets/images/most.png",
-"projects/assets/images/valve.png",
-],
-},
+    status: "COMPLETED",
+    description:
+      "Closed-loop evaporative cooling for PV panels. Achieved 5°C reduction matching Simulink predictions mitigating thermal efficiency losses.",
+    type: "projects" as const,
+    href: "projects/solar-cooling.html",
+    previews: [
+      "assets/images/solar.png",
+      "projects/assets/images/temp.png",
+      "projects/assets/images/experimental-temp-power.png",
+    ],
+  },
+  {
+    category: "IOT_PRODUCT_FABRICATION",
+    title: "NYC Subway Arrival Countdown",
+    status: "DEPLOYED",
+    description:
+      "Real-time transit telemetry display with fault-tolerant updates and custom-fabricated enclosure.",
+    type: "projects" as const,
+    href: "projects/subway.html",
+    previews: [
+      "projects/assets/images/herodisplay.png",
+      "projects/assets/images/layout.png",
+    ],
+  },
+  {
+    category: "DFM",
+    title: "Solutions Looking for Problems",
+    status: "ONGOING",
+    description:
+      "Self-initiated product design series targeting small everyday friction points through CAD-driven iteration, rapid prototyping, and enclosure design.",
+    type: "projects" as const,
+    href: "projects/solutions.html",
+    previews: ["projects/assets/images/paper_roll.png"],
+  },
+  {
+    category: "ADDITIVE_MANUFACTURE",
+    title: "Additive Manufacturing and testing of 316L Stainless Steel (DMLS)",
+    status: "COMPLETED",
+    description:
+      "Experimental study on build orientation effects in DMLS-printed 316L stainless steel. Evaluated tensile, impact, and hardness properties, identifying anisotropy, defect formation, and orientation-driven performance tradeoffs.",
+    type: "projects" as const,
+    href: "projects/dmls.html",
+    previews: ["projects/assets/images/tensile.png"],
+  },
+  {
+    category: "INDUSTRIAL_OPERATION",
+    title: "Emerson | Mechanical Engineering",
+    status: "COMPLETED",
+    description:
+      "Professional engineering focused on real-world constraints, MOST analysis, and system behavior.",
+    type: "professional" as const,
+    href: "projects/emerson.html",
+    previews: [
+      "projects/assets/images/emerson.png",
+      "projects/assets/images/most.png",
+      "projects/assets/images/valve.png",
+    ],
+  },
+  {
+    category: "AI_PRODUCT_DESIGN",
+    title: "LawgicHub AI | Product Engineer",
+    status: "REMOTE",
+    description:
+      "Product-shaping role focused on clarity, restraint, and user trust. Guiding how a domain-specific legal AI thinks, speaks, and presents itself through synthesis of expert feedback and cross-functional alignment.",
+    type: "professional" as const,
+    href: "projects/lawgic.html",
+    previews: [
+      "projects/assets/images/lawgic.png",
+      "projects/assets/images/most.png",
+      "projects/assets/images/valve.png",
+    ],
+  },
 ];
+
 
 const statusColors: Record<string, string> = {
 COMPLETED: "text-green-400",
