@@ -83,9 +83,9 @@ const projects: Project[] = [
   },
   {
   category: "IOT_PRODUCT_FABRICATION",
-  title: "Everyday Friction — Ongoing Product Design Explorations",
+  title: "Solutions Looking for Problems",
   status: "ONGOING",
-  description: "Self-initiated product design experiments targeting small everyday friction points through CAD-driven iteration, rapid prototyping, and enclosure design.",
+  description: "Self-initiated product design series targeting small everyday friction points through CAD-driven iteration, rapid prototyping, and enclosure design.",
   type: "projects" as const,
   href: "projects/solutions.html",
     previews: [
