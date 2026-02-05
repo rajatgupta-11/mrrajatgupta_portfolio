@@ -9,26 +9,26 @@ const RESUME_VIEW_URL = `${import.meta.env.BASE_URL}resume.html`;
 
 const experience = [
   {
-    title: "Mechanical Engineer Intern",
+    title: "Systems & Product Strategy",
+    company: "LawgicHub AI",
+    period: "2024 – Present",
+    summary: "Working on system-level thinking and workflow structure for a multi-agent legal AI platform.",
+  },
+  {
+    title: "Mechanical Engineer, Intern",
     company: "Emerson",
     period: "January 2024 – June 2024",
     summary:
-      "Worked on industrial mechanical systems with emphasis on real-world constraints, MOST analysis, and tolerance-driven design decisions.",
+      "Worked on optimizing the butterfly valve assembly cell throughput using PMTS based optimization.",
   },
   {
-    title: "HVAC Engineer Intern",
+    title: "HVAC Engineer, Intern",
     company: "Shapoorji Pallonji Group · Mumbai, India",
     period: "January 2023 – June 2023",
     summary:
       "Performed heat load calculations, developed BOQs, and designed HVAC piping schematics for the New Delhi Railway Station project.",
   },
-  {
-    title: "Systems & Product Strategy (Non-Engineering)",
-    company: "LawgicHub AI",
-    period: "2024 – Present",
-    summary:
-      "Worked on system-level thinking and workflow structure for a multi-agent legal AI platform (non-engineering role).",
-  },
+  
 ];
 
 const education = [
