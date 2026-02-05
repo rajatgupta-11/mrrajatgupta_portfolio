@@ -193,6 +193,30 @@ img,video{
   </div>
 </section>
 
+<section class="card">
+  <h2>Sequential Release Timing</h2>
+
+  <p>
+    A fixed half-revolution delay is insufficient for sequential release.
+    The first payload detachment introduces an impulsive disturbance that
+    immediately alters system dynamics. Angular velocity drops, hinge compliance excites wobble, and
+    vacuum seal rupture introduces nonlinear energy loss. Time-based prediction becomes invalid within milliseconds.
+  </p>
+
+  <p class="mono" style="margin-top:1.5rem">STATE-AWARE SOLUTION</p>
+
+  <div class="math">
+    \[
+      \Delta t_{opt} \approx \frac{\Delta \theta_{remaining}}{\omega_{current}}
+    \]
+  </div>
+
+  <p style="color:var(--muted)">
+    Release timing is recomputed continuously using measured angular state,
+    ensuring correct 180° phase alignment despite transient disturbances.
+  </p>
+</section>
+
 <!-- KINETIC ASSIST -->
 <section class="card">
   <h2>Kinetic Assist to Orbit</h2>
