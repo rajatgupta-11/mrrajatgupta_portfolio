@@ -148,9 +148,7 @@ export const Resume = () => {
                 <p className="text-primary font-mono text-sm">
                   {edu.institution}
                 </p>
-                <p className="text-muted-foreground text-sm mt-1">
-                  Focus: {edu.focus}
-                </p>
+              
               </div>
             ))}
           </div>
