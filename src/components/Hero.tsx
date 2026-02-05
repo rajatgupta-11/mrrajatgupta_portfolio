@@ -193,7 +193,7 @@ export const Hero = () => {
           transition={{ delay: 0.6, duration: 0.8 }}
           className="max-w-2xl text-lg text-muted-foreground/80 leading-relaxed mb-12"
         >
-       I’m a graduate mechanical engineering student who enjoys turning ideas into working hardware. Focused on robotics, controls and hands-on mechanical design. motion.p>
+       I’m a graduate mechanical engineering student who enjoys turning ideas into working hardware. Focused on robotics, controls and hands-on mechanical design. </motion.p>
 
         {/* Action Buttons */}
         <motion.div
