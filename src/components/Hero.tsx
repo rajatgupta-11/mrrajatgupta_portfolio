@@ -216,7 +216,7 @@ export const Hero = () => {
 
           <div className="flex items-center gap-4">
             {[
-              { icon: Linkedin, href: "https://mrrajatgupta-portfolio.vercel.app/", label: "LinkedIn" },
+              { icon: Linkedin, href: "https://www.linkedin.com/in/rajat-gupta-60152125a/", label: "LinkedIn" },
               { icon: Mail, href: "#contact", label: "Email" },
             ].map((social, i) => (
               <a
