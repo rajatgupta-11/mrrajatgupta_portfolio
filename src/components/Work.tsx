@@ -132,7 +132,7 @@ const projects: Project[] = [
     description:
       "Experimental study on build orientation effects in DMLS-printed 316L stainless steel. Evaluated tensile, impact, and hardness properties, identifying anisotropy, defect formation, and orientation-driven performance tradeoffs.",
     type: "projects" as const,
-    href: "projects/dmls.html",
+    href: "projects/dlms.html",
     previews: ["projects/assets/images/tensile.png"],
   },
   
