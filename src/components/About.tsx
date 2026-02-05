@@ -31,10 +31,7 @@
               className="space-y-6"
             >
               <p className="text-muted-foreground leading-relaxed">
-              I’m a mechanical engineering student focused on hands-on design and prototyping.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                My work sits at the intersection of mechanics, control theory, and computation. I care about system-level behavior: how dynamics, sensing, actuation, and control interact under real constraints. I enjoy designing, simulating, building, breaking, and refining systems until their behavior matches intent.
+          I’m a graduate mechanical engineering student working on autonomous systems and product-focused mechanical design. My work sits at the intersection of mechanics, control theory, and electronics. 
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 I'm highly motivated by failure-driven learning. Most interested in small, high-ownership environments that value autonomy, rapid prototyping, and fast progress.
@@ -50,7 +47,6 @@
             >
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-primary animate-pulse-glow" />
                   <span className="font-mono text-sm text-primary">Beyond Engineering</span>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
