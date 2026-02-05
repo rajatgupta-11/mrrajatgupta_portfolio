@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LawgicHub AI | Product Engineering</title>
+<meta name="description" content="Product engineering focused on restraint, trust, and system behavior in high-stakes legal AI.">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#030507;
+  --surface:#0a0c10;
+  --card-bg:rgba(15,19,24,.8);
+  --text:#e6edf3;
+  --muted:#8b949e;
+  --accent:#10b981;
+  --border:rgba(255,255,255,.08);
+  --max-width:1100px;
+}
+
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased}
+
+body{
+  margin:0;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  color:var(--text);
+  background:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px),
+    var(--bg);
+  background-size:100px 100px;
+}
+
+.nav-home{
+  position:fixed;
+  top:2rem;
+  left:2rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  color:var(--accent);
+  text-decoration:none;
+  padding:.5rem 1rem;
+  border:1px solid var(--border);
+  background:var(--surface);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  z-index:100;
+}
+.nav-home:hover{background:var(--accent);color:#000}
+
+main{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:10rem 1.5rem 6rem;
+}
+
+.mono{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.85rem;
+  color:var(--accent);
+}
+
+h1{
+  font-size:clamp(2.4rem,5vw,4.2rem);
+  font-weight:800;
+  margin:0 0 1.5rem;
+  line-height:1.05;
+  letter-spacing:-.04em;
+}
+
+h2{
+  font-size:1.8rem;
+  font-weight:800;
+  margin:0 0 1.5rem;
+}
+
+.subtitle{
+  font-size:1.2rem;
+  color:var(--muted);
+  max-width:780px;
+  margin:0 auto 2.8rem;
+}
+
+.card{
+  background:var(--card-bg);
+  backdrop-filter:blur(10px);
+  border:1px solid var(--border);
+  padding:3.5rem;
+  margin-bottom:3rem;
+  position:relative;
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  top:-1px;
+  right:-1px;
+  width:15px;
+  height:15px;
+  border-top:2px solid var(--accent);
+  border-right:2px solid var(--accent);
+}
+
+.cta{
+  display:inline-flex;
+  align-items:center;
+  gap:.75rem;
+  padding:.9rem 1.6rem;
+  border:1px solid var(--accent);
+  color:var(--accent);
+  text-decoration:none;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.85rem;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  transition:.2s ease;
+}
+.cta:hover{
+  background:var(--accent);
+  color:#000;
+}
+
+footer{
+  margin-top:8rem;
+  border-top:1px solid var(--border);
+  padding-top:4rem;
+  text-align:center;
+}
+
+@media(max-width:900px){
+  main{padding-top:6rem}
+}
+</style>
+</head>
+
+<body>
+<a href="../" class="nav-home">← Home</a>
+
+<main>
+
+<header style="text-align:center;">
+  <div class="mono" style="margin-bottom:1.5rem;letter-spacing:.4em;">
+    [ AI_PRODUCT_DESIGN / LEGAL_SYSTEMS ]
+  </div>
+
+  <h1>LawgicHub AI<br>Product Engineering</h1>
+
+  <div class="mono" style="opacity:.8;margin-bottom:1.5rem;">
+    STATUS: REMOTE
+  </div>
+
+  <p class="subtitle">
+    Product shaping at the intersection of judgment, restraint, and trust in high-stakes legal AI systems.
+  </p>
+</header>
+
+<section class="card">
+  <h2>Our Mission</h2>
+  <p>
+    LawgicHub builds domain-specific legal AI systems designed for environments where accuracy,
+    explainability, and trust are non-negotiable. The platform prioritizes verified reasoning,
+    citation integrity, and predictable behavior over generic generative capability.
+  </p>
+  <p style="margin-top:1.2rem;color:var(--muted);">
+    By combining in-house legal models, multi-agent validation, and responsible AI governance,
+    LawgicHub aims to reduce legal research and drafting time while preserving professional
+    accountability and data security.
+  </p>
+</section>
+
+<section class="card">
+  <h2>My Role</h2>
+  <p>
+    My role sits at the intersection of product judgment, system behavior, and user trust.
+    Internally, we sometimes joke that I’m the
+    <span class="mono">“Rick Rubin”</span> of the team.
+    I’m not implementing core models, but I spend my time shaping how the system
+    <em>feels</em>, where it draws boundaries, and how it behaves under ambiguity.
+  </p>
+
+  <p style="margin-top:1.2rem;color:var(--muted);">
+    The focus is restraint over expansion. Translating expert legal feedback into system-level
+    constraints, aligning engineering and legal perspectives, and ensuring the product communicates
+    uncertainty clearly instead of masking it. The goal is not to make the AI louder, but calmer,
+    more predictable, and harder to misuse.
+  </p>
+</section>
+
+<footer>
+  <a href="https://lawgichub.ai" target="_blank" class="cta">
+    Visit LawgicHub →
+  </a>
+
+  <div class="mono" style="margin-top:3rem;opacity:.5;">
+    END_PROJECT_LOG_V1
+  </div>
+</footer>
+
+</main>
+</body>
+</html>
