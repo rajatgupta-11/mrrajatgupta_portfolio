@@ -13,7 +13,7 @@
 :root {
   --bg:#030507;
   --surface:#0a0c10;
-  --card:rgba(15,19,24,.85);
+  --card:rgba(15,19,24,.75);
   --text:#e6edf3;
   --muted:#8b949e;
   --accent:#10b981;
@@ -23,18 +23,24 @@
 *{box-sizing:border-box}
 body{
   margin:0;
-  background:var(--bg);
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
   color:var(--text);
-  font-family:'Plus Jakarta Sans',sans-serif;
+  background:
+    linear-gradient(var(--border) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px),
+    var(--bg);
+  background-size:100px 100px;
 }
+a{color:var(--accent);text-decoration:none}
 main{
   max-width:var(--max);
   margin:auto;
   padding:7rem 1.5rem 6rem;
 }
 h1,h2{letter-spacing:-.04em}
-h1{font-size:clamp(2.4rem,5vw,3.6rem)}
-h2{font-size:1.7rem;margin-bottom:1rem}
+h1{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;margin-bottom:1rem}
+h2{font-size:1.7rem;font-weight:800;margin-bottom:1rem}
+p{line-height:1.6;color:var(--muted)}
 .mono{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:.8rem}
 .card{
   background:var(--card);
@@ -42,6 +48,17 @@ h2{font-size:1.7rem;margin-bottom:1rem}
   padding:2.8rem;
   border-radius:4px;
   margin-bottom:2.5rem;
+  position:relative;
+}
+.card::after{
+  content:"";
+  position:absolute;
+  top:-1px;
+  right:-1px;
+  width:16px;
+  height:16px;
+  border-top:2px solid var(--accent);
+  border-right:2px solid var(--accent);
 }
 .split{
   display:grid;
@@ -53,6 +70,17 @@ img{
   width:100%;
   border:1px solid var(--border);
   border-radius:4px;
+}
+figure{
+  margin:0;
+}
+figcaption{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  color:var(--muted);
+  text-align:center;
+  margin-top:1rem;
+  letter-spacing:.1em;
 }
 .metric-row{
   display:grid;
@@ -162,7 +190,7 @@ img{
 <section class="split card">
   <div>
     <h2>Hardware Integration</h2>
-    <ul style="color:var(--muted);padding-left:1.1rem">
+    <ul style="color:var(--muted);padding-left:1.1rem;line-height:1.8">
       <li>PV panel with surface-mounted NTC thermistor</li>
       <li>Ultrasonic misting module as cooling actuator</li>
       <li>Arduino-based controller with relay logic</li>
@@ -186,7 +214,7 @@ img{
       MATLAB / Simulink was used to predict system behavior before hardware testing.
     </p>
 
-    <ul style="color: var(--muted); padding-left: 1.1rem; margin-bottom: 1.5rem;">
+    <ul style="color: var(--muted); padding-left: 1.1rem; margin-bottom: 1.5rem;line-height:1.8">
       <li>Simulated panel temperature vs measured temperature</li>
       <li>Cooling cycle timing vs misting actuation</li>
       <li>Thermal response shape and settling behavior</li>
@@ -208,7 +236,7 @@ img{
 <!-- LIMITATIONS -->
 <section class="card">
   <h2>Key Limitations & Tradeoffs</h2>
-  <ul style="color:var(--muted);padding-left:1.1rem">
+  <ul style="color:var(--muted);padding-left:1.1rem;line-height:1.8">
     <li>Actuator energy dominates at small scale</li>
     <li>Binary control limits resolution</li>
     <li>Indoor irradiance limits extrapolation</li>
@@ -219,12 +247,32 @@ img{
 
 <!-- FOOTER -->
 <footer style="margin-top:6rem;text-align:center;border-top:1px solid var(--border);padding-top:3rem">
-  <div style="display:flex;justify-content:center;gap:3rem">
-    <a href="assets/videos/Topview.mp4" class="button">SINGLE-CYCLE DEMO VIDEO</a>
-    <a href="assets/vault/report.pdf" class="button">FULL REPORT</a>
-    <a href="assets/vault/ppt.pdf" class="button">SLIDES</a>
-   
+  
+  <p class="mono" style="margin-bottom:2rem;opacity:.7">
+    TECHNICAL_DOCUMENTATION
+  </p>
+
+  <div style="display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin-bottom:3rem">
+    <a href="assets/videos/Topview.mp4" 
+       target="_blank"
+       class="mono" 
+       style="border-bottom:1px solid var(--accent);padding-bottom:.2rem">
+      SINGLE-CYCLE DEMO VIDEO
+    </a>
+    <a href="assets/vault/report.pdf" 
+       target="_blank"
+       class="mono" 
+       style="border-bottom:1px solid var(--accent);padding-bottom:.2rem">
+      FULL REPORT
+    </a>
+    <a href="assets/vault/ppt.pdf" 
+       target="_blank"
+       class="mono" 
+       style="border-bottom:1px solid var(--accent);padding-bottom:.2rem">
+      SLIDES
+    </a>
   </div>
+
 </footer>
 
 </main>
