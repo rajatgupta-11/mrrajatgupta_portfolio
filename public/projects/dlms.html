@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Additive Manufacturing & Defect Analysis of 316L Stainless Steel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+<style>
+:root {
+  --bg:#030507;
+  --surface:#0a0c10;
+  --card-bg:rgba(15,19,24,.8);
+  --text:#e6edf3;
+  --muted:#8b949e;
+  --accent:#10b981;
+  --border:rgba(255,255,255,.08);
+  --max-width:1100px;
+}
+
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased}
+
+body{
+  margin:0;
+  background-color:var(--bg);
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:100px 100px;
+  color:var(--text);
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  line-height:1.6;
+}
+
+.nav-home{
+  position:fixed;
+  top:2rem;
+  left:2rem;
+  z-index:100;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  color:var(--accent);
+  text-decoration:none;
+  padding:.5rem 1rem;
+  border:1px solid var(--border);
+  background:var(--surface);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+.nav-home:hover{background:var(--accent);color:#000}
+
+main{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:10rem 1.5rem 6rem;
+}
+
+h1{
+  font-size:clamp(2.5rem,5vw,4.5rem);
+  line-height:1;
+  margin:0 0 1.5rem;
+  font-weight:800;
+  letter-spacing:-.04em;
+}
+h2{
+  font-size:1.8rem;
+  font-weight:800;
+  margin:0 0 1.5rem;
+}
+
+.mono{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.85rem;
+  color:var(--accent);
+}
+
+.subtitle{
+  font-size:1.2rem;
+  color:var(--muted);
+  max-width:800px;
+  margin:0 auto 2.5rem;
+}
+
+.skills-container{
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  flex-wrap:wrap;
+  margin-bottom:5rem;
+}
+.skill-box{
+  border:1px solid var(--accent);
+  padding:.4rem 1rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.8rem;
+  color:var(--accent);
+  text-transform:uppercase;
+}
+
+.card{
+  background:var(--card-bg);
+  backdrop-filter:blur(10px);
+  border:1px solid var(--border);
+  padding:3.5rem;
+  margin-bottom:3rem;
+  position:relative;
+}
+.card::after{
+  content:"";
+  position:absolute;
+  top:-1px;
+  right:-1px;
+  width:15px;
+  height:15px;
+  border-top:2px solid var(--accent);
+  border-right:2px solid var(--accent);
+}
+
+.split{
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:4rem;
+  align-items:center;
+}
+.split.reverse{grid-template-columns:1.2fr 1fr}
+
+.metric-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1.5rem;
+  margin-top:2rem;
+}
+.metric-item{
+  border-left:2px solid var(--accent);
+  padding:1rem 1.5rem;
+  background:rgba(16,185,129,.03);
+}
+.metric-value{
+  font-size:2.2rem;
+  font-weight:800;
+  line-height:1;
+}
+.metric-label{
+  font-size:.75rem;
+  text-transform:uppercase;
+  color:var(--muted);
+  letter-spacing:.1em;
+}
+
+.split.media-heavy {
+  grid-template-columns: 1.5fr 1fr;
+}
+
+img,video{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:6px;
+  display:block;
+}
+
+.video-enhanced{
+  transform:scale(1.05);
+}
+
+figcaption{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.75rem;
+  color:var(--muted);
+  margin-top:1rem;
+}
+
+.spec-list{
+  list-style:none;
+  padding:0;
+  margin:1.5rem 0;
+}
+
+.spec-list li{
+  padding:.75rem 0;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.spec-list li:last-child{
+  border-bottom:none;
+}
+
+.spec-list strong{
+  color:var(--accent);
+  font-family:'JetBrains Mono',monospace;
+  font-size:.85rem;
+}
+
+.findings-box{
+  background:rgba(16,185,129,.05);
+  border-left:3px solid var(--accent);
+  padding:1.5rem 2rem;
+  margin-top:2rem;
+}
+
+.findings-box ul{
+  margin:.5rem 0;
+  padding-left:1.5rem;
+}
+
+.findings-box li{
+  margin:.5rem 0;
+  color:var(--muted);
+}
+
+.report-link{
+  display:inline-flex;
+  align-items:center;
+  gap:.75rem;
+  padding:.8rem 1.5rem;
+  margin-top:2rem;
+  border:1px solid var(--accent);
+  color:var(--accent);
+  text-decoration:none;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.85rem;
+  transition:all .2s;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+.report-link:hover{
+  background:var(--accent);
+  color:#000;
+}
+
+@media(max-width:1000px){
+  .split,.split.reverse{grid-template-columns:1fr}
+  main{padding-top:6rem}
+  .video-enhanced{transform:none}
+}
+</style>
+<link rel="stylesheet" href="theme.css">
+<script defer src="theme.js"></script>
+</head>
+
+<body>
+
+<a href="../" class="nav-home">← Home</a>
+
+<main>
+
+<header style="text-align:center;">
+  <div class="mono mono-tagline" style="margin-bottom:1.5rem;letter-spacing:.4em;">[ METAL_AM / MATERIALS_TESTING ]</div>
+  <h1>Additive Manufacturing of 316L Stainless Steel</h1>
+  <p class="subtitle">
+    Mechanical Properties & Defect Analysis (DMLS)
+  </p>
+
+  <div class="skills-container">
+    <div class="skill-box">Metal Additive Manufacturing</div>
+    <div class="skill-box">Materials Testing</div>
+    <div class="skill-box">Defect Analysis</div>
+    <div class="skill-box">DMLS</div>
+  </div>
+</header>
+
+<section class="card">
+  <div class="split">
+    <div>
+      <h2>Overview</h2>
+      <p>
+        An experimental study analyzing how build orientation affects mechanical behavior and defect formation in DMLS-printed 316L stainless steel.
+      </p>
+      <p style="color:var(--muted);">
+        Vertically printed specimens were manufactured and evaluated through tensile, impact, and hardness testing to characterize anisotropy, failure behavior, and print-induced defects.
+      </p>
+    </div>
+    <figure>
+      <img src="assets/images/dlms.png" alt="">
+      <figcaption>FABRICATION_PROCESS</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="split reverse card">
+  <figure>
+    <img src="assets/images/powder.png" alt="316L stainless steel powder">
+    <figcaption>TRUFORM_316L_POWDER</figcaption>
+  </figure>
+  <div>
+    <h2>Equipment & Material</h2>
+    <ul class="spec-list">
+      <li>
+        <span>Printer</span>
+        <strong>XACT Metal XM200G2</strong>
+      </li>
+      <li>
+        <span>Process</span>
+        <strong>Direct Metal Laser Sintering (DMLS)</strong>
+      </li>
+      <li>
+        <span>Material</span>
+        <strong>TruForm 316L Stainless Steel</strong>
+      </li>
+      <li>
+        <span>Powder Size</span>
+        <strong>~15–45 μm</strong>
+      </li>
+      <li>
+        <span>Powder Mix</span>
+        <strong>20% virgin / 80% recycled</strong>
+      </li>
+      <li>
+        <span>Build Orientation</span>
+        <strong>90° (vertical)</strong>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="split card">
+  <div>
+    <h2>Mechanical Testing</h2>
+    <p>
+      Specimens were subjected to a comprehensive suite of standardized mechanical tests to evaluate material performance and identify failure modes.
+    </p>
+    <ul class="spec-list">
+      <li>
+        <span>Tensile Testing</span>
+        <strong>To Failure</strong>
+      </li>
+      <li>
+        <span>Impact Testing</span>
+        <strong>Charpy Method</strong>
+      </li>
+      <li>
+        <span>Hardness Testing</span>
+        <strong>Vickers</strong>
+      </li>
+      <li>
+        <span>Inspection</span>
+        <strong>Dimensional & Visual Defect</strong>
+      </li>
+    </ul>
+  </div>
+  <figure>
+    <img src="assets/images/tensile.png" alt="Mechanical testing equipment">
+    <figcaption>TESTING_CONFIGURATION</figcaption>
+  </figure>
+</section>
+
+<section class="split reverse card">
+  <figure>
+    <img src="assets/images/specimen.png" alt="Failed tensile specimen">
+    <figcaption>POST-FAILURE_ANALYSIS</figcaption>
+  </figure>
+  <div>
+    <h2>Failure & Defect Observation</h2>
+    <div class="findings-box">
+      <ul>
+        <li>Fracture behavior consistent with inter-layer weakness</li>
+        <li>Visual evidence of porosity, lack-of-fusion regions, and micro-cracks</li>
+        <li>One specimen failed prematurely due to a print-induced micro-crack</li>
+        <li>Hardness varied across specimens, indicating non-uniform heat input during fabrication</li>
+      </ul>
+    </div>
+    <p style="color:var(--muted);margin-top:1.5rem;">
+      Defect distribution and severity were directly correlated with build orientation, highlighting the critical role of layer-wise construction in final part integrity.
+    </p>
+  </div>
+</section>
+
+<footer style="margin-top:8rem;border-top:1px solid var(--border);padding-top:4rem;text-align:center;">
+  <a href="assets/vault/am.pdf" target="_blank" class="report-link">
+    Download Technical Report
+  </a>
+</footer>
+
+</main>
+</body>
+</html>
