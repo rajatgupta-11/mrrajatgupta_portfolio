@@ -22,7 +22,7 @@ const projects: Project[] = [
     title: "18 DOF Hexapod Robotic Platform",
     status: "DEPLOYED",
     description:
-      "Designed and built a 6-legged 18-DOF microserver controlled platform under $150. ESP32-based WiFi control and Arduino based multi-joint actuation.",
+      "End to end design and deployment of 18dof spider inspired biomimetic robot.",
     type: "projects" as const,
     href: "projects/hexapod.html",
     previews: [
@@ -36,7 +36,7 @@ const projects: Project[] = [
     title: "Autonomous Quadcopter w/ PID Control & RL",
     status: "DEPLOYED",
     description:
-      "Betaflight tuning and PPO reinforcement learning in Isaac Sim with traditional PID architectures for smooth 'man to computer' input transitions.",
+      "Betaflight tuning and PPO reinforcement learning in Isaac Sim with traditional PID architectures for smooth 'man to computer' flight transitions.",
     type: "projects" as const,
     href: "projects/drone.html",
     previews: [
@@ -50,7 +50,7 @@ const projects: Project[] = [
     title: "NYC Subway Arrival Countdown",
     status: "DEPLOYED",
     description:
-      "Real-time transit telemetry display with fault-tolerant updates and custom-fabricated enclosure.",
+      "Real-time train arrival desk clock w/ smart reminders and a custom 3-D printed enclosure.",
     type: "projects" as const,
     href: "projects/subway.html",
     previews: [
@@ -63,13 +63,11 @@ const projects: Project[] = [
     title: "Closed Loop Solar Panel Efficiency Control",
     status: "COMPLETED",
     description:
-      "Closed-loop evaporative cooling for PV panels. Achieved 5°C reduction matching Simulink predictions mitigating thermal efficiency losses.",
+      "Second order closed loop evaporative thermal control system for solar panels, tackling output efficiency issues caused by overheating.",
     type: "projects" as const,
     href: "projects/solar-cooling.html",
     previews: [
       "assets/images/solar.png",
-      "projects/assets/images/temp.png",
-      "projects/assets/images/experimental-temp-power.png",
     ],
   },
 
@@ -78,7 +76,7 @@ const projects: Project[] = [
     title: "Solutions Looking for Problems",
     status: "ONGOING",
     description:
-      "Self-initiated product design series targeting small everyday friction points through CAD-driven iteration, rapid prototyping, and enclosure design.",
+      "Self-initiated product design series targeting small everyday friction points through CAD-driven iteration.",
     type: "projects" as const,
     href: "projects/solutions.html",
     previews: ["projects/assets/images/paper_roll.png"],
@@ -87,27 +85,25 @@ const projects: Project[] = [
     category: "MUJOCO_SIM",
     title: "SpinLaunch Kinetic Sim & Analysis",
     status: "COMPLETED",
-    description: "High fidelity Mujoco & Python simulation framework analysis for kinetic launch systems. Reduced post-release oscillatory hinge loads by 90% and optimized factors like angle of throw and burner phase using ONLY HALF the propellant of a conventional launch",
+    description: "Mujoco and python based physics engines created to study real world constraints and test out abstract kinetic launch strategies.",
     type: "projects" as const,
     href: "projects/kinetic.html",
     previews: [
       "projects/assets/images/accelerator.png",
-      "projects/assets/images/",
-      "projects/assets/images/fuel_graph.png",
+     
     ],
   },
   {
-    category: "AI_PRODUCT_DESIGN",
-    title: "LawgicHub AI | Product Engineer",
+    category: "AI_SYSTEMS_STRATEGY",
+    title: "LawgicHub AI | Product & Systems Strategy",
     status: "REMOTE",
     description:
-      "Product-shaping role focused on clarity, restraint, and user trust. Guiding how a domain-specific legal AI thinks, speaks, and presents itself through synthesis of expert feedback and cross-functional alignment.",
+      "Guiding how a domain-specific legal AI thinks, speaks, and presents itself, focusing on reducing user friction while making sure the AI behaves.",
     type: "professional" as const,
     href: "projects/lawgic.html",
     previews: [
       "projects/assets/images/lawgic.png",
-      "projects/assets/images/most.png",
-      "projects/assets/images/valve.png",
+
     ],
   },
   
@@ -116,13 +112,11 @@ const projects: Project[] = [
     title: "Emerson | Mechanical Engineering",
     status: "COMPLETED",
     description:
-      "Professional engineering focused on real-world constraints, MOST analysis, and system behavior.",
+      "Assemvly cell optimization role, implemting PMTS to improve butterfly valve throughput,",
     type: "professional" as const,
     href: "projects/emerson.html",
     previews: [
       "projects/assets/images/emerson.png",
-      "projects/assets/images/most.png",
-      "projects/assets/images/valve.png",
     ],
   },
   {
@@ -130,7 +124,7 @@ const projects: Project[] = [
     title: "Additive Manufacturing & Testing of 316L Stainless Steel",
     status: "COMPLETED",
     description:
-      "Experimental study on build orientation effects in DMLS-printed 316L stainless steel. Evaluated tensile, impact, and hardness properties, identifying anisotropy, defect formation, and orientation-driven performance tradeoffs.",
+      "Study fabricating and evaluating mechanical properties of 316L stainless steel 3D printed parts.",
     type: "projects" as const,
     href: "projects/dlms.html",
     previews: ["projects/assets/images/tensile.png"],
