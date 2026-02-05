@@ -12,29 +12,29 @@ const experience = [
     title: "Mechanical Engineer Intern",
     company: "Emerson",
     period: "January 2024 – June 2024",
-    description:
-      "Worked on industrial mechanical systems with emphasis on real-world constraints, MOST analysis, tolerance-driven design decisions, and system-level behavior under operational loads.",
+    summary:
+      "Worked on industrial mechanical systems with emphasis on real-world constraints, MOST analysis, and tolerance-driven design decisions.",
   },
   {
     title: "HVAC Engineer Intern",
-    company: "Shapoorji Pallonji Group, Mumbai, India",
+    company: "Shapoorji Pallonji Group · Mumbai, India",
     period: "January 2023 – June 2023",
-    description:
+    summary:
       "Performed heat load calculations, developed BOQs, and designed HVAC piping schematics for the New Delhi Railway Station project.",
   },
   {
     title: "Systems & Product Strategy (Non-Engineering)",
     company: "LawgicHub AI",
     period: "2024 – Present",
-    description:
-      "Non-coding role focused on system-level thinking, workflow design, and product direction for a multi-agent legal AI platform.",
+    summary:
+      "Worked on system-level thinking and workflow structure for a multi-agent legal AI platform (non-engineering role).",
   },
 ];
 
 const education = [
   {
     degree: "M.S. Mechanical Engineering",
-    institution: "New York University, Tandon School of Engineering, USA",
+    institution: "New York University · Tandon School of Engineering, USA",
     focus: "Controls, Dynamics, Robotics, Fabrication",
   },
   {
@@ -51,116 +51,112 @@ export const Resume = () => {
   return (
     <section
       id="resume"
-      className="py-24 md:py-32 relative bg-surface-1 overflow-hidden"
       ref={ref}
+      className="py-24 md:py-32 relative bg-surface-1 overflow-hidden"
     >
       <GalaxyBackground />
 
-      <div className="section-container relative z-10">
-        {/* Header */}
+      <div className="section-container relative z-10 max-w-5xl mx-auto">
+        {/* HEADER */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-12 max-w-3xl"
+          transition={{ duration: 0.5 }}
+          className="mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6"
         >
-          <span className="bracket-label">[ DOCUMENTATION / 04 ]</span>
-          <h2 className="text-3xl md:text-4xl font-semibold mt-2">
-            <span className="neon-text">Resume</span>
-          </h2>
-          <p className="text-muted-foreground mt-3">
-            Mechanical engineering background with systems, controls, and
-            real-world hardware focus.
-          </p>
+          <div>
+            <span className="bracket-label">[ DOCUMENTATION / 04 ]</span>
+            <h2 className="text-3xl md:text-4xl font-semibold mt-2">
+              <span className="neon-text">Resume</span>
+            </h2>
+            <p className="text-muted-foreground mt-3 max-w-md">
+              Mechanical engineering background with systems, controls, and real-world hardware focus.
+            </p>
+          </div>
+
+          {/* ACTION BUTTONS */}
+          <div className="flex gap-3">
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              href={RESUME_VIEW_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/30 bg-background/5 text-primary font-mono text-sm hover:bg-primary/10 transition-colors"
+            >
+              <FileText className="w-4 h-4" />
+              View Resume
+            </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              href={RESUME_PDF_URL}
+              download
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground font-mono text-sm hover:bg-primary/90 transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              Download PDF
+            </motion.a>
+          </div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-12 gap-8">
-          {/* Resume Download */}
-          <div className="lg:col-span-4">
-            <div className="rounded-2xl border border-primary/15 bg-card/60 backdrop-blur-xl p-6 md:p-8 h-full flex flex-col justify-between">
-              <div>
-                <FileText className="w-7 h-7 text-primary" />
-                <h3 className="text-xl font-semibold mt-4">Full Resume</h3>
-                <p className="text-sm text-muted-foreground mt-2">
-                  PDF with detailed experience, projects, and technical depth.
+        {/* EXPERIENCE */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="rounded-2xl border border-primary/15 bg-card/60 backdrop-blur-xl p-6 md:p-8 mb-8"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <Briefcase className="w-5 h-5 text-primary" />
+            <h3 className="font-mono text-lg">Experience</h3>
+          </div>
+
+          <div className="space-y-6">
+            {experience.map((exp, i) => (
+              <div key={i} className="border-l-2 border-primary/30 pl-4">
+                <div className="flex flex-wrap justify-between gap-2">
+                  <div>
+                    <h4 className="font-semibold">{exp.title}</h4>
+                    <p className="text-primary font-mono text-sm">{exp.company}</p>
+                  </div>
+                  <p className="text-muted-foreground text-sm">{exp.period}</p>
+                </div>
+                <p className="text-muted-foreground text-sm mt-2">
+                  {exp.summary}
                 </p>
               </div>
+            ))}
+          </div>
+        </motion.div>
 
-              <div className="mt-6 space-y-3">
-                <a
-                  href={RESUME_VIEW_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block text-center py-3 rounded-xl border border-primary/20 text-primary font-mono text-sm hover:bg-primary/10"
-                >
-                  View Resume
-                </a>
-                <a
-                  href={RESUME_PDF_URL}
-                  download
-                  className="block text-center py-3 rounded-xl bg-primary text-primary-foreground font-mono text-sm hover:bg-primary/90"
-                >
-                  <Download className="inline w-4 h-4 mr-2" />
-                  Download PDF
-                </a>
-              </div>
-            </div>
+        {/* EDUCATION */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="rounded-2xl border border-primary/15 bg-card/60 backdrop-blur-xl p-6 md:p-8"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <GraduationCap className="w-5 h-5 text-primary" />
+            <h3 className="font-mono text-lg">Education</h3>
           </div>
 
-          {/* Experience + Education */}
-          <div className="lg:col-span-8 space-y-6">
-            {/* Experience */}
-            <div className="rounded-2xl border border-primary/15 bg-card/60 backdrop-blur-xl p-6 md:p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <Briefcase className="w-5 h-5 text-primary" />
-                <h3 className="font-mono text-lg">Experience</h3>
+          <div className="space-y-6">
+            {education.map((edu, i) => (
+              <div key={i} className="border-l-2 border-primary/30 pl-4">
+                <h4 className="font-semibold">{edu.degree}</h4>
+                <p className="text-primary font-mono text-sm">
+                  {edu.institution}
+                </p>
+                <p className="text-muted-foreground text-sm mt-1">
+                  Focus: {edu.focus}
+                </p>
               </div>
-
-              <div className="space-y-5">
-                {experience.map((exp, i) => (
-                  <div key={i} className="rounded-xl bg-background/5 p-4">
-                    <div className="flex justify-between flex-wrap gap-2">
-                      <div>
-                        <h4 className="font-semibold">{exp.title}</h4>
-                        <p className="text-primary font-mono text-sm">
-                          {exp.company}
-                        </p>
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        {exp.period}
-                      </p>
-                    </div>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      {exp.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Education */}
-            <div className="rounded-2xl border border-primary/15 bg-card/60 backdrop-blur-xl p-6 md:p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <GraduationCap className="w-5 h-5 text-primary" />
-                <h3 className="font-mono text-lg">Education</h3>
-              </div>
-
-              <div className="space-y-5">
-                {education.map((edu, i) => (
-                  <div key={i} className="rounded-xl bg-background/5 p-4">
-                    <h4 className="font-semibold">{edu.degree}</h4>
-                    <p className="text-primary font-mono text-sm">
-                      {edu.institution}
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      Focus: {edu.focus}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
