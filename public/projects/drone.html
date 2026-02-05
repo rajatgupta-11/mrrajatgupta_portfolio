@@ -11,14 +11,14 @@
 :root{
   --bg:#030507;
   --surface:#0a0c10;
-  --card:rgba(15,19,24,.85);
+  --card-bg:rgba(15,19,24,.8);
   --text:#e6edf3;
   --muted:#8b949e;
   --accent:#10b981;
-  --border:rgba(255,255,255,.1);
-  --maxw:1100px;
+  --border:rgba(255,255,255,.08);
+  --max-width:1100px;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased}
 body{
   margin:0;
   font-family:'Plus Jakarta Sans',system-ui,sans-serif;
@@ -33,38 +33,41 @@ body{
   position:fixed;top:2rem;left:2rem;
   font-family:'JetBrains Mono';font-size:.75rem;
   color:var(--accent);text-decoration:none;
-  padding:.6rem 1.2rem;border:1px solid var(--border);
-  background:var(--surface);z-index:10;
+  padding:.5rem 1rem;border:1px solid var(--border);
+  background:var(--surface);z-index:100;
+  text-transform:uppercase;letter-spacing:.1em;
 }
-main{max-width:var(--maxw);margin:0 auto;padding:5.5rem 1.5rem 6rem}
-.mono{font-family:'JetBrains Mono';color:var(--accent);font-size:.8rem}
-h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;margin:.5rem 0}
-.subtitle{color:var(--muted);max-width:720px;margin-bottom:1.2rem}
+.nav-home:hover{background:var(--accent);color:#000}
+main{max-width:var(--max-width);margin:0 auto;padding:10rem 1.5rem 6rem}
+.mono{font-family:'JetBrains Mono';color:var(--accent);font-size:.85rem}
+h1{font-size:clamp(2.5rem,5vw,4.5rem);font-weight:800;margin:0 0 1.5rem;line-height:1;letter-spacing:-.04em}
+h2{
+  font-size:1.8rem;
+  font-weight:800;
+  margin:0 0 1.5rem;
+}
+.subtitle{font-size:1.2rem;color:var(--muted);max-width:800px;margin:0 auto 2.5rem}
 .hero{margin:.6rem 0 2.8rem;border:1px solid var(--border);background:rgba(255,255,255,.02)}
 model-viewer{width:100%;height:420px}
 .card{
-  background:var(--card);
+  background:var(--card-bg);
+  backdrop-filter:blur(10px);
   border:1px solid var(--border);
-  padding:3rem;
+  padding:3.5rem;
   margin-bottom:3rem;
   position:relative;
 }
 .card::after{
   content:"";position:absolute;top:-1px;right:-1px;
-  width:18px;height:18px;border-top:2px solid var(--accent);border-right:2px solid var(--accent)
+  width:15px;height:15px;border-top:2px solid var(--accent);border-right:2px solid var(--accent)
 }
-h2{
-  font-family:'JetBrains Mono';
-  color:var(--accent);
-  font-size:1.4rem;
-  text-transform:uppercase;
-  margin-bottom:1.5rem;
-}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.split{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:center}
+.split.reverse{grid-template-columns:1.2fr 1fr}
 .exec-image{
   max-width:85%;
   margin-left:auto;
-  border-radius:2px;
+  border-radius:6px;
+  border:1px solid var(--border);
 }
 .arch-wrapper{
   background:#ffffff;
@@ -77,19 +80,20 @@ h2{
   width:100%;
   display:block;
 }
-.skill-strip{
+.skills-container{
   display:flex;
-  gap:1.8rem;
+  justify-content:center;
+  gap:1rem;
   flex-wrap:wrap;
-  margin:1.2rem 0 2.2rem;
+  margin-bottom:5rem;
 }
 .skill-box{
   border:1px solid var(--accent);
+  padding:.4rem 1rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.8rem;
   color:var(--accent);
-  font-family:'JetBrains Mono';
-  padding:.9rem 1.3rem;
-  font-size:1rem;
-  background:rgba(0,0,0,.15);
+  text-transform:uppercase;
 }
 
 /* COLLAPSIBLE COMPONENTS */
@@ -117,9 +121,10 @@ th{
 }
 td{padding:.75rem;border-bottom:1px solid var(--border)}
 
-@media(max-width:900px){
-  .split{grid-template-columns:1fr}
+@media(max-width:1000px){
+  .split,.split.reverse{grid-template-columns:1fr}
   model-viewer{height:320px}
+  main{padding-top:6rem}
 }
 </style>
 <link rel="stylesheet" href="theme.css">
@@ -128,14 +133,15 @@ td{padding:.75rem;border-bottom:1px solid var(--border)}
 <body>
 <a href="../" class="nav-home">← Home</a>
 <main>
-<header>
-  <div class="mono mono-tagline">[ PROJECT_UAV_V1 / CONTROL_CORE ]</div>
+<header style="text-align:center;">
+  <div class="mono mono-tagline" style="margin-bottom:1.5rem;letter-spacing:.4em;">[ PROJECT_UAV_V1 / CONTROL_CORE ]</div>
   <h1>UAV Autonomy & Robust Control Testbed</h1>
   <p class="subtitle">
     Understanding classical control behavior under asymmetric mass loading,
     mechanical vibration, and communication loss.
   </p>
-  <div class="skill-strip">
+
+  <div class="skills-container">
     <div class="skill-box">Betaflight PID Tuning</div>
     <div class="skill-box">IMU Filtering (Notch / RPM)</div>
     <div class="skill-box">Isaac Sim (RL Prototyping)</div>
@@ -190,6 +196,20 @@ td{padding:.75rem;border-bottom:1px solid var(--border)}
 </section>
 
 <section class="card">
+  <h2>Wiring Configuration</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2rem;">
+    <figure style="margin:0;">
+      <img src="assets/images/fc.png" alt="Flight Controller Wiring Diagram" style="width:100%;border:1px solid var(--border);border-radius:6px;">
+      <figcaption style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted);margin-top:1rem;text-align:center;">FLIGHT_CONTROLLER_WIRING</figcaption>
+    </figure>
+    <figure style="margin:0;">
+      <img src="assets/images/esc.png" alt="ESC Configuration Diagram" style="width:100%;border:1px solid var(--border);border-radius:6px;">
+      <figcaption style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted);margin-top:1rem;text-align:center;">ESC_CONFIGURATION</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="card">
   <div class="split">
     <div>
       <h2>Control Strategy</h2>
@@ -199,13 +219,49 @@ td{padding:.75rem;border-bottom:1px solid var(--border)}
         derivative gains and dynamic notch filtering.
       </p>
       <p class="mono">u(t) = Kp e(t) + Ki ∫e(t)dt + Kd de/dt</p>
+      <ul style="margin-top:1.5rem;color:var(--muted);font-size:.9rem;line-height:1.8;">
+        <li><strong style="color:var(--text);">Proportional (Kp):</strong> Reacts to current error, providing response stiffness</li>
+        <li><strong style="color:var(--text);">Integral (Ki):</strong> Accumulates past errors to cancel steady-state biases</li>
+        <li><strong style="color:var(--text);">Derivative (Kd):</strong> Predicts rate of change to dampen oscillations</li>
+      </ul>
     </div>
     <div>
-      <h2>Deterministic Failsafe</h2>
+      <h2>Disturbance Rejection</h2>
       <p>
-        On signal loss, the controller enforces a deterministic state machine:
-        attitude leveling followed by linear throttle decay to avoid free-fall
-        and ensure controlled touchdown.
+        A 5.67g coin was affixed to one arm to create an asymmetric disturbance, testing the controller's robustness under non-ideal conditions.
+      </p>
+      <p style="color:var(--muted);margin-top:1rem;">
+        <strong style="color:var(--text);">Mechanical Imbalance:</strong> Motors operate at different power levels to maintain hover.
+      </p>
+      <p style="color:var(--muted);">
+        <strong style="color:var(--text);">Harmonic Resonance:</strong> Added mass shifts arm vibration frequency, inducing sensor noise.
+      </p>
+      <p style="color:var(--muted);">
+        <strong style="color:var(--text);">Vibration Hardening:</strong> Increased Kp to overpower tilt and deployed notch filters to clean IMU data.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Deterministic Failsafe</h2>
+  <p>
+    On signal loss, the controller enforces a deterministic state machine based on RSSI (signal strength) thresholds, prioritizing controlled descent over mission completion.
+  </p>
+  <div class="split" style="margin-top:2rem;">
+    <div>
+      <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;">Implementation Strategy</h3>
+      <ul style="color:var(--muted);line-height:1.8;">
+        <li><strong style="color:var(--text);">Link Detection:</strong> Brahma F4 monitors receiver for signal loss</li>
+        <li><strong style="color:var(--text);">Attitude Lock:</strong> Immediate transition to Angle Mode, forcing 0° pitch and roll</li>
+        <li><strong style="color:var(--text);">Throttle Ramp-Down:</strong> Linear decay instead of power cut: Throttle = Hover - (Rate × Time)</li>
+        <li><strong style="color:var(--text);">Ground Contact:</strong> Z-axis accelerometer spike while gyro stable triggers motor disarm</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;">State Machine Flow</h3>
+      <p style="color:var(--muted);line-height:1.8;">
+        The failsafe logic executes entirely on the flight controller to guarantee hard real-time execution. Detection latency averages 100–150 ms, followed by attitude neutralization within 250–450 ms. Controlled descent proceeds at 0.4–0.6 m/s² deceleration, with touchdown velocities between 1.2–1.8 m/s.
       </p>
     </div>
   </div>
@@ -219,6 +275,27 @@ td{padding:.75rem;border-bottom:1px solid var(--border)}
     sensor noise. Future work requires domain randomization across mass, noise,
     and timing.
   </p>
+  
+  <div class="split" style="margin-top:2rem;">
+    <div>
+      <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;">Autonomous Guidance Layer</h3>
+      <p style="color:var(--muted);line-height:1.8;">
+        To reduce pilot workload and improve behavior under non-nominal conditions, a learning-based guidance layer was prototyped to run above the existing flight controller without modifying flight-critical control loops.
+      </p>
+      <p style="color:var(--muted);line-height:1.8;margin-top:1rem;">
+        Policies were trained in NVIDIA Isaac Sim under randomized mass, sensor noise, and latency conditions to capture a range of disturbances observed in real flight.
+      </p>
+    </div>
+    <div>
+      <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;">Implementation Architecture</h3>
+      <p style="color:var(--muted);line-height:1.8;">
+        The trained policy runs on a companion computer at low frequency, generating bounded roll, pitch, yaw-rate, and throttle reference commands equivalent to pilot stick inputs. These commands are arbitrated against manual RC inputs such that pilot intervention immediately overrides autonomous behavior.
+      </p>
+      <p style="color:var(--muted);line-height:1.8;margin-top:1rem;">
+        All stabilization, filtering, and failsafe logic remains on the flight controller, preserving real-time determinism and safety. Full integration was prototyped but not deployed due to Raspberry Pi communication challenges.
+      </p>
+    </div>
+  </div>
 </section>
 
 <section class="card">
@@ -259,7 +336,7 @@ td{padding:.75rem;border-bottom:1px solid var(--border)}
 
 <footer style="margin-top:8rem;border-top:1px solid var(--border);padding-top:4rem;text-align:center;">
   <a href="assets/vault/uav.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:.75rem;padding:.8rem 1.5rem;border:1px solid var(--accent);color:var(--accent);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:.85rem;transition:all .2s;text-transform:uppercase;letter-spacing:.1em;" onmouseover="this.style.background='var(--accent)';this.style.color='#000'" onmouseout="this.style.background='';this.style.color='var(--accent)'">
-    View Technical Report
+    Download Technical Report
   </a>
   <div class="mono" style="margin-top:3rem;opacity:.5">END_PROJECT_LOG_V1</div>
 </footer>
