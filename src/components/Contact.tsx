@@ -1,11 +1,11 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Send, Mail, MapPin, Github, Linkedin, ArrowUpRight } from "lucide-react";
 
 export const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -14,26 +14,34 @@ export const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Request submitted:", formState);
+
+    const subject = encodeURIComponent(
+      `Portfolio Contact — ${formState.name || "No Name"}`
+    );
+
+    const body = encodeURIComponent(
+      `Name: ${formState.name}\nEmail: ${formState.email}\n\n${formState.message}`
+    );
+
+    window.location.href = `mailto:rg4883@nyu.edu?subject=${subject}&body=${body}`;
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 relative" ref={ref}>
+    <section id="contact" ref={ref} className="py-24 md:py-32 relative">
       <div className="section-container">
-        {/* Section Header */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
+          className="mb-14 text-center"
         >
           <span className="bracket-label">[ CONNECT / 05 ]</span>
           <h2 className="text-3xl md:text-4xl font-semibold mt-2">
             Get In <span className="neon-text">Touch</span>
           </h2>
           <p className="text-muted-foreground mt-4 max-w-md mx-auto">
-            Interested in collaborating or talking robots? Let's connect.
+            Collaborations, robotics, control systems, or just sharp ideas.
           </p>
         </motion.div>
 
@@ -42,61 +50,86 @@ export const Contact = () => {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-8"
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
           >
-            <div className="glass rounded-xl p-6 glass-hover border border-primary/15 hover:border-primary/30 hover:shadow-[0_0_30px_hsl(var(--neon-cyan)/0.10)]">
+            {/* Email */}
+            <div className="glass rounded-xl p-6 border border-primary/15">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-lg bg-primary/10">
                   <Mail className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="font-mono text-sm text-muted-foreground">Email</p>
-                  <p className="font-medium">rg4883@nyu.edu</p>
+                  <p className="font-mono text-sm text-muted-foreground">
+                    Email
+                  </p>
+                  <a
+                    href="mailto:rg4883@nyu.edu"
+                    className="font-medium hover:text-primary transition-colors"
+                  >
+                    rg4883@nyu.edu
+                  </a>
                 </div>
               </div>
             </div>
 
-            <div className="glass rounded-xl p-6 glass-hover border border-primary/15 hover:border-primary/30 hover:shadow-[0_0_30px_hsl(var(--neon-cyan)/0.10)]">
+            {/* Location */}
+            <div className="glass rounded-xl p-6 border border-primary/15">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-lg bg-primary/10">
                   <MapPin className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="font-mono text-sm text-muted-foreground">Location</p>
+                  <p className="font-mono text-sm text-muted-foreground">
+                    Location
+                  </p>
                   <p className="font-medium">New York, USA</p>
                 </div>
               </div>
             </div>
 
-            {/* Social Links */}
+            {/* Social */}
             <div className="flex gap-4">
-              {[
-                { icon: Github, href: "#", label: "GitHub" },
-                { icon: Linkedin, href: "https://www.linkedin.com/in/rajat-gupta-60152125a/", label: "LinkedIn" },
-              ].map((social) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex-1 glass rounded-xl p-4 glass-hover flex items-center justify-center gap-3 group border border-primary/15 hover:border-primary/30 hover:shadow-[0_0_30px_hsl(var(--neon-cyan)/0.10)]"
-                >
-                  <social.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                  <span className="font-mono text-sm">{social.label}</span>
-                  <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
-                </motion.a>
-              ))}
+             <a
+  href="https://medium.com/@rajatg2062"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex-1 glass rounded-xl p-4 flex items-center justify-center gap-3 border border-primary/15 hover:border-primary/30 transition-all"
+>
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className="text-muted-foreground"
+  >
+    <path d="M4.37 7.23c.02-.2 0-.4-.06-.58L3 3.75V3.5h4.75l3.67 8.05L14.66 3.5H19v.25l-1.14 1.1c-.1.08-.15.21-.13.34v8.1c-.02.13.03.26.13.34l1.11 1.1v.25h-5.58v-.25l1.15-1.12c.11-.11.11-.14.11-.34V6.67L11.4 14.9h-.44L7.2 6.67v5.54c-.03.28.06.56.24.78l1.5 1.82v.25H4.5v-.25l1.5-1.82c.18-.22.26-.5.22-.78z" />
+  </svg>
+  <span className="font-mono text-sm">Medium</span>
+  <ArrowUpRight className="w-4 h-4" />
+</a>
+
+
+              <a
+                href="https://www.linkedin.com/in/rajat-gupta-60152125a/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 glass rounded-xl p-4 flex items-center justify-center gap-3 border border-primary/15 hover:border-primary/30 transition-all"
+              >
+                <Linkedin className="w-5 h-5" />
+                <span className="font-mono text-sm">LinkedIn</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
             </div>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Mailto Form */}
           <motion.form
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6 }}
             onSubmit={handleSubmit}
-            className="glass rounded-xl p-6 md:p-8 space-y-6 border border-primary/15 hover:border-primary/30 hover:shadow-[0_0_30px_hsl(var(--neon-cyan)/0.10)] transition-all duration-300"
+            className="glass rounded-xl p-6 md:p-8 space-y-6 border border-primary/15"
           >
             <div>
               <label className="block font-mono text-sm text-muted-foreground mb-2">
@@ -105,8 +138,10 @@ export const Contact = () => {
               <input
                 type="text"
                 value={formState.name}
-                onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg bg-surface-2 border border-border focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors font-mono text-sm"
+                onChange={(e) =>
+                  setFormState({ ...formState, name: e.target.value })
+                }
+                className="w-full px-4 py-3 rounded-lg bg-surface-2 border border-border focus:border-primary focus:outline-none font-mono text-sm"
                 placeholder="Your name"
               />
             </div>
@@ -118,8 +153,10 @@ export const Contact = () => {
               <input
                 type="email"
                 value={formState.email}
-                onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg bg-surface-2 border border-border focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors font-mono text-sm"
+                onChange={(e) =>
+                  setFormState({ ...formState, email: e.target.value })
+                }
+                className="w-full px-4 py-3 rounded-lg bg-surface-2 border border-border focus:border-primary focus:outline-none font-mono text-sm"
                 placeholder="your@email.com"
               />
             </div>
@@ -129,11 +166,13 @@ export const Contact = () => {
                 Message
               </label>
               <textarea
-                value={formState.message}
-                onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                 rows={4}
-                className="w-full px-4 py-3 rounded-lg bg-surface-2 border border-border focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-colors font-mono text-sm resize-none"
-                placeholder="Your message..."
+                value={formState.message}
+                onChange={(e) =>
+                  setFormState({ ...formState, message: e.target.value })
+                }
+                className="w-full px-4 py-3 rounded-lg bg-surface-2 border border-border focus:border-primary focus:outline-none font-mono text-sm resize-none"
+                placeholder="What do you want to build?"
               />
             </div>
 
@@ -141,10 +180,10 @@ export const Contact = () => {
               type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full py-3 px-4 rounded-lg bg-primary text-primary-foreground font-mono text-sm flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors neon-box"
+              className="w-full py-3 rounded-lg bg-primary text-primary-foreground font-mono text-sm flex items-center justify-center gap-2"
             >
               <Send className="w-4 h-4" />
-              Send Message
+              Open Email Client
             </motion.button>
           </motion.form>
         </div>
