@@ -19,7 +19,7 @@ const experience = [
     company: "Emerson",
     period: "January 2024 – June 2024",
     summary:
-      "Worked on optimizing the butterfly valve assembly cell throughput using PMTS based optimization.",
+      "Worked on optimizing the butterfly valve assembly cell throughput using PMTS.",
   },
   {
     title: "HVAC Engineer, Intern",
@@ -35,12 +35,10 @@ const education = [
   {
     degree: "M.S. Mechanical Engineering",
     institution: "New York University · Tandon School of Engineering, USA",
-    focus: "Controls, Dynamics, Robotics, Fabrication",
   },
   {
     degree: "B.Tech Mechatronics Engineering (Minor: Digital Marketing)",
     institution: "Manipal Institute of Technology, India",
-    focus: "Mechatronics, Embedded Systems, Mechanical Design",
   },
 ];
 
@@ -70,7 +68,7 @@ export const Resume = () => {
               <span className="neon-text">Resume</span>
             </h2>
             <p className="text-muted-foreground mt-3 max-w-md">
-              Mechanical engineering background with systems, controls, and real-world hardware focus.
+              Experience and Education at a glance
             </p>
           </div>
 
