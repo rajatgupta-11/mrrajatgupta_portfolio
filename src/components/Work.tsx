@@ -112,7 +112,7 @@ const projects: Project[] = [
     title: "Emerson | Mechanical Engineering",
     status: "COMPLETED",
     description:
-      "Assemvly cell optimization role, implemting PMTS to improve butterfly valve throughput,",
+      "Assembly cell optimization role, implementing PMTS to improve butterfly valve throughput,",
     type: "professional" as const,
     href: "projects/emerson.html",
     previews: [
