@@ -4,9 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>UAV Autonomy & Robust Control Testbed</title>
-<meta name="description" content="Robust PID stabilization, vibration mitigation, and deterministic failsafe behavior on a 250 mm quadrotor.">
+<meta name="description" content="Robust control, disturbance rejection, and deterministic failsafe behavior on a 250 mm quadrotor.">
+
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
 :root{
   --bg:#030507;
@@ -18,7 +20,7 @@
   --border:rgba(255,255,255,.08);
   --max-width:1100px;
 }
-*{box-sizing:border-box;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
 body{
   margin:0;
   font-family:'Plus Jakarta Sans',system-ui,sans-serif;
@@ -29,29 +31,22 @@ body{
     var(--bg);
   background-size:100px 100px;
 }
+main{max-width:var(--max-width);margin:0 auto;padding:10rem 1.5rem 6rem}
 .nav-home{
   position:fixed;top:2rem;left:2rem;
   font-family:'JetBrains Mono';font-size:.75rem;
   color:var(--accent);text-decoration:none;
   padding:.5rem 1rem;border:1px solid var(--border);
-  background:var(--surface);z-index:100;
+  background:var(--surface);
   text-transform:uppercase;letter-spacing:.1em;
 }
 .nav-home:hover{background:var(--accent);color:#000}
-main{max-width:var(--max-width);margin:0 auto;padding:10rem 1.5rem 6rem}
-.mono{font-family:'JetBrains Mono';color:var(--accent);font-size:.85rem}
-h1{font-size:clamp(2.5rem,5vw,4.5rem);font-weight:800;margin:0 0 1.5rem;line-height:1;letter-spacing:-.04em}
-h2{
-  font-size:1.8rem;
-  font-weight:800;
-  margin:0 0 1.5rem;
-}
+.mono{font-family:'JetBrains Mono';color:var(--accent)}
+h1{font-size:clamp(2.5rem,5vw,4.5rem);font-weight:800;margin:0 0 1.5rem}
+h2{font-size:1.8rem;font-weight:800;margin:0 0 1.5rem}
 .subtitle{font-size:1.2rem;color:var(--muted);max-width:800px;margin:0 auto 2.5rem}
-.hero{margin:.6rem 0 2.8rem;border:1px solid var(--border);background:rgba(255,255,255,.02)}
-model-viewer{width:100%;height:420px}
 .card{
   background:var(--card-bg);
-  backdrop-filter:blur(10px);
   border:1px solid var(--border);
   padding:3.5rem;
   margin-bottom:3rem;
@@ -59,59 +54,36 @@ model-viewer{width:100%;height:420px}
 }
 .card::after{
   content:"";position:absolute;top:-1px;right:-1px;
-  width:15px;height:15px;border-top:2px solid var(--accent);border-right:2px solid var(--accent)
+  width:15px;height:15px;
+  border-top:2px solid var(--accent);
+  border-right:2px solid var(--accent)
 }
-.split{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:center}
-.split.reverse{grid-template-columns:1.2fr 1fr}
-.exec-image{
-  max-width:85%;
-  margin-left:auto;
-  border-radius:6px;
-  border:1px solid var(--border);
-}
-.arch-wrapper{
-  background:#ffffff;
-  padding:1.5rem;
-  border-radius:2px;
-  max-width:920px;
-  margin:0 auto;
-}
-.arch-wrapper img{
-  width:100%;
-  display:block;
-}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
 .skills-container{
-  display:flex;
-  justify-content:center;
-  gap:1rem;
-  flex-wrap:wrap;
-  margin-bottom:5rem;
+  display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:5rem
 }
 .skill-box{
   border:1px solid var(--accent);
   padding:.4rem 1rem;
-  font-family:'JetBrains Mono',monospace;
+  font-family:'JetBrains Mono';
   font-size:.8rem;
   color:var(--accent);
   text-transform:uppercase;
 }
+.hero{margin:1rem 0 3rem;border:1px solid var(--border)}
+model-viewer{width:100%;height:420px}
 
 .metric-row{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:1.5rem;
-  margin-top:2rem;
 }
 .metric-item{
   border-left:2px solid var(--accent);
   padding:1rem 1.5rem;
   background:rgba(16,185,129,.03);
 }
-.metric-value{
-  font-size:2.2rem;
-  font-weight:800;
-  line-height:1;
-}
+.metric-value{font-size:2.2rem;font-weight:800}
 .metric-label{
   font-size:.75rem;
   text-transform:uppercase;
@@ -129,35 +101,42 @@ th{
 }
 td{padding:.75rem;border-bottom:1px solid var(--border)}
 
+img.full{
+  width:100%;
+  border-radius:6px;
+  border:1px solid var(--border);
+}
+
 @media(max-width:1000px){
-  .split,.split.reverse{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
   model-viewer{height:320px}
-  main{padding-top:6rem}
 }
 </style>
-<link rel="stylesheet" href="theme.css">
-<script defer src="theme.js"></script>
 </head>
+
 <body>
 <a href="../" class="nav-home">← Home</a>
+
 <main>
-<header style="text-align:center;">
-  <div class="mono mono-tagline" style="margin-bottom:1.5rem;letter-spacing:.4em;">[ PROJECT_UAV_V1 / CONTROL_CORE ]</div>
+
+<header style="text-align:center">
+  <div class="mono" style="letter-spacing:.4em;margin-bottom:1.5rem">[ PROJECT_UAV_V1 / CONTROL_CORE ]</div>
   <h1>UAV Autonomy & Robust Control Testbed</h1>
   <p class="subtitle">
-    Understanding classical control behavior under asymmetric mass loading,
-    mechanical vibration, and communication loss.
+    Evaluating control stability, disturbance rejection, and failsafe behavior
+    under non-ideal real-world conditions.
   </p>
-
   <div class="skills-container">
-    <div class="skill-box">Betaflight PID Tuning</div>
-    <div class="skill-box">IMU Filtering (Notch / RPM)</div>
-    <div class="skill-box">Isaac Sim (RL Prototyping)</div>
-    <div class="skill-box">Failsafe State Machine</div>
-    <div class="skill-box">GPS Companion Experiments</div>
+    <div class="skill-box">PID Control</div>
+    <div class="skill-box">Failsafe Logic</div>
+    <div class="skill-box">Vibration Mitigation</div>
+    <div class="skill-box">Isaac Sim</div>
+    <div class="skill-box">Embedded Systems</div>
   </div>
 </header>
+
 <section class="hero">
+  <!-- GLB UNCHANGED -->
   <model-viewer src="drone.glb" auto-rotate camera-controls disable-zoom></model-viewer>
 </section>
 
@@ -182,154 +161,94 @@ td{padding:.75rem;border-bottom:1px solid var(--border)}
 <section class="card">
   <h2>Executive Summary</h2>
   <p>
-    This 250 mm testbed investigates robust PID stabilization and deterministic failsafe behavior.
-    All flight-critical control logic executes directly on the Brahma F4 MK-III flight controller
-    to guarantee hard real-time execution, while non-real-time autonomy experiments run on a
-    Raspberry Pi companion computer.
+    A 250 mm quadrotor testbed built to study robust control behavior under asymmetric loading,
+    mechanical vibration, and communication loss. All flight-critical control, filtering, and failsafe
+    logic runs directly on the flight controller to preserve deterministic real-time behavior. A
+    companion computer was used exclusively for non-critical autonomy experiments.
   </p>
+</section>
+
+<section class="card">
+  <img src="assets/images/uav-built.png" alt="Built UAV Testbed" class="full">
 </section>
 
 <section class="card">
   <h2>System Components</h2>
   <table>
-    <tr><th>Subsystem</th><th>Component Details</th></tr>
-    <tr><td>Airframe</td><td>250 mm carbon-fiber quadcopter frame</td></tr>
-    <tr><td>Motors</td><td>Readytosky 2306 class brushless motors &times;4</td></tr>
-    <tr><td>Propellers</td><td>5-inch tri-blade FPV propellers</td></tr>
-    <tr><td>ESC</td><td>Vishnu 50A ESC (DShot600)</td></tr>
-    <tr><td>Flight Controller</td><td>Brahma F4 MK-III (IMU sampling, PID control, filtering, failsafe logic)</td></tr>
-    <tr><td>Companion Computer</td><td>Raspberry Pi 4B (non-real-time autonomy experiments, logging, sim-to-real tests)</td></tr>
-    <tr><td>Navigation</td><td>u-blox NEO-6M GPS module (position estimates for high-level experiments)</td></tr>
-    <tr><td>Power</td><td>4S LiPo battery</td></tr>
+    <tr><th>Subsystem</th><th>Details</th></tr>
+    <tr><td>Airframe</td><td>250 mm carbon-fiber quadcopter</td></tr>
+    <tr><td>Motors</td><td>2306-class brushless motors (×4)</td></tr>
+    <tr><td>ESC</td><td>50A ESC (DShot)</td></tr>
+    <tr><td>Flight Controller</td><td>Brahma F4 MK-III</td></tr>
+    <tr><td>Companion Computer</td><td>Raspberry Pi 4B</td></tr>
+    <tr><td>Navigation</td><td>u-blox GPS module</td></tr>
+    <tr><td>Power</td><td>4S LiPo</td></tr>
   </table>
 </section>
 
 <section class="card">
   <h2>System Architecture</h2>
-  <div class="arch-wrapper">
-    <img src="assets/images/table1.png" alt="Hierarchical Architecture of the UAV Control System">
-  </div>
-</section>
-
-<section class="card">
-  <h2>Wiring Configuration</h2>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2rem;">
-    <figure style="margin:0;">
-      <img src="assets/images/fc.png" alt="Flight Controller Wiring Diagram" style="width:100%;border:1px solid var(--border);border-radius:6px;">
-      <figcaption style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted);margin-top:1rem;text-align:center;">FLIGHT_CONTROLLER_WIRING</figcaption>
-    </figure>
-    <figure style="margin:0;">
-      <img src="assets/images/esc.png" alt="ESC Configuration Diagram" style="width:100%;border:1px solid var(--border);border-radius:6px;">
-      <figcaption style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted);margin-top:1rem;text-align:center;">ESC_CONFIGURATION</figcaption>
-    </figure>
-  </div>
+  <img src="assets/images/table1.png" alt="UAV Control Architecture" class="full">
 </section>
 
 <section class="card">
   <h2>Control Strategy</h2>
   <p>
-    Independent PID loops stabilize roll, pitch, and yaw. Tuning prioritized
-    disturbance rejection and vibration tolerance through conservative
-    derivative gains and dynamic notch filtering.
+    Classical PID stabilization was tuned for robustness rather than peak responsiveness.
+    A 5.67 g asymmetric mass was introduced on one arm to induce imbalance, vibration,
+    and sensor noise. Gains and filtering were adjusted to maintain stable hover without
+    oscillation or control divergence under sustained disturbance.
   </p>
-  <p class="mono" style="margin-top:1.5rem;">u(t) = Kp e(t) + Ki ∫e(t)dt + Kd de/dt</p>
-  <ul style="margin-top:1.5rem;color:var(--muted);font-size:.9rem;line-height:1.8;">
-    <li><strong style="color:var(--text);">Proportional (Kp):</strong> Reacts to current error, providing response stiffness</li>
-    <li><strong style="color:var(--text);">Integral (Ki):</strong> Accumulates past errors to cancel steady-state biases</li>
-    <li><strong style="color:var(--text);">Derivative (Kd):</strong> Predicts rate of change to dampen oscillations</li>
-  </ul>
-  
-  <h3 style="font-size:1.2rem;font-weight:700;margin:2.5rem 0 1rem;">Disturbance Rejection: Coin Experiment</h3>
-  <p>
-    A 5.67g coin was affixed to one arm to create an asymmetric disturbance, testing the controller's robustness under non-ideal conditions.
-  </p>
-  <ul style="margin-top:1rem;color:var(--muted);line-height:1.8;">
-    <li><strong style="color:var(--text);">Mechanical Imbalance:</strong> Motors operate at different power levels to maintain hover</li>
-    <li><strong style="color:var(--text);">Harmonic Resonance:</strong> Added mass shifts arm vibration frequency, inducing sensor noise</li>
-    <li><strong style="color:var(--text);">Vibration Hardening:</strong> Increased Kp to overpower tilt and deployed notch filters to clean IMU data</li>
-  </ul>
 </section>
 
 <section class="card">
   <h2>Deterministic Failsafe</h2>
-  <p>
-    Implemented a deterministic state machine that executes on signal loss, prioritizing controlled descent over mission completion.
-  </p>
-  
-  <h3 style="font-size:1.1rem;font-weight:700;margin:2rem 0 1rem;">Implementation</h3>
-  <ul style="color:var(--muted);line-height:1.8;">
-    <li><strong style="color:var(--text);">Link Detection:</strong> RSSI monitoring triggers failsafe at 15-25% signal strength</li>
-    <li><strong style="color:var(--text);">Attitude Lock:</strong> Immediate transition to 0° pitch/roll within 100-150 ms</li>
-    <li><strong style="color:var(--text);">Controlled Descent:</strong> Linear throttle decay (0.4-0.6 m/s²) prevents free-fall</li>
-    <li><strong style="color:var(--text);">Ground Detection:</strong> Z-axis accelerometer spike triggers motor disarm at 1.2-1.8 m/s touchdown velocity</li>
+  <div class="split">
+    <div>
+      <p>
+        A deterministic state machine executes immediately on signal loss, prioritizing
+        controlled descent and vehicle safety over mission continuation.
+      </p>
+      <ul style="color:var(--muted);line-height:1.8">
+        <li>RSSI-based link loss detection</li>
+        <li>Immediate attitude neutralization</li>
+        <li>Linear throttle ramp-down</li>
+        <li>Ground contact detection via IMU</li>
+      </ul>
+    </div>
+    <div>
+      <table>
+        <tr><th>Metric</th><th>Value</th></tr>
+        <tr><td>Detection Latency</td><td>~100–150 ms</td></tr>
+        <tr><td>Attitude Lock</td><td>~250–450 ms</td></tr>
+        <tr><td>Descent Deceleration</td><td>~0.4–0.6 m/s²</td></tr>
+        <tr><td>Touchdown Velocity</td><td>~1.2–1.8 m/s</td></tr>
+        <tr><td>Outcome</td><td>Controlled descent</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Learning-Based Guidance (Prototype)</h2>
+  <ul style="color:var(--muted);line-height:1.8">
+    <li>Designed a non-flight-critical guidance layer above the flight controller</li>
+    <li>Policies trained in NVIDIA Isaac Sim with randomized mass, noise, and latency</li>
+    <li>Intended deployment on Raspberry Pi generating bounded reference commands</li>
+    <li>Validated architecturally and in simulation, not deployed due to latency and signal integrity limits</li>
   </ul>
-  
-  <p style="margin-top:2rem;color:var(--muted);">
-    All failsafe logic executes on the flight controller to guarantee hard real-time response with sub-150ms detection latency.
-  </p>
 </section>
 
-<section class="card">
-  <h2>Sim-to-Real Transfer: Autonomous Guidance</h2>
-  <p>
-    Prototyped a learning-based guidance layer to reduce pilot workload during non-nominal conditions. Policies were trained in NVIDIA Isaac Sim with domain randomization across mass distribution, sensor noise, and communication latency.
-  </p>
-  
-  <h3 style="font-size:1.1rem;font-weight:700;margin:2rem 0 1rem;">Architecture</h3>
-  <ul style="color:var(--muted);line-height:1.8;">
-    <li><strong style="color:var(--text);">Training Environment:</strong> Isaac Sim with randomized physics parameters matching real-world disturbances</li>
-    <li><strong style="color:var(--text);">Deployment Target:</strong> Raspberry Pi 4B companion computer generating low-frequency reference commands</li>
-    <li><strong style="color:var(--text);">Safety Arbitration:</strong> Manual RC override always takes precedence over autonomous commands</li>
-    <li><strong style="color:var(--text);">Control Isolation:</strong> All stabilization and failsafe logic remains on flight controller for real-time determinism</li>
-  </ul>
-  
-  <p style="margin-top:2rem;color:var(--muted);">
-    Integration was prototyped but not deployed due to communication latency exceeding 50 ms and vibration-induced sensor noise creating a reality gap. Future work requires tighter domain randomization and hardware-in-the-loop validation.
-  </p>
-</section>
-
-<section class="card">
-  <h2>Results: Hover & Stability</h2>
-  <table>
-    <tr><th>Metric</th><th>Clean</th><th>Coin-Loaded</th></tr>
-    <tr><td>Hover Drift (XY)</td><td>~10–15 cm</td><td>~15–25 cm</td></tr>
-    <tr><td>Roll Std Dev</td><td>~0.5–0.9°</td><td>~0.9–1.6°</td></tr>
-    <tr><td>Pitch Std Dev</td><td>~0.5–0.8°</td><td>~0.8–1.5°</td></tr>
-    <tr><td>Yaw Drift</td><td>low</td><td>low:moderate</td></tr>
-    <tr><td>Stable Hover Duration</td><td>~20–60 s</td><td>~15–45 s</td></tr>
-  </table>
-</section>
-
-<section class="card">
-  <h2>Results: IMU Noise & Vibration</h2>
-  <table>
-    <tr><th>Metric</th><th>Clean</th><th>Pre-filter</th><th>Filtered</th></tr>
-    <tr><td>Gyro Noise Floor</td><td>~0.04–0.08 dps</td><td>~0.10–0.20 dps</td><td>~0.08–0.16 dps</td></tr>
-    <tr><td>Dominant Band</td><td>~120–200 Hz</td><td>~100–300 Hz</td><td>attenuated in-band</td></tr>
-    <tr><td>PSD Reduction</td><td>—</td><td>—</td><td>~5–12 dB</td></tr>
-    <tr><td>D-term</td><td>stable</td><td>borderline</td><td>stable</td></tr>
-  </table>
-</section>
-
-<section class="card">
-  <h2>Results: Failsafe / Descent</h2>
-  <table>
-    <tr><th>Metric</th><th>Value (Range)</th></tr>
-    <tr><td>RSSI Threshold</td><td>~15–25%</td></tr>
-    <tr><td>Detection Latency</td><td>~100–150 ms</td></tr>
-    <tr><td>Attitude Neutralization</td><td>~250–450 ms</td></tr>
-    <tr><td>Descent Deceleration</td><td>~0.4–0.6 m/s²</td></tr>
-    <tr><td>Touchdown Velocity</td><td>~1.2–1.8 m/s</td></tr>
-    <tr><td>Outcome</td><td>controlled descent, no freefall</td></tr>
-  </table>
-</section>
-
-<footer style="margin-top:8rem;border-top:1px solid var(--border);padding-top:4rem;text-align:center;">
-  <a href="assets/vault/uav.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:.75rem;padding:.8rem 1.5rem;border:1px solid var(--accent);color:var(--accent);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:.85rem;transition:all .2s;text-transform:uppercase;letter-spacing:.1em;" onmouseover="this.style.background='var(--accent)';this.style.color='#000'" onmouseout="this.style.background='';this.style.color='var(--accent)'">
-    Download Technical Report
+<footer style="margin-top:8rem;text-align:center;border-top:1px solid var(--border);padding-top:4rem">
+  <a href="assets/vault/uav.pdf" target="_blank"
+     style="display:inline-block;padding:.8rem 1.5rem;border:1px solid var(--accent);
+     color:var(--accent);text-decoration:none;font-family:'JetBrains Mono';
+     text-transform:uppercase;letter-spacing:.1em">
+     Download Technical Report
   </a>
   <div class="mono" style="margin-top:3rem;opacity:.5">END_PROJECT_LOG_V1</div>
 </footer>
+
 </main>
 </body>
 </html>
