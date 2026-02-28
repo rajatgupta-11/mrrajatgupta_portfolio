@@ -123,7 +123,7 @@ figcaption { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color:
   <nav class="section-nav">
     <a href="#kinematics" class="nav-btn">KINEMATICS</a>
     <a href="#design" class="nav-btn">MECHANICAL_DESIGN</a>
-    <a href="#fabrication" class="nav-btn">FABRICATION</a>
+    <a href="#fabrication" class="nav-btn">GAIT OPTIMIZATION</a>
     <a href="#electronics" class="nav-btn">ELECTRONICS_POWER</a>
   </nav>
 
@@ -174,18 +174,20 @@ figcaption { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color:
   <section id="fabrication" class="card" data-step="3">
     <div class="split">
       <div>
-        <h2>Fabrication & Craftsmanship</h2>
-        <p>Printed on a Bambu Lab X1E in high-rigidity PLA, the fabrication focused on monolithic structural integrity.</p>
-        
-        <h3 class="mono">Friction Stir Welding (The Dremel Method)</h3>
-        <p style="font-size: 0.95rem; color: var(--muted);">Standard adhesives proved insufficient for the horn-to-frame bond. I developed a post-processing technique using a rotary tool and raw PLA filament to friction-weld the locking lip over the servo horn.</p>
-        
-        <p style="font-size: 0.95rem; color: var(--muted);">This created a fused mechanical connection that is far stronger than epoxy and lighter than using additional M3 fasteners, keeping the total assembly weight to a targeted 350g.</p>
+        <h2>Gait Optimization</h2>
+        <p>Initial testing was conducted with the wiring and batteries kept off-body, IK gaits were too computationally heavy for the current SBC setup. FK gaits were tested as well for simplicity.</p>
+   
       </div>
       <figure>
-        <img src="assets/images/original.png" >
-        <figcaption>FRICTION_STIR_WELD_MACRO</figcaption>
-      </figure>
+  <video 
+    src="assets/videos/walk.mp4"
+    autoplay
+    loop
+    muted
+    playsinline
+    style="width:100%; border:1px solid var(--border); background:#000;">
+  </video>
+</figure>
     </div>
   </section>
 
