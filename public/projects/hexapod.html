@@ -143,7 +143,6 @@ figcaption { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color:
     playsinline
     style="width:100%; border:1px solid var(--border); background:#000;">
   </video>
-  <figcaption>IK_CIRCULAR_TRAJECTORY</figcaption>
 </figure>
 
     </div>
@@ -161,11 +160,14 @@ figcaption { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color:
         <p>Designing for 18 micro-servos (MG90S) required a rigorous focus on weight-to-torque ratios and joint reliability.</p>
         
         <h3 class="mono">Pre-Bent Neutral Stance</h3>
-        <p style="font-size: 0.95rem; color: var(--muted);">I engineered the leg geometry with a pre-set neutral bend. This minimizes the holding torque required for the "standing" state, preventing servo stall and thermal runaway during static phases.</p>
+        <p style="font-size: 0.95rem; color: var(--muted);">I engineered the leg geometry with a pre-set neutral bend. This minimizes the holding torque required for the "standing" state, preventing servo stall and excessive current spikes.</p>
 
         <h3 class="mono">The Horn Housing Crisis</h3>
-        <p style="font-size: 0.95rem; color: var(--muted);">Initial models faced a critical failure: the servo horns would slip or detach under high load. I redesigned the joints with a specialized internal indent and a "locking lip" to secure the horn within the 3D-printed assembly.</p>
+        <p style="font-size: 0.95rem; color: var(--muted);">Initial models faced a critical failure: the servo horns would slip or detach under high load. I redesigned the joints with an internal indent and a "locking lip" that was secured in place using PLA friction welding with a dremel.</p>
       </div>
+      <figure>
+        <img src="assets/images/hexa.png" >
+      </figure>
     </div>
   </section>
 
@@ -181,7 +183,7 @@ figcaption { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color:
         <p style="font-size: 0.95rem; color: var(--muted);">This created a fused mechanical connection that is far stronger than epoxy and lighter than using additional M3 fasteners, keeping the total assembly weight to a targeted 350g.</p>
       </div>
       <figure>
-        <img src="assets/images/original.png" alt="Fabrication detail (placeholder)">
+        <img src="assets/images/original.png" >
         <figcaption>FRICTION_STIR_WELD_MACRO</figcaption>
       </figure>
     </div>
