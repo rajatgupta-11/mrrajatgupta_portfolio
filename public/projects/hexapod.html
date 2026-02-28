@@ -136,17 +136,8 @@ figcaption { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color:
     <div class="split">
       <div>
         <h2>Kinematics & Trajectory</h2>
-        <p>The core challenge of the 18-DOF system is resolving the $(x, y, z)$ position of each leg tip into Coxa, Femur, and Tibia joint angles.</p>
-        
-        <h3 class="mono">Triangular Geometry Approach</h3>
-        <p style="font-size: 0.95rem; color: var(--muted);">Instead of black-box libraries, I derived a trigonometric IK solver. This approach ensures a fundamental understanding of coordinate frame transformations and allows for specific mechanical offsets to be hard-coded into the gait cycle.</p>
-
-        <h3 class="mono">Bézier Path Planning</h3>
-        <p style="font-size: 0.95rem; color: var(--muted);">Standard linear movement causes massive instantaneous acceleration (jerk), leading to servo torque spikes and system brownouts. I implemented cubic Bézier curves to smooth the foot trajectories.</p>
-        
-        <div class="math-box">
-          $$B(t) = (1-t)^3P_0 + 3(1-t)^2tP_1 + 3(1-t)t^2P_2 + t^3P_3$$
-        </div>
+        <p> First, I created a Python-based gait simulator to validate trajectories in joint and workspace domains. Foot targets are converted to coxa, femur, and tibia angles via inverse kinematics. </p>
+      
       </div>
       <figure>
   <video 
