@@ -71,16 +71,7 @@ const projects: Project[] = [
     ],
   },
 
-  {
-    category: "DFM",
-    title: "Solutions Looking for Problems",
-    status: "ONGOING",
-    description:
-      "Self-initiated product design series targeting small everyday friction points through CAD-driven iteration.",
-    type: "projects" as const,
-    href: "projects/solutions.html",
-    previews: ["projects/assets/images/paper_roll.png"],
-  },
+ 
    {
     category: "MUJOCO_SIM",
     title: "SpinLaunch Kinetic Sim & Analysis",
@@ -93,19 +84,7 @@ const projects: Project[] = [
      
     ],
   },
-  {
-    category: "AI_SYSTEMS_STRATEGY",
-    title: "LawgicHub AI | Product & Systems Strategy",
-    status: "REMOTE",
-    description:
-      "Guiding how a domain-specific legal AI thinks, speaks, and presents itself, focusing on reducing user friction while making sure the AI behaves.",
-    type: "professional" as const,
-    href: "projects/lawgic.html",
-    previews: [
-      "projects/assets/images/lawgic.png",
-
-    ],
-  },
+ 
   
   {
     category: "INDUSTRIAL_OPERATION",
@@ -128,6 +107,16 @@ const projects: Project[] = [
     type: "projects" as const,
     href: "projects/dlms.html",
     previews: ["projects/assets/images/tensile.png"],
+  },
+   {
+    category: "DFM",
+    title: "Solutions Looking for Problems",
+    status: "ONGOING",
+    description:
+      "Self-initiated product design series targeting small everyday friction points through CAD-driven iteration.",
+    type: "projects" as const,
+    href: "projects/solutions.html",
+    previews: ["projects/assets/images/paper_roll.png"],
   },
   
 ];
