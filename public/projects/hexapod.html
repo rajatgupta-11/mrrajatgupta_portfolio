@@ -148,13 +148,7 @@ figure video {
     </p>
   </header>
 
-  <nav class="section-nav">
-    <a href="#kinematics" class="nav-btn">KINEMATICS</a>
-    <a href="#design" class="nav-btn">MECHANICAL_DESIGN</a>
-    <a href="#fabrication" class="nav-btn">GAIT OPTIMIZATION</a>
-    <a href="#electronics" class="nav-btn">ELECTRONICS_POWER</a>
-  </nav>
-
+ 
   <section id="kinematics" class="card" data-step="1">
     <div class="split">
       <div>
@@ -217,26 +211,7 @@ figure video {
     </div>
   </section>
 
-  <section id="electronics" class="card" data-step="4">
-    <div class="split">
-      <figure>
-        <img src="assets/images/annotated.png" alt="Electronics overview (placeholder)">
-        <figcaption>54_WIRE_ROUTING_MANAGEMENT</figcaption>
-      </figure>
-
-      <div>
-        <h2>Electronics & Power Isolation</h2>
-        <p>Coordinating 18 servos creates "dirty" power rails with massive current transients.</p>
-
-        <h3 class="mono">Tethered R&D Phase</h3>
-        <p style="font-size: 0.95rem; color: var(--muted);">To isolate gait-tuning from power distribution issues, V1 is tethered to a high-amperage bench supply. This provides the stable $I_{peak}$ required for testing trajectory smoothing without the brownout risks posed by standard buck converters.</p>
-
-        <h3 class="mono">System Integration</h3>
-        <p style="font-size: 0.95rem; color: var(--muted);">Two PCA9685 boards manage the PWM signals, while a state machine in the Arduino controller limits the gait pattern to no more than 5 active motors per phase, protecting the system from current-induced resets.</p>
-      </div>
-    </div>
-  </section>
-
+  
   <footer style="margin-top: 6rem; text-align: center; border-top: 1px solid var(--border); padding-top: 4rem;">
   </footer>
 
