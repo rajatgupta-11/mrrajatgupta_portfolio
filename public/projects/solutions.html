@@ -4,15 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>PV Thermal Control | Closed-Loop Evaporative Cooling</title>
+<title>Consumer Hardware Prototyping</title>
+<meta name="description" content="Rapid consumer hardware prototyping focused on structural integrity, tolerance control, and everyday usability.">
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
-:root {
+:root{
   --bg:#030507;
-  --surface:#0a0c10;
   --card:rgba(15,19,24,.75);
   --text:#e6edf3;
   --muted:#8b949e;
@@ -32,266 +31,145 @@ body{
   background-size:100px 100px;
 }
 a{color:var(--accent);text-decoration:none}
-.nav-home{
-  position:fixed;
-  top:2rem;
-  left:2rem;
-  z-index:100;
-  font-family:'JetBrains Mono',monospace;
-  font-size:.75rem;
-  color:var(--accent);
-  text-decoration:none;
-  padding:.5rem 1rem;
-  border:1px solid var(--border);
-  background:var(--surface);
-  text-transform:uppercase;
-  letter-spacing:.1em;
-}
-.nav-home:hover{background:var(--accent);color:#000}
-main{
-  max-width:var(--max);
-  margin:auto;
-  padding:7rem 1.5rem 6rem;
-}
-h1,h2{letter-spacing:-.04em}
-h1{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;margin-bottom:1rem}
-h2{font-size:1.7rem;font-weight:800;margin-bottom:1rem}
+main{max-width:var(--max);margin:0 auto;padding:5rem 1.5rem}
+.mono{font-family:'JetBrains Mono';font-size:.8rem;color:var(--accent)}
+h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;margin-bottom:1rem}
 p{line-height:1.6;color:var(--muted)}
-.mono{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:.8rem}
+
 .card{
   background:var(--card);
   border:1px solid var(--border);
-  padding:2.8rem;
-  border-radius:4px;
-  margin-bottom:2.5rem;
+  padding:3rem;
+  margin-bottom:3rem;
   position:relative;
 }
 .card::after{
   content:"";
-  position:absolute;
-  top:-1px;
-  right:-1px;
-  width:16px;
-  height:16px;
+  position:absolute;top:-1px;right:-1px;
+  width:16px;height:16px;
   border-top:2px solid var(--accent);
   border-right:2px solid var(--accent);
 }
-.split{
+
+.grid{
   display:grid;
-  grid-template-columns:1fr 1.1fr;
-  gap:3.5rem;
-  align-items:center;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:2rem;
 }
-img{
-  width:100%;
+
+.project-card{
+  position:relative;
+  overflow:hidden;
   border:1px solid var(--border);
-  border-radius:4px;
 }
-figure{
-  margin:0;
+
+.project-card img,
+.project-card video{
+  width:100%;
+  display:block;
+  transition:transform .4s ease;
 }
-figcaption{
-  font-family:'JetBrains Mono',monospace;
-  font-size:.75rem;
-  color:var(--muted);
+
+.project-card:hover img,
+.project-card:hover video{
+  transform:scale(1.05);
+}
+
+.overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.78);
+  display:flex;
+  align-items:center;
+  justify-content:center;
   text-align:center;
-  margin-top:1rem;
-  letter-spacing:.1em;
+  padding:2rem;
+  opacity:0;
+  transition:opacity .3s ease;
 }
-.metric-row{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:1.5rem;
+
+.project-card:hover .overlay{
+  opacity:1;
 }
-.metric{
-  border-left:2px solid var(--accent);
-  padding:1rem 1.3rem;
+
+.overlay p{
+  color:var(--text);
+  font-size:1rem;
+  line-height:1.5;
 }
-.metric span{display:block}
-.metric .value{font-size:2rem;font-weight:800}
-.metric .label{
-  font-size:.75rem;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:.1em;
-}
-.button{
-  display:inline-block;
-  margin-top:1.5rem;
-  padding:.9rem 1.6rem;
-  border:1px solid var(--accent);
-  color:var(--accent);
-  font-family:'JetBrains Mono',monospace;
-  font-size:.8rem;
-  text-decoration:none;
-}
-.button:hover{
-  background:var(--accent);
-  color:#000;
-}
+
 @media(max-width:900px){
-  .split{grid-template-columns:1fr}
+  main{padding:3rem 1rem}
 }
 </style>
 </head>
 
 <body>
-
-<a href="../" class="nav-home">← Home</a>
-
 <main>
 
 <!-- HERO -->
-<section style="text-align:center;margin-bottom:6rem">
-  <div class="mono" style="letter-spacing:.3em;margin-bottom:1rem">
-    [ THERMAL_CONTROL / PV ]
-  </div>
-  <h1>Closed-Loop Evaporative Cooling for Photovoltaic Panels</h1>
-  <p style="max-width:760px;margin:auto;color:var(--muted);font-size:1.05rem">
-    Active temperature regulation using feedback control and physical validation.
+<section style="text-align:center;margin-bottom:5rem">
+  <div class="mono">[ CONSUMER_HARDWARE / RAPID_PROTOTYPING ]</div>
+  <h1>Consumer Hardware Prototyping</h1>
+  <p style="max-width:750px;margin:1.5rem auto">
+    Rapidly designed and fabricated functional consumer objects,
+    focused on structural integrity, tolerance control, and everyday usability.
   </p>
 </section>
 
-<!-- PROBLEM -->
-<section class="split card">
-  <div>
-    <h2>Thermal Efficiency Loss</h2>
-    <p style="color:var(--muted);margin-bottom:2rem">
-      I built a closed-loop evaporative cooling system that treats PV temperature as a controllable state.
-    </p>
+<!-- PROJECT GRID -->
+<section class="card">
+  <div class="grid">
 
-    <div class="metric-row">
-      <div class="metric">
-        <span class="label">Efficiency Loss</span>
-        <span class="value">~0.45%</span>
-        <span class="mono">per 1°C &gt; 25°C</span>
-      </div>
-      <div class="metric">
-        <span class="label">Power Loss</span>
-        <span class="value">12–22%</span>
-        <span class="mono">thermal loading</span>
+    <!-- PlayStation Dock -->
+    <div class="project-card">
+      <img src="assets/images/psdock.png" alt="PlayStation Dock">
+      <div class="overlay">
+        <p>Wall-mounted PlayStation controller and headset dock with FEA-informed rib reinforcement and snap-fit tolerance tuning.</p>
       </div>
     </div>
-  </div>
 
-  <img src="assets/images/motivation.png" alt="PV thermal loss">
-</section>
-
-<!-- RESULTS -->
-<section class="card">
-  <h2>Results at a Glance</h2>
-  <div class="metric-row">
-    <div class="metric">
-      <span class="label">Temp Reduction</span>
-      <span class="value">5°C</span>
-      <span class="mono">burst cooling</span>
+    <!-- Paper Roll Dispenser (Video) -->
+    <div class="project-card">
+      <video autoplay muted loop playsinline>
+        <source src="assets/videos/paper.mp4" type="video/mp4">
+      </video>
+      <div class="overlay">
+        <p>Cantilever paper roll dispenser optimized for stiffness and root stress reduction under full-load deflection.</p>
+      </div>
     </div>
-    <div class="metric">
-      <span class="label">Energy Recovered</span>
-      <span class="value">~100 J</span>
-      <span class="mono">lab scale</span>
+
+    <!-- Sponge Holder -->
+    <div class="project-card">
+      <img src="assets/images/sponge.png" alt="Sponge Holder">
+      <div class="overlay">
+        <p>Drain-integrated sponge holder eliminating standing water through gravity-assisted geometry.</p>
+      </div>
     </div>
-    <div class="metric">
-      <span class="label">Sim to Hardware Fidelity</span>
-      <span class="value">High</span>
-      <span class="mono">Simulink & ARDUINO</span>
+
+    <!-- NYC Transit Display -->
+    <div class="project-card">
+      <img src="assets/images/nyc.png" alt="NYC Transit Display">
+      <div class="overlay">
+        <p>Precision-fit enclosure for real-time NYC transit display integrating live API data and embedded logic.</p>
+      </div>
     </div>
-  </div>
-</section>
 
-<!-- FULL SYSTEM IMAGE -->
-<section class="card">
-  <img src="assets/images/annotated.png" alt="Annotated system architecture">
-</section>
+    <!-- Custom Storage Box -->
+    <div class="project-card">
+      <img src="assets/images/box.png" alt="Custom Storage Box">
+      <div class="overlay">
+        <p>Custom snap-lid enclosure with controlled interference fit tuned for repeatable FDM fabrication.</p>
+      </div>
+    </div>
 
-<!-- HARDWARE -->
-<section class="split card">
-  <div>
-    <h2>Hardware Integration</h2>
-    <ul style="color:var(--muted);padding-left:1.1rem;line-height:1.8">
-      <li>PV panel with surface-mounted NTC thermistor</li>
-      <li>Ultrasonic misting module as cooling actuator</li>
-      <li>Arduino-based controller with relay logic</li>
-      <li>External supply and transistor isolation</li>
-      <li>Independent heat and illumination sources</li>
-    </ul>
-
-    <a class="button" href="assets/vault/aef.pdf" target="_blank">
-      OPEN MATH APPENDIX(AT YOUR OWN RISK)
-    </a>
   </div>
 
-  <img src="assets/images/temp.png" alt="Hardware schematic">
-</section>
-
-<section class="split card">
-  <div>
-    <h2>Simulation & Validation</h2>
-
-    <p style="color: var(--muted); margin-bottom: 1.5rem;">
-      MATLAB / Simulink was used to predict system behavior before hardware testing.
-    </p>
-
-    <ul style="color: var(--muted); padding-left: 1.1rem; margin-bottom: 1.5rem;line-height:1.8">
-      <li>Simulated panel temperature vs measured temperature</li>
-      <li>Cooling cycle timing vs misting actuation</li>
-      <li>Thermal response shape and settling behavior</li>
-    </ul>
-
-    <p style="color: var(--muted);">
-      Experimental results closely matched simulation, validating the thermal model
-      and control assumptions used during design.
-    </p>
-  </div>
-
-  <figure>
-    <img src="assets/images/comparison.png" alt="Simulink vs hardware comparison">
-    <figcaption>SIMULINK ↔ HARDWARE TEMPERATURE RESPONSE</figcaption>
-  </figure>
-</section>
-
-
-<!-- LIMITATIONS -->
-<section class="card">
-  <h2>Key Limitations & Tradeoffs</h2>
-  <ul style="color:var(--muted);padding-left:1.1rem;line-height:1.8">
-    <li>Actuator energy dominates at small scale</li>
-    <li>Binary control limits resolution</li>
-    <li>Indoor irradiance limits extrapolation</li>
-    <li>Non-uniform misting causes spatial gradients</li>
-    <li>Power measurement uncertainty</li>
-  </ul>
-</section>
-
-<!-- FOOTER -->
-<footer style="margin-top:6rem;text-align:center;border-top:1px solid var(--border);padding-top:3rem">
-  
-  <p class="mono" style="margin-bottom:2rem;opacity:.7">
-    TECHNICAL_DOCUMENTATION
+  <p class="mono" style="margin-top:3rem;text-align:center;opacity:.6">
+    40+ FDM prints · Iterative tolerance tuning · Load-path-driven redesign
   </p>
 
-  <div style="display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin-bottom:3rem">
-    <a href="assets/videos/Topview.mp4" 
-       target="_blank"
-       class="mono" 
-       style="border-bottom:1px solid var(--accent);padding-bottom:.2rem">
-      SINGLE-CYCLE DEMO VIDEO
-    </a>
-    <a href="assets/vault/report.pdf" 
-       target="_blank"
-       class="mono" 
-       style="border-bottom:1px solid var(--accent);padding-bottom:.2rem">
-      FULL REPORT
-    </a>
-    <a href="assets/vault/ppt.pdf" 
-       target="_blank"
-       class="mono" 
-       style="border-bottom:1px solid var(--accent);padding-bottom:.2rem">
-      SLIDES
-    </a>
-  </div>
-
-</footer>
+</section>
 
 </main>
 </body>
