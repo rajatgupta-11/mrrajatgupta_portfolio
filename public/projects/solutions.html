@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Consumer Hardware Prototyping</title>
-<meta name="description" content="Rapid consumer hardware prototyping focused on structural integrity, tolerance control, and everyday usability.">
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
@@ -30,17 +29,34 @@ body{
     var(--bg);
   background-size:100px 100px;
 }
-a{color:var(--accent);text-decoration:none}
-main{max-width:var(--max);margin:0 auto;padding:5rem 1.5rem}
-.mono{font-family:'JetBrains Mono';font-size:.8rem;color:var(--accent)}
-h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;margin-bottom:1rem}
-p{line-height:1.6;color:var(--muted)}
+main{max-width:var(--max);margin:0 auto;padding:6rem 1.5rem}
+
+.mono{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.8rem;
+  color:var(--accent);
+  letter-spacing:.2em;
+}
+
+h1{
+  font-size:clamp(2.5rem,5vw,4rem);
+  font-weight:800;
+  margin:1rem 0;
+  text-align:center;
+}
+
+.subtitle{
+  max-width:750px;
+  margin:1.5rem auto 4rem;
+  color:var(--muted);
+  text-align:center;
+  line-height:1.6;
+}
 
 .card{
   background:var(--card);
   border:1px solid var(--border);
   padding:3rem;
-  margin-bottom:3rem;
   position:relative;
 }
 .card::after{
@@ -51,9 +67,16 @@ p{line-height:1.6;color:var(--muted)}
   border-right:2px solid var(--accent);
 }
 
+/* NEW GRID STRUCTURE */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  grid-template-columns:1fr 1fr;
+  gap:2rem;
+}
+
+.left-stack{
+  display:flex;
+  flex-direction:column;
   gap:2rem;
 }
 
@@ -78,7 +101,7 @@ p{line-height:1.6;color:var(--muted)}
 .overlay{
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,.78);
+  background:rgba(0,0,0,.82);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -93,13 +116,21 @@ p{line-height:1.6;color:var(--muted)}
 }
 
 .overlay p{
-  color:var(--text);
   font-size:1rem;
   line-height:1.5;
 }
 
+.bottom-note{
+  text-align:center;
+  margin-top:3rem;
+  font-family:'JetBrains Mono';
+  font-size:.75rem;
+  color:var(--accent);
+  opacity:.7;
+}
+
 @media(max-width:900px){
-  main{padding:3rem 1rem}
+  .grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -107,69 +138,68 @@ p{line-height:1.6;color:var(--muted)}
 <body>
 <main>
 
-<!-- HERO -->
-<section style="text-align:center;margin-bottom:5rem">
-  <div class="mono">[ CONSUMER_HARDWARE / RAPID_PROTOTYPING ]</div>
-  <h1>Consumer Hardware Prototyping</h1>
-<p style="max-width:750px;margin:1.5rem auto">
-  Rapidly designed and fabricated consumer hardware focused on structural integrity, tolerance control, and everyday usability. All components are CAD-modeled and printed in PLA on a Bambu Labs X1E, optimized through rapid iteration, load-path refinement, thermal considerations, and data-driven mechanical redesign.
-</p>
-</section>
+<div class="mono" style="text-align:center;">[ CONSUMER_HARDWARE / RAPID_PROTOTYPING ]</div>
+<h1>Consumer Hardware Prototyping</h1>
 
-<!-- PROJECT GRID -->
+<p class="subtitle">
+  Rapidly designed and fabricated consumer hardware engineered for structural integrity, tolerance control, and everyday usability. All components are CAD-modeled and printed in PLA on a Bambu Labs X1E, optimized through rapid iteration, load-path refinement, thermal considerations, and data-driven mechanical redesign.
+</p>
+
 <section class="card">
   <div class="grid">
 
-    <!-- PlayStation Dock -->
-    <div class="project-card">
-      <img src="assets/images/psdock.png" alt="PlayStation Dock">
-      <div class="overlay">
-        <p> Mounted PlayStation controller and headset dock with FEA-informed rib reinforcement and snap-fit tolerance tuning.</p>
+    <!-- LEFT COLUMN -->
+    <div class="left-stack">
+
+      <div class="project-card">
+        <img src="assets/images/psdock.png" alt="PlayStation Dock">
+        <div class="overlay">
+          <p>Mounted PlayStation controller and headset dock with FEA-informed rib reinforcement and snap-fit tolerance tuning.</p>
+        </div>
       </div>
+
+      <div class="project-card">
+        <img src="assets/images/sponge.png" alt="Sponge Holder">
+        <div class="overlay">
+          <p>Drain-integrated sponge holder eliminating standing water through gravity-assisted geometry and controlled wall thickness.</p>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Paper Roll Dispenser (Video) -->
-    <div class="project-card">
-      <video autoplay muted loop playsinline>
-        <source src="assets/videos/paper.mp4" type="video/mp4">
-      </video>
-      <div class="overlay">
-        <p>Cantilever paper roll dispenser optimized for stiffness, root stress reduction and .</p>
-      </div>
-    </div>
+    <!-- RIGHT COLUMN -->
+    <div class="left-stack">
 
-    <!-- Sponge Holder -->
-    <div class="project-card">
-      <img src="assets/images/sponge.png" alt="Sponge Holder">
-      <div class="overlay">
-        <p>Dish sponge holder eliminating standing water through gravity-assisted geometry.</p>
+      <div class="project-card">
+        <video autoplay muted loop playsinline>
+          <source src="assets/videos/paper.mp4" type="video/mp4">
+        </video>
+        <div class="overlay">
+          <p>Cantilever paper roll dispenser optimized for stiffness and root stress reduction under full-load deflection.</p>
+        </div>
       </div>
-    </div>
 
-    <!-- NYC Transit Display -->
-    <div class="project-card">
-      <video autoplay muted loop playsinline>
-        <source src="assets/videos/herodisplay.mp4" type="video/mp4">
-      </video>
-      <div class="overlay">
-        <p> Precision-fit enclosure for real-time NYC transit display integrating live API data and embedded logic.</p>
+      <div class="project-card">
+        <img src="assets/images/nyc.png" alt="NYC Display">
+        <div class="overlay">
+          <p>Precision-fit enclosure for real-time NYC transit display integrating embedded logic and API telemetry.</p>
+        </div>
       </div>
-    </div>
 
-
-    <!-- Custom Storage Box -->
-    <div class="project-card">
-      <img src="assets/images/box.png" alt="Custom Storage Box">
-      <div class="overlay">
-        <p>Custom snap-lid enclosure with controlled interference fit tuned for repeatable FDM fabrication.</p>
+      <div class="project-card">
+        <img src="assets/images/box.png" alt="Custom Box">
+        <div class="overlay">
+          <p>Custom snap-lid enclosure with controlled interference fit tuned for repeatable FDM fabrication.</p>
+        </div>
       </div>
+
     </div>
 
   </div>
 
-  <p class="mono" style="margin-top:3rem;text-align:center;opacity:.6">
+  <div class="bottom-note">
     40+ FDM prints · Iterative tolerance tuning · Load-path-driven redesign
-  </p>
+  </div>
 
 </section>
 
