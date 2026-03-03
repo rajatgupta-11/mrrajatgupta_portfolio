@@ -84,7 +84,17 @@ const projects: Project[] = [
      
     ],
   },
- 
+
+  {
+    category: "DFM",
+    title: "Consumer Hardware Prototyping",
+    status: "ONGOING",
+    description:
+      "Self-initiated product design series targeting small everyday friction points through CAD-driven iteration.",
+    type: "projects" as const,
+    href: "projects/solutions.html",
+    previews: ["projects/assets/images/psdock.png"],
+  },
   
   {
     category: "INDUSTRIAL_OPERATION",
@@ -108,16 +118,7 @@ const projects: Project[] = [
     href: "projects/dlms.html",
     previews: ["projects/assets/images/tensile.png"],
   },
-   {
-    category: "DFM",
-    title: "Consumer Hardware Prototypings",
-    status: "ONGOING",
-    description:
-      "Self-initiated product design series targeting small everyday friction points through CAD-driven iteration.",
-    type: "projects" as const,
-    href: "projects/solutions.html",
-    previews: ["projects/assets/images/paper_roll.png"],
-  },
+   
   
 ];
 
