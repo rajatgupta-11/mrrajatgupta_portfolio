@@ -110,7 +110,7 @@ const projects: Project[] = [
   },
    {
     category: "DFM",
-    title: "Solutions Looking for Problems",
+    title: "Consumer Hardware Prototypings",
     status: "ONGOING",
     description:
       "Self-initiated product design series targeting small everyday friction points through CAD-driven iteration.",
