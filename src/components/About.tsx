@@ -31,7 +31,7 @@
               className="space-y-6"
             >
               <p className="text-muted-foreground leading-relaxed">
-          I’m a graduate mechanical engineering student working on autonomous systems and product-focused mechanical design. My work sits at the intersection of mechanics, control theory, and electronics. 
+    Im working on autonomous robotic systems and product-focused mechanical design. My focus sits at the intersection of mechanics, control theory, and electronics. 
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 I'm highly motivated by failure-driven learning. Most interested in small, high-ownership environments that value autonomy, rapid prototyping, and fast progress.
