@@ -11,128 +11,221 @@
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
-:root {
-  --bg: #030507;
-  --surface: #0a0c10;
-  --card-bg: rgba(15, 19, 24, 0.85);
-  --text: #e6edf3;
-  --muted: #8b949e;
-  --accent: #10b981;
-  --border: rgba(255, 255, 255, 0.1);
-  --max-width: 1100px;
+
+:root{
+--bg:#030507;
+--surface:#0a0c10;
+--card-bg:rgba(15,19,24,.85);
+--text:#e6edf3;
+--muted:#8b949e;
+--accent:#10b981;
+--border:rgba(255,255,255,.1);
+--max-width:1100px;
 }
 
-*{box-sizing:border-box; -webkit-font-smoothing: antialiased;}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
 
-body {
-  margin: 0;
-  background-color: var(--bg);
-  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 100px 100px;
-  color: var(--text);
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  line-height: 1.6;
+body{
+margin:0;
+background-color:var(--bg);
+background-image:
+linear-gradient(var(--border) 1px,transparent 1px),
+linear-gradient(90deg,var(--border) 1px,transparent 1px);
+background-size:100px 100px;
+color:var(--text);
+font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+line-height:1.6;
 }
 
-.nav-home {
-  position: fixed; top: 2rem; left: 2rem; z-index: 1000;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
-  color: var(--accent); text-decoration: none;
-  padding: 0.6rem 1.2rem; border: 1px solid var(--accent);
-  background: rgba(10, 12, 16, 0.9); backdrop-filter: blur(10px);
+.nav-home{
+position:fixed;
+top:2rem;
+left:2rem;
+z-index:1000;
+font-family:'JetBrains Mono',monospace;
+font-size:.75rem;
+color:var(--accent);
+text-decoration:none;
+padding:.6rem 1.2rem;
+border:1px solid var(--accent);
+background:rgba(10,12,16,.9);
+backdrop-filter:blur(10px);
 }
 
-main { max-width: var(--max-width); margin: 0 auto; padding: 10rem 1.5rem 6rem; }
-
-/* --- HUD TYPOGRAPHY --- */
-h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; margin: 0 0 1.5rem; font-weight: 800; letter-spacing: -0.05em; text-align: center;}
-h2 { font-size: 1.6rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem;}
-h2::before { content: "[0"+attr(data-step)+"]"; font-family: 'JetBrains Mono'; font-size: 0.8rem; opacity: 0.5; }
-
-.mono { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); }
-
-/* --- SECTION NAVIGATOR --- */
-.section-nav {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-  margin: 4rem 0;
-}
-.nav-btn {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 1.5rem;
-  color: var(--text);
-  text-decoration: none;
-  text-align: center;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  transition: all 0.3s;
-  cursor: pointer;
-}
-.nav-btn:hover {
-  border-color: var(--accent);
-  background: rgba(16, 185, 129, 0.05);
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+main{
+max-width:var(--max-width);
+margin:0 auto;
+padding:10rem 1.5rem 6rem;
 }
 
-/* --- COMPONENTS --- */
-.card {
-  background: var(--card-bg);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--border);
-  padding: 4rem;
-  margin-bottom: 4rem;
-  position: relative;
-  scroll-margin-top: 100px;
-}
-.card::after { content: ""; position: absolute; top: -1px; right: -1px; width: 25px; height: 25px; border-top: 2px solid var(--accent); border-right: 2px solid var(--accent); }
-
-.metric-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 3rem; }
-.metric-item { border: 1px solid var(--border); padding: 1.5rem; background: rgba(255,255,255,0.02); }
-.metric-label { font-size: 0.7rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.1em; display: block; margin-bottom: 0.5rem;}
-.metric-value { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
-
-.split { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: flex-start; }
-img { width: 100%; border: 1px solid var(--border); border-radius: 2px; background: #000; }
-figcaption { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-top: 1rem; text-transform: uppercase; }
-
-.math-box { background: rgba(0,0,0,0.3); padding: 2rem; border-radius: 4px; margin: 2rem 0; font-family: 'JetBrains Mono', monospace;}
-
-/* -----------------------------
-   LAYOUT FIXES (VISUAL ONLY)
-   ----------------------------- */
-.split > * { min-width: 0; } /* prevents overflow / weird squeezing */
-
-figure {
-  margin: 0;               /* remove default browser margins */
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;               /* consistent spacing between media */
-  align-self: flex-start;
+h1{
+font-size:clamp(2.5rem,6vw,4.5rem);
+line-height:1;
+margin:0 0 1.5rem;
+font-weight:800;
+letter-spacing:-.05em;
+text-align:center;
 }
 
-figure img {
-  display: block;
-  width: 100%;
-  height: auto;
+h2{
+font-size:1.6rem;
+color:var(--accent);
+text-transform:uppercase;
+letter-spacing:.1em;
+margin-bottom:1.5rem;
+display:flex;
+align-items:center;
+gap:.8rem;
 }
 
-figure video {
-  display: block;
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--border);
-  background: #000;
-  max-height: 360px;       /* prevents tall/vertical videos from dominating */
-  object-fit: contain;     /* keeps full frame visible */
+h2::before{
+content:"[0" attr(data-step) "]";
+font-family:'JetBrains Mono';
+font-size:.8rem;
+opacity:.5;
 }
-/* ----------------------------- */
 
-@media(max-width:1000px){ .split { grid-template-columns: 1fr; } .section-nav { grid-template-columns: 1fr 1fr; } }
+.mono{
+font-family:'JetBrains Mono',monospace;
+font-size:.8rem;
+color:var(--accent);
+}
+
+.card{
+background:var(--card-bg);
+backdrop-filter:blur(20px);
+border:1px solid var(--border);
+padding:4rem;
+margin-bottom:4rem;
+position:relative;
+scroll-margin-top:100px;
+}
+
+.card::after{
+content:"";
+position:absolute;
+top:-1px;
+right:-1px;
+width:25px;
+height:25px;
+border-top:2px solid var(--accent);
+border-right:2px solid var(--accent);
+}
+
+.split{
+display:grid;
+grid-template-columns:1fr 1.2fr;
+gap:4rem;
+align-items:flex-start;
+}
+
+img{
+width:100%;
+border:1px solid var(--border);
+border-radius:2px;
+background:#000;
+}
+
+figcaption{
+font-family:'JetBrains Mono',monospace;
+font-size:.7rem;
+color:var(--muted);
+margin-top:1rem;
+text-transform:uppercase;
+}
+
+figure{
+margin:0;
+display:flex;
+flex-direction:column;
+gap:1rem;
+align-self:flex-start;
+}
+
+figure img{
+display:block;
+width:100%;
+height:auto;
+}
+
+figure video{
+display:block;
+width:100%;
+height:auto;
+border:1px solid var(--border);
+background:#000;
+max-height:360px;
+object-fit:contain;
+}
+
+/* ---------- CAROUSEL ---------- */
+
+.video-carousel{
+position:relative;
+}
+
+.carousel-track video{
+display:none;
+width:100%;
+max-height:360px;
+object-fit:contain;
+border:1px solid var(--border);
+background:#000;
+}
+
+.carousel-track video.active{
+display:block;
+}
+
+.carousel-arrow{
+position:absolute;
+top:45%;
+transform:translateY(-50%);
+background:rgba(0,0,0,.6);
+border:1px solid var(--border);
+color:white;
+width:34px;
+height:34px;
+cursor:pointer;
+font-size:18px;
+}
+
+.carousel-arrow.left{left:-18px;}
+.carousel-arrow.right{right:-18px;}
+
+.carousel-dots{
+display:flex;
+justify-content:center;
+gap:8px;
+margin-top:12px;
+}
+
+.carousel-dot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:white;
+opacity:.6;
+cursor:pointer;
+}
+
+.carousel-dot.active{
+background:var(--accent);
+opacity:1;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:1000px){
+
+.split{
+grid-template-columns:1fr;
+}
+
+}
+
 </style>
-<link rel="stylesheet" href="theme.css">
-<script defer src="theme.js"></script>
+
 </head>
 
 <body>
@@ -140,82 +233,139 @@ figure video {
 <a href="../" class="nav-home">← Home</a>
 
 <main>
-  <header style="text-align:center;">
-    <div class="mono mono-tagline" style="margin-bottom: 1.5rem; letter-spacing: 0.5em;">[ SYSTEM_DEVELOPMENT / HEXAPOD_V1 ]</div>
-    <h1>18-DOF Biomimetic Locomotion Testbed</h1>
-    <p style="color: var(--muted); font-size: 1.2rem; max-width: 800px; margin: 0 auto 3rem;">
-      Exploring high-degree-of-freedom coordination through geometric inverse kinematics, cubic trajectory planning, and hybrid fabrication techniques.
-    </p>
-  </header>
 
- 
-  <section id="kinematics" class="card" data-step="1">
-    <div class="split">
-      <div>
-        <h2>Kinematics & Trajectory</h2>
-        <p> First, I created a Python-based gait simulator to validate trajectories in joint and workspace domains. Foot targets are converted to coxa, femur, and tibia angles via inverse kinematics. </p>
-      </div>
+<header style="text-align:center;">
 
-      <figure>
-        <video
-          src="assets/videos/gait.mp4"
-          autoplay
-          loop
-          muted
-          playsinline>
-        </video>
-      </figure>
-    </div>
-  </section>
+<div class="mono" style="margin-bottom:1.5rem;letter-spacing:.5em;">
+[ SYSTEM_DEVELOPMENT / HEXAPOD_V1 ]
+</div>
 
-  <section id="design" class="card" data-step="2">
-    <div class="split">
-      <figure>
-        <figcaption>IK_CIRCULAR_TRAJECTORY_DEMO</figcaption>
-      </figure>
+<h1>18-DOF Biomimetic Locomotion Testbed</h1>
 
-      <div>
-        <h2>Mechanical Design</h2>
-        <p>Designing for 18 micro-servos (MG90S) required a rigorous focus on weight-to-torque ratios and joint reliability.</p>
+<p style="color:var(--muted);font-size:1.2rem;max-width:800px;margin:0 auto 3rem;">
+Exploring high-degree-of-freedom coordination through geometric inverse kinematics, cubic trajectory planning, and hybrid fabrication techniques.
+</p>
 
-        <h3 class="mono">Pre-Bent Neutral Stance</h3>
-        <p style="font-size: 0.95rem; color: var(--muted);">I engineered the leg geometry with a pre-set neutral bend. This minimizes the holding torque required for the "standing" state, preventing servo stall and excessive current spikes.</p>
+</header>
 
-        <h3 class="mono">The Horn Housing Crisis</h3>
-        <p style="font-size: 0.95rem; color: var(--muted);">Initial models faced a critical failure: the servo horns would slip or detach under high load. I redesigned the joints with an internal indent and a "locking lip" that was secured in place using PLA friction welding with a dremel.</p>
-      </div>
+<section class="card">
 
-      <figure>
-        <img src="assets/images/hexa.png">
-        <img src="assets/images/dremel.png">
-      </figure>
-    </div>
-  </section>
+<div class="split">
 
-  <section id="fabrication" class="card" data-step="3">
-    <div class="split">
-      <div>
-        <h2>Gait Optimization</h2>
-        <p>Initial testing was conducted with the wiring and batteries kept off-body, IK gaits were too computationally heavy for the current SBC setup. FK gaits were tested as well for simplicity.</p>
-      </div>
+<div>
 
-      <figure>
-        <video
-          src="assets/videos/walk.mp4"
-          autoplay
-          loop
-          muted
-          playsinline>
-        </video>
-      </figure>
-    </div>
-  </section>
+<h2 data-step="3">Gait Optimization</h2>
 
-  
-  <footer style="margin-top: 6rem; text-align: center; border-top: 1px solid var(--border); padding-top: 4rem;">
-  </footer>
+<p>
+Initial testing was conducted with the wiring and batteries kept off-body.  
+IK gaits were too computationally heavy for the current SBC setup, so FK gaits were also explored for simplicity.
+</p>
+
+</div>
+
+<figure class="video-carousel">
+
+<button class="carousel-arrow left">&#10094;</button>
+
+<div class="carousel-track">
+
+<video class="active" muted playsinline>
+<source src="assets/videos/walk.mp4" type="video/mp4">
+</video>
+
+<video muted playsinline>
+<source src="assets/videos/gait2.mp4" type="video/mp4">
+</video>
+
+<video muted playsinline>
+<source src="assets/videos/gait3.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<button class="carousel-arrow right">&#10095;</button>
+
+<div class="carousel-dots"></div>
+
+</figure>
+
+</div>
+
+</section>
 
 </main>
+
+<script>
+
+/* ---------- VIDEO CAROUSEL ---------- */
+
+document.querySelectorAll(".video-carousel").forEach(carousel=>{
+
+const videos = carousel.querySelectorAll("video")
+const dotsContainer = carousel.querySelector(".carousel-dots")
+const left = carousel.querySelector(".left")
+const right = carousel.querySelector(".right")
+
+let index = 0
+
+videos.forEach((v,i)=>{
+
+const dot = document.createElement("div")
+dot.classList.add("carousel-dot")
+if(i===0) dot.classList.add("active")
+
+dot.addEventListener("click",()=>show(i))
+
+dotsContainer.appendChild(dot)
+
+})
+
+const dots = dotsContainer.querySelectorAll(".carousel-dot")
+
+function show(i){
+
+videos[index].classList.remove("active")
+dots[index].classList.remove("active")
+videos[index].pause()
+
+index=i
+
+videos[index].classList.add("active")
+dots[index].classList.add("active")
+
+videos[index].currentTime=0
+videos[index].play()
+
+}
+
+function next(){
+
+let i = (index+1)%videos.length
+show(i)
+
+}
+
+function prev(){
+
+let i = (index-1+videos.length)%videos.length
+show(i)
+
+}
+
+right.onclick = next
+left.onclick = prev
+
+videos.forEach(v=>{
+
+v.addEventListener("ended", next)
+
+})
+
+videos[0].play()
+
+})
+
+</script>
 
 </body>
 </html>
