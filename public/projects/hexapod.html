@@ -211,25 +211,17 @@ Exploring high-degree-of-freedom coordination through geometric inverse kinemati
 
 <section id="design" class="card" data-step="2">
 <div class="split">
-
-<figure>
-<figcaption>IK_CIRCULAR_TRAJECTORY_DEMO</figcaption>
-</figure>
-
 <div>
 <h2>Mechanical Design</h2>
-<p>Designing for 18 micro-servos (MG90S) required a rigorous focus on weight-to-torque ratios and joint reliability.</p>
-
-<h3 class="mono">Pre-Bent Neutral Stance</h3>
-<p style="font-size: 0.95rem; color: var(--muted);">I engineered the leg geometry with a pre-set neutral bend. This minimizes the holding torque required for the "standing" state, preventing servo stall and excessive current spikes.</p>
-
-<h3 class="mono">The Horn Housing Crisis</h3>
-<p style="font-size: 0.95rem; color: var(--muted);">Initial models faced a critical failure: the servo horns would slip or detach under high load. I redesigned the joints with an internal indent and a "locking lip" that was secured in place using PLA friction welding with a dremel.</p>
+<p>
+The platform was designed around 18 MG90S servos with strict weight and torque constraints.  
+Leg geometry was tuned to maintain a naturally bent neutral stance, minimizing static holding torque and reducing current draw during standing.  
+The structure was iterated through rapid 3D-printed prototypes to balance stiffness, joint alignment, and serviceability across the full leg assembly.
+</p>
 </div>
-
+  
 <figure>
 <img src="assets/images/hexa.png">
-<img src="assets/images/dremel.png">
 </figure>
 
 </div>
@@ -240,7 +232,7 @@ Exploring high-degree-of-freedom coordination through geometric inverse kinemati
 
 <div>
 <h2>Gait Optimization</h2>
-<p>Initial testing was conducted with the wiring and batteries kept off-body, IK gaits were too computationally heavy for the current SBC setup. FK gaits were tested as well for simplicity.</p>
+<p>Initial locomotion testing focused on developing stable multi-leg coordination across the 18-DOF platform. I experimented with several inverse-kinematic gait patterns including tripod, ripple, and slower phase-offset variants. Foot trajectories were shaped using Bézier curves to smooth motion and reduce current spikes across the servo array.</p>
 </div>
 
 <figure class="video-carousel">
